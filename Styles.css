@@ -1,0 +1,946 @@
+/* Web Reso */
+
+@media (max-width: 480px) {
+    body {
+        font-size: 20px;
+    }
+
+    .container {
+        justify-content: space-around;
+        /* Space around items */
+    }
+}
+
+
+
+/* Global Config */
+
+
+h1 {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    color: #ffffff;
+}
+
+h2,
+h3,
+h4 {
+    font-family: "Roboto static", Arial, Helvetica, sans-serif;
+}
+
+
+h5, button{
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+}
+
+li {
+    overflow: hidden;
+    text-decoration: none;
+
+}
+
+a {
+    font-family: "Roboto static", Arial, Helvetica, sans-serif;
+    text-decoration: none;
+
+
+}
+
+
+.page-nav {
+    border-radius: 10px;
+    display: block;
+    height: 20px;
+    color: white;
+    padding: 5px;
+
+}
+
+.page-nav:hover {
+    border-radius: 10px;
+    background-color: rgb(45, 100, 160, .25);
+
+}
+
+.page-nav.activePage {
+    
+    height: 20px;
+    background-color: #0454ac;
+}
+
+
+
+hr {
+    border: solid 1px white;
+    opacity: 1;
+
+}
+
+hr.blue {
+    margin-top: 10px;
+    width: 100%;
+    border: solid 1px#0454ac;
+}
+
+p {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+
+}
+
+footer {
+    width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px #0454ac;
+    opacity: .25;
+}
+
+
+table {
+    background-color: rgb(255, 255, 255);
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    /* max-width: 1200px; */
+    margin-top: 5px;
+    /* margin-left: 250px;
+    margin-right: 250px; */
+
+    margin-left: auto;
+    margin-right: auto;
+    /* border-radius: 4px; */
+    align-content: center;
+    position: relative;
+    overflow: scroll;
+
+}
+
+td,
+th {
+    border: 2px solid rgb(255, 255, 255);
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #0454ac;
+    color: white;
+}
+
+/*-----Pagination */
+
+.pagination {
+    margin-top: 30px;
+    margin-left: 200px;
+    align-items: end;
+    display: inline-block;
+}
+
+.pagination a {
+    background-color: white;
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #524e4e;
+    border-radius: 5px;
+
+}
+
+.pagination a.active {
+    background-color: #0454ac;
+    color: rgb(255, 255, 255);
+}
+
+
+/*-----Pagination End*/
+
+
+
+/* Global Config end */
+
+
+/* Sign out start */
+
+/* Sign out end */
+
+/* Login start */
+#Pculogo-login {
+    width: 150px;
+    height: 150px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.Login-title {
+    display: block;
+    text-align: center;
+}
+
+#Login-body {
+
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    transition: 30s;
+    height: 0;
+
+
+    animation-name: bgSlides;
+    animation-direction: alternate-reverse;
+    animation-duration: 40s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out
+}
+
+/* BG animation */
+@keyframes bgSlides {
+    0% {
+        background-image: url(./Images/1.jpg);
+    }
+
+    20% {
+        background-image: url(./Images/2.jpg);
+    }
+
+    40% {
+        background-image: url(./Images/3.jpg);
+    }
+
+    60% {
+        background-image: url(./Images/4.jpg);
+    }
+
+    80% {
+        background-image: url(./Images/5.jpg);
+    }
+
+    100% {
+        background-image: url(./Images/6.jpg);
+    }
+}
+
+.Login-container {
+
+    margin-top: 40px;
+}
+
+.Login-form {
+    width: 400px;
+    height: 300px;
+    border: solid 1px rgb(20, 20, 20);
+    border-radius: 20px;
+    background-color: rgb(0, 0, 0);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    align-content: center;
+    display: block;
+}
+
+.Login-content input {
+    height: 30px;
+    width: 250px;
+    margin: 20px;
+
+
+}
+
+.Login-submit input {
+    text-align: center;
+    height: 40px;
+    width: 80px;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.fa-solid {
+    color: rgb(255, 255, 255);
+}
+
+/* Login End */
+
+
+
+
+/* Register */
+#Register-body {
+
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    color: white;
+    text-align: center;
+
+    animation-name: bgSlides;
+    animation-direction: alternate-reverse;
+    animation-duration: 40s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+
+}
+
+.Register-title {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+
+}
+
+.Register-container {
+
+    background-color: #000000;
+    border-radius: 20px;
+    width: 300px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+
+
+
+
+}
+
+.Register-container input {
+    background-color: #ede9e9;
+    height: 20px;
+    border-radius: 5px;
+    margin: 10px;
+    margin-top: 20px;
+    align-content: center;
+
+}
+
+#reg-submit {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    width: 100px;
+    height: 50px;
+    margin-top: 30px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.Register-container label {
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+
+
+
+
+
+/* Register End */
+
+
+
+
+/* Start Index */
+
+#Main-body {
+
+    background-color: #cacdd1;
+}
+
+#Topnavigator-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background-color: #0454ac;
+    display: flex;
+    flex-direction: left;
+    width: 100%;
+    height: 50px;
+    white-space: nowrap;
+    padding: 5px;
+    border-bottom: solid 2px rgb(0, 0, 0, .5);
+    padding: 9px;
+    padding-left: 50px;
+    padding-bottom: 10px;
+
+}
+
+#Sidebar-container {
+    top: 0;
+    position: fixed;
+    overflow: hidden;
+    background-color: #1e2125;
+    display: block;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 100%;
+    width: 270px;
+    left: 0;
+    padding: 1rem;
+    max-width: 35vw;
+    z-index: -1;
+    margin-top: 10px;
+    align-items: center;
+    border-right: 1px solid #0303048d;
+}
+
+#Sidebar-container ul {
+    padding: 4px;
+    margin-top: 20px;
+}
+
+#Sidebar-container li {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* Container of tables and styles */
+
+#Main-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 50%;
+    position: fixed;
+    display: block;
+    padding: 5px;
+    margin-top: 100px;
+    margin-left: 350px;
+    margin-right: 350px;
+    /* justify-content: safe center; */
+
+    overflow: auto;
+}
+
+#Right-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    width: 450px;
+    max-width: 90%;
+    max-height: 100%;
+    position: fixed;
+    display: block;
+    padding: 5px;
+    margin-top: 100px;
+    margin-left: 1160px;
+    margin-right: 1160px;
+
+}
+
+.notification{
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 5px;
+    border: solid 2px;
+    background-color: rgb(40, 170, 0);
+    color: #ffffff;
+    height: fit-content;
+    width: 250px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    text-align: justify;
+
+
+
+}
+
+
+/* Index End */
+
+
+
+
+
+/* Dashboard START */
+
+
+
+
+/* Product Page */
+
+.add-product-container {
+    background-color: #0454ac;
+    border-radius: 5px;
+    text-align: left;
+    width: fit-content;
+    height: auto;
+    max-width: 100%;
+    max-height: 90%;
+
+    margin-top: 25px;
+    /* margin-left: 100px;
+    margin-right: 100px; */
+
+}
+
+.add-product {
+    display: inline-block;
+    width: 800px;
+    height: 30px;
+    align-content: center;
+    border-radius: 1px;
+    margin-left: 18px;
+    margin-right: auto;
+
+}
+
+.open-product-modal {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: 25px;
+    text-align: right;
+
+}
+
+
+.search-table {
+    width: 250px;
+    height: 35px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: auto;
+
+}
+
+/* Product Page End*/
+
+
+/* Add Product */
+
+.title-form {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    color: #0454ac;
+}
+
+#add-product-btn {
+
+    cursor: pointer;
+    border-radius: 10px;
+    width: 120px;
+    height: 30px;
+    background-color: #00810b;
+    border: rgba(255, 255, 255, 0.609) solid;
+
+    color: white;
+
+}
+
+#add-product-btn:hover {
+
+    cursor: pointer;
+    border: 2px solid#02bf12;
+    border-radius: 10px;
+    width: 120px;
+    height: 30px;
+    background-color: #00810b;
+    color: white;
+
+}
+
+
+.select-uniform-name,
+.select-gender {
+    width: 100%;
+    height: 30px;
+    display: block;
+    margin: 20px;
+    font-size: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+
+}
+
+.cell-num-select {
+
+    width: 70px;
+    height: 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.sizes-container {
+    font-family: "Roboto static", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin: 5px 5px;
+}
+
+.sizes-container input {
+    width: 20px;
+    height: 20px;
+}
+
+.input-price,
+.input-quantity {
+    display: block;
+    width: 80%;
+    height: 30px;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+
+}
+
+.submit-add-product,
+.submit-add-cell {
+    width: 100px;
+    height: 30px;
+    display: block;
+    border: 2px solid;
+    cursor: pointer;
+    background-color: #00810b;
+    color: white;
+    border: rgba(255, 255, 255, 0.609) solid;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin: 5px auto;
+}
+
+.submit-add-product:hover,
+.submit-add-cell:hover {
+    border: 2px solid#02bf12;
+}
+
+#confirm-orders,
+#cancel-orders,
+#confirm-archive,
+#cancel-archive,
+#confirm-print,
+#cancel-print {
+    width: 100px;
+    height: 30px;
+    display: block;
+    border: 2px solid;
+    cursor: pointer;
+    background-color: #00810b;
+    color: white;
+    border-radius: 10px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 10px;
+    margin: 5px auto;
+
+}
+
+#confirm-orders:hover,
+#cancel-orders:hover,
+#confirm-archive:hover,
+#confirm-print:hover,
+#cancel-print:hover {
+    border: 2px solid#02bf12;
+}
+
+
+.cell-btn,
+.edit-btn,
+.delete-btn {
+    opacity: 1;
+}
+
+.cell-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover {
+    opacity: 0.5;
+
+    cursor: pointer;
+}
+
+.data-result-table {
+
+    overflow: hidden;
+
+}
+
+
+/* Add Product End */
+
+
+
+
+/* Purchase History Start */
+
+.transaction-table {
+
+    width: 500px;
+}
+
+.download-purchase-history {
+    
+    margin-top: 40px;
+    margin-left: 25px;
+    width: fit-content;
+    max-height: fit-content;
+
+}
+
+.download-data {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    width: 120px;
+    height: 40px;
+    background-color: #00810b;
+    color: rgb(255, 255, 255);
+    border: rgba(255, 255, 255, 0.609) solid;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.download-data:hover {
+
+    border: 4px solid#02bf12;
+}
+
+/* Purchase History End */
+
+/* ORDERS START */
+
+.proceed-btn {
+    margin-left: 20px;
+    border-radius: 10px;
+    border: rgba(255, 255, 255, 0.609) solid;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #00810b;
+    color: white;
+
+}
+
+.proceed-btn:hover {
+    border: #02bf12;
+}
+
+
+.buttons-order-container {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+
+}
+
+.submit-finish-order,
+.submit-update-order,
+.update-order,
+.print {
+
+    width: 150px;
+    height: 30px;
+    color: white;
+    background-color: green;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin: 5px auto;
+
+}
+
+
+.generate:hover {
+
+    border: 2px solid#02bf12;
+
+}
+
+.updateOrder:hover {
+    border: 2px solid#02bf12;
+
+}
+
+.finishOrder:hover {
+    border: 2px solid#02bf12;
+
+}
+
+#update-order-btn {
+    width: 100px;
+    height: 30px;
+    display: block;
+    border: 2px solid;
+    cursor: pointer;
+    background-color: #00810b;
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin: 5px auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ORDERS END */
+
+
+/* ------------------------------------------------------- */
+/* MODAL WINDOWS */
+
+
+
+.modal-confirm-content {
+    background-color: #ffffff;
+    width: 350px;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin: 15% auto;
+    padding: 20px;
+    max-height: 90%;
+}
+
+
+.modal-order-content {
+    background-color: #ffffff;
+    height: fit-content;
+    margin: 15% auto;
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 500px;
+    max-height: 90%;
+
+
+}
+
+.modal-receipt-content {
+    background-color: #ffffff;
+    height: fit-content;
+    margin: 5% auto;
+    padding: 20px;
+    border: solid 1px rgb(255, 255, 255);
+    width: 400px;
+
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(4, 86, 174, .25);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    height: fit-content;
+    max-height: 90%;
+    margin: 10% auto;
+
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 500px;
+}
+
+.modal-confirm-content {
+    background-color: #ffffff;
+    width: 350px;
+    height: fit-content;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin: 15% auto;
+    padding: 20px;
+}
+
+
+.modal-order-contents {
+    background-color: #ffffff;
+    height: fit-content;
+    margin: 15% auto;
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 500px;
+
+}
+
+
+
+#close-icon {
+    color: rgb(255, 80, 80);
+
+
+
+}
+
+#close-icon:hover {
+
+    color: rgb(249, 28, 28);
+
+}
+
+.close-modal {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+
+#return {
+    color: #00810b;
+}
+
+#return:hover {
+    color: #04b513;
+
+}
+
+.go-back {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.go-back {
+
+    cursor: pointer;
+
+}
+
+
+
+
+/* MODAL WINDOWS END*/
+/* ------------------------------------------------------- */

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@706&family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body id="Login-body">
+    <img src="Images/PCU Logo.png" alt="PCU Logo" id="Pculogo-login">
+    <h1 class="Login-title">Uniform Vending Machine System</h1>
+    <div class="Login-container">
+        <form action="login.php" class="Login-form" onsubmit="return isvalid()" method="post">
+            <h3>Login to your account</h3>
+            <div class="Login-content">
+                <i class="fa-solid fa-user" id="icon-bg"></i>
+                <input type="text" placeholder="Username" name="user">
+            </div>
+            <div class="Login-content">
+                <i class="fa-solid fa-lock" id="icon-bg"></i>
+                <input type="password" placeholder="Password" name="pass">
+            </div>
+            <div class="Login-submit">
+                <input type="submit" value="Login" name="submit">
+            </div>
+            <p style="text-align: center; color: white;">No account?<a href="./register.html" style="color: #0454ac;"> Sign in.</a></p>
+        </form>
+    </div>
+    <script src="https://kit.fontawesome.com/883b8ee9d9.js" crossorigin="anonymous"></script>
+    <script>
+        function isvalid() {
+            var user = document.forms[0].user.value;
+            var pass = document.forms[0].pass.value;
+            if (user.length == "" && pass.length == "") {
+                alert("Enter Credentials");
+                return false;
+            } else {
+                if (user.length == "") {
+                    alert("Enter Username");
+                    return false;
+                }
+                if (pass.length == "") {
+                    alert("Enter Password");
+                    return false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

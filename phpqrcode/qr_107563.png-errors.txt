@@ -1,0 +1,36 @@
+2024-09-18 07:24:38: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>D:\xampp\htdocs\UV-Stock-Monitoring--2024-2025-Website\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
