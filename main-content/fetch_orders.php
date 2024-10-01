@@ -32,8 +32,8 @@ while ($item = $itemsResult->fetch_assoc()) {
     <thead>
         <tr>
             <th>Order ID</th>
-            <th>Student ID</th>
             <th>Order Date</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -41,8 +41,8 @@ while ($item = $itemsResult->fetch_assoc()) {
         <?php foreach ($orders as $order): ?>
             <tr id="order-row-<?php echo $order['order_id']; ?>">
                 <td><?php echo $order['order_id']; ?></td>
-                <td><?php echo $order['student_id']; ?></td>
                 <td><?php echo $order['order_date']; ?></td>
+                <td><?php echo $order['status']; ?></td>
                 <td>
                     <button class="proceed-btn" onclick="openModal(<?php echo $order['order_id']; ?>)">
                         Proceed
@@ -57,7 +57,6 @@ while ($item = $itemsResult->fetch_assoc()) {
                         <i id="close-icon" class="fa-solid fa-xmark"></i>
                     </span>
                     <h2>Order Details (ID: <?php echo $order['order_id']; ?>)</h2>
-                    <h3>Student ID: <?php echo $order['student_id']; ?></h3>
                     <h3>Order Date: <?php echo $order['order_date']; ?></h3>
                     <h3>Items:</h3>
                     <ul>
