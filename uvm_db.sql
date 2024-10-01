@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2024 at 01:30 PM
+-- Generation Time: Oct 01, 2024 at 11:03 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,7 +72,6 @@ CREATE TABLE `items` (
   `product_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
   `quantity_dispensed` int(11) DEFAULT 0,
   `is_fully_fulfilled` tinyint(1) DEFAULT 0,
   `created_at` datetime DEFAULT current_timestamp(),
@@ -83,20 +82,29 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `product_id`, `order_id`, `quantity`, `price`, `quantity_dispensed`, `is_fully_fulfilled`, `created_at`, `updated_at`) VALUES
-(21, 57, 1010, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(22, 61, 1010, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(23, 72, 1010, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(24, 76, 1010, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(25, 79, 1010, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(26, 57, 1011, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(27, 80, 1011, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(28, 57, 1012, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(29, 72, 1012, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(30, 54, 1013, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(31, 55, 1013, 2, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(32, 56, 1013, 1, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(33, 57, 1013, 2, NULL, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40');
+INSERT INTO `items` (`item_id`, `product_id`, `order_id`, `quantity`, `quantity_dispensed`, `is_fully_fulfilled`, `created_at`, `updated_at`) VALUES
+(21, 57, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(22, 61, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(23, 72, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(24, 76, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(25, 79, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(26, 57, 1011, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(27, 80, 1011, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(28, 57, 1012, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(29, 72, 1012, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(30, 54, 1013, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(31, 55, 1013, 2, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(32, 56, 1013, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(33, 57, 1013, 2, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
+(34, 68, 1014, 1, 0, 0, '2024-10-01 11:30:33', '2024-10-01 11:30:33'),
+(35, 68, 1015, 2, 0, 0, '2024-10-01 11:56:19', '2024-10-01 11:56:19'),
+(36, 68, 1016, 2, 0, 0, '2024-10-01 12:05:34', '2024-10-01 12:05:34'),
+(37, 77, 1016, 1, 0, 0, '2024-10-01 12:05:34', '2024-10-01 12:05:34'),
+(38, 68, 1017, 2, 0, 0, '2024-10-01 12:08:13', '2024-10-01 12:08:13'),
+(39, 75, 1017, 1, 0, 0, '2024-10-01 12:08:13', '2024-10-01 12:08:13'),
+(40, 81, 1018, 2, 0, 0, '2024-10-01 12:09:58', '2024-10-01 12:09:58'),
+(41, 81, 1019, 1, 0, 0, '2024-10-01 14:11:48', '2024-10-01 14:11:48'),
+(42, 54, 1020, 1, 0, 0, '2024-10-01 14:13:38', '2024-10-01 14:13:38');
 
 -- --------------------------------------------------------
 
@@ -125,23 +133,28 @@ CREATE TABLE `item_modifications` (
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` enum('pending','processed','completed') DEFAULT 'pending',
-  `total_quantity` int(11) DEFAULT NULL,
-  `total_amount` decimal(10,2) DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp()
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `student_id`, `order_date`, `status`, `total_quantity`, `total_amount`, `updated_at`) VALUES
-(1010, 7, '2024-09-25 10:00:12', 'pending', NULL, NULL, NULL),
-(1011, 4, '2024-09-25 12:59:33', 'pending', NULL, NULL, NULL),
-(1012, 4, '2024-09-25 13:04:17', 'pending', NULL, NULL, NULL),
-(1013, 1, '2024-09-26 05:13:26', 'pending', NULL, NULL, NULL);
+INSERT INTO `orders` (`order_id`, `order_date`, `status`, `updated_at`, `created_at`) VALUES
+(1010, '2024-09-25 10:00:12', 'pending', NULL, '2024-10-01 11:18:00'),
+(1011, '2024-09-25 12:59:33', 'pending', NULL, '2024-10-01 11:18:00'),
+(1012, '2024-09-25 13:04:17', 'pending', NULL, '2024-10-01 11:18:00'),
+(1013, '2024-09-26 05:13:26', 'pending', NULL, '2024-10-01 11:18:00'),
+(1014, '2024-10-01 03:30:33', 'pending', NULL, '2024-10-01 11:30:33'),
+(1015, '2024-10-01 03:56:19', 'pending', NULL, '2024-10-01 11:56:19'),
+(1016, '2024-10-01 04:05:34', 'pending', NULL, '2024-10-01 12:05:34'),
+(1017, '2024-10-01 04:08:13', 'pending', NULL, '2024-10-01 12:08:13'),
+(1018, '2024-10-01 04:09:58', 'pending', NULL, '2024-10-01 12:09:58'),
+(1019, '2024-10-01 06:11:48', 'pending', NULL, '2024-10-01 14:11:48'),
+(1020, '2024-10-01 06:13:38', 'pending', NULL, '2024-10-01 14:13:38');
 
 -- --------------------------------------------------------
 
@@ -256,6 +269,7 @@ INSERT INTO `students` (`student_id`, `student_no`) VALUES
 (1, '111'),
 (2, '123'),
 (4, '1234567890'),
+(8, '20190412'),
 (3, '3'),
 (7, '369'),
 (5, '6'),
@@ -351,8 +365,7 @@ ALTER TABLE `item_modifications`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `student_id` (`student_id`);
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `order_modifications`
@@ -420,7 +433,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `item_modifications`
@@ -432,7 +445,7 @@ ALTER TABLE `item_modifications`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1014;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1021;
 
 --
 -- AUTO_INCREMENT for table `order_modifications`
@@ -456,7 +469,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -478,6 +491,7 @@ ALTER TABLE `users`
 -- Constraints for table `items`
 --
 ALTER TABLE `items`
+  ADD CONSTRAINT `fk_items_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
 
 --
