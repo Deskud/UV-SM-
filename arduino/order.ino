@@ -248,12 +248,12 @@ void fetchData(String endpoint, int selectedId) {
       connected = true;  // Set the flag if connected
       Serial.println("Connected to server");
 
-      if (endpoint == "/vm-unif/lib/get_products.php") {
+      if (endpoint == "/vm-unif/arduino/arduino-api/get_products.php") {
         endpoint += "?category_id=" + String(selectedId);
-      } else if (endpoint == "/vm-unif/lib/get_sizes.php") {
+      } else if (endpoint == "/vm-unif/arduino/arduino-api/get_sizes.php") {
         String encodedProductName = urlencode(products[selectedId].product_name);
         endpoint += "?product_name=" + encodedProductName;
-      } else if (endpoint == "/vm-unif/lib/get_quantities.php") {
+      } else if (endpoint == "/vm-unif/arduino/arduino-api/get_quantities.php") {
         endpoint += "?product_id=" + String(selectedId);
       }
 
@@ -336,7 +336,7 @@ void parseJsonData(String jsonResponse, String endpoint) {
     return;
   }
 
-  if (endpoint.startsWith("/vm-unif/lib/get_categories.php")) {
+  if (endpoint.startsWith("/vm-unif/arduino/arduino-api/get_categories.php")) {
     categoryCount = 0;
     JsonArray categoriesArray = doc.as<JsonArray>();
 
@@ -345,7 +345,7 @@ void parseJsonData(String jsonResponse, String endpoint) {
       categories[categoryCount].category_name = String(category["category_name"].as<const char*>());
       categoryCount++;
     }
-  } else if (endpoint.startsWith("/vm-unif/lib/get_products.php")) {
+  } else if (endpoint.startsWith("/vm-unif/arduino/arduino-api/get_products.php")) {
     productCount = 0;
     JsonArray productsArray = doc.as<JsonArray>();
 
@@ -353,7 +353,7 @@ void parseJsonData(String jsonResponse, String endpoint) {
       products[productCount].product_name = String(product["product_name"].as<const char*>());
       productCount++;
     }
-  } else if (endpoint.startsWith("/vm-unif/lib/get_sizes.php")) {
+  } else if (endpoint.startsWith("/vm-unif/arduino/arduino-api/get_sizes.php")) {
     sizeCount = 0;
     JsonArray sizesArray = doc.as<JsonArray>();
 
@@ -363,28 +363,28 @@ void parseJsonData(String jsonResponse, String endpoint) {
       sizes[sizeCount].size_name = String(size["size_name"].as<const char*>());
       sizeCount++;
     }
-  } else if (endpoint.startsWith("/vm-unif/lib/get_quantities.php")) {
+  } else if (endpoint.startsWith("/vm-unif/arduino/arduino-api/get_quantities.php")) {
     product_quantity = doc[0]["product_quantity"];
   }
 }
 
 int categorySelection() {
-  fetchData("/vm-unif/lib/get_categories.php", 0);
+  fetchData("/vm-unif/arduino/arduino-api/get_categories.php", 0);
   return handleSelection("Categories", categories, categoryCount, sizeof(Category), getCategoryName, 1);
 }
 
 int productSelection(int categoryId) {
-  fetchData("/vm-unif/lib/get_products.php", categoryId);
+  fetchData("/vm-unif/arduino/arduino-api/get_products.php", categoryId);
   return handleSelection("Products", products, productCount, sizeof(Product), getProductName, 0);
 }
 
 int sizeSelection(int productIndex) {
-  fetchData("/vm-unif/lib/get_sizes.php", productIndex);
+  fetchData("/vm-unif/arduino/arduino-api/get_sizes.php", productIndex);
   return handleSelection("Sizes", sizes, sizeCount, sizeof(Size), getSizeName, 0);
 }
 
 int quantitySelection(int productId) {
-  fetchData("/vm-unif/lib/get_quantities.php", productId);  // Fetch available quantity
+  fetchData("/vm-unif/arduino/arduino-api/get_quantities.php", productId);  // Fetch available quantity
   int availableQuantity = product_quantity;                 // Get available quantity
   return handleQuantitySelection(availableQuantity);        // Pass available quantity to handle function
 }
