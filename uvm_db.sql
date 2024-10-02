@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2024 at 11:03 AM
+-- Generation Time: Oct 02, 2024 at 02:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uvm_new`
+-- Database: `uvm_db`
 --
 
 -- --------------------------------------------------------
@@ -57,9 +57,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES
-(2, 'pe uniform'),
-(1, 'school uniform'),
-(3, 'washday shirt');
+(3, 'Others'),
+(2, 'P.E. Uniform'),
+(1, 'Regular Uniform');
 
 -- --------------------------------------------------------
 
@@ -83,28 +83,28 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `product_id`, `order_id`, `quantity`, `quantity_dispensed`, `is_fully_fulfilled`, `created_at`, `updated_at`) VALUES
-(21, 57, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(22, 61, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(23, 72, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(24, 76, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(25, 79, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(26, 57, 1011, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(27, 80, 1011, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(28, 57, 1012, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(29, 72, 1012, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(30, 54, 1013, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(31, 55, 1013, 2, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(32, 56, 1013, 1, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(33, 57, 1013, 2, 0, 0, '2024-09-29 18:33:40', '2024-09-29 18:33:40'),
-(34, 68, 1014, 1, 0, 0, '2024-10-01 11:30:33', '2024-10-01 11:30:33'),
-(35, 68, 1015, 2, 0, 0, '2024-10-01 11:56:19', '2024-10-01 11:56:19'),
-(36, 68, 1016, 2, 0, 0, '2024-10-01 12:05:34', '2024-10-01 12:05:34'),
-(37, 77, 1016, 1, 0, 0, '2024-10-01 12:05:34', '2024-10-01 12:05:34'),
-(38, 68, 1017, 2, 0, 0, '2024-10-01 12:08:13', '2024-10-01 12:08:13'),
-(39, 75, 1017, 1, 0, 0, '2024-10-01 12:08:13', '2024-10-01 12:08:13'),
-(40, 81, 1018, 2, 0, 0, '2024-10-01 12:09:58', '2024-10-01 12:09:58'),
-(41, 81, 1019, 1, 0, 0, '2024-10-01 14:11:48', '2024-10-01 14:11:48'),
-(42, 54, 1020, 1, 0, 0, '2024-10-01 14:13:38', '2024-10-01 14:13:38');
+(21, 57, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(22, 61, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(23, 72, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(24, 76, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(25, 79, 1010, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(26, 57, 1011, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(27, 80, 1011, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(28, 57, 1012, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(29, 72, 1012, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(30, 54, 1013, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(31, 55, 1013, 2, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(32, 56, 1013, 1, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(33, 57, 1013, 2, 0, 0, '2024-09-29 18:33:40', '2024-10-02 20:08:24'),
+(34, 68, 1014, 1, 0, 0, '2024-10-01 11:30:33', '2024-10-02 20:08:24'),
+(35, 68, 1015, 2, 0, 0, '2024-10-01 11:56:19', '2024-10-02 20:08:24'),
+(36, 68, 1016, 2, 0, 0, '2024-10-01 12:05:34', '2024-10-02 20:08:24'),
+(37, 77, 1016, 1, 0, 0, '2024-10-01 12:05:34', '2024-10-02 20:08:24'),
+(38, 68, 1017, 2, 0, 0, '2024-10-01 12:08:13', '2024-10-02 20:08:24'),
+(39, 75, 1017, 1, 0, 0, '2024-10-01 12:08:13', '2024-10-02 20:08:24'),
+(40, 81, 1018, 2, 0, 0, '2024-10-01 12:09:58', '2024-10-02 20:08:24'),
+(41, 81, 1019, 1, 0, 0, '2024-10-01 14:11:48', '2024-10-02 20:08:24'),
+(42, 54, 1020, 1, 0, 0, '2024-10-01 14:13:38', '2024-10-02 20:08:24');
 
 -- --------------------------------------------------------
 
@@ -184,7 +184,7 @@ CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `product_name` varchar(100) NOT NULL,
   `cell_num` tinyint(4) NOT NULL,
-  `size` int(11) NOT NULL,
+  `size_id` int(11) DEFAULT NULL,
   `gender` enum('male','female','unisex') NOT NULL,
   `product_quantity` int(11) DEFAULT 0,
   `price` decimal(10,2) NOT NULL,
@@ -199,7 +199,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `cell_num`, `size`, `gender`, `product_quantity`, `price`, `sold_quantity`, `date_added`, `is_archived`, `date_archived`, `category_id`) VALUES
+INSERT INTO `products` (`product_id`, `product_name`, `cell_num`, `size_id`, `gender`, `product_quantity`, `price`, `sold_quantity`, `date_added`, `is_archived`, `date_archived`, `category_id`) VALUES
 (54, 'Male Polo', 1, 1, 'male', 20, 375.00, 0, '2024-09-25 09:43:10', 0, NULL, 1),
 (55, 'Male Polo', 2, 2, 'male', 20, 375.00, 0, '2024-09-25 09:43:10', 0, NULL, 1),
 (56, 'Male Polo', 3, 3, 'male', 20, 375.00, 0, '2024-09-25 09:43:10', 0, NULL, 1),
@@ -300,7 +300,7 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`transaction_id`, `order_id`, `user_id`, `total_quantity`, `total_amount`, `transaction_date`, `qr_code`, `status`, `quantity_dispensed`, `is_fully_fulfilled`, `updated_at`) VALUES
-(1, 1010, 0, 0, 0.00, '2024-09-25 10:52:36', 123456, 'unclaimed', 0, 0, NULL),
+(1, 1010, 1, 0, 0.00, '2024-09-25 10:52:36', 123456, 'unclaimed', 0, 0, '2024-10-01 23:23:45'),
 (2, 1013, 1, 4, 1400.00, '2024-09-26 05:17:38', 654321, 'unclaimed', 0, 0, NULL);
 
 -- --------------------------------------------------------
@@ -380,7 +380,8 @@ ALTER TABLE `order_modifications`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD UNIQUE KEY `unique_cell_num` (`cell_num`),
-  ADD KEY `fk_category` (`category_id`);
+  ADD KEY `fk_category` (`category_id`),
+  ADD KEY `fk_size_id` (`size_id`);
 
 --
 -- Indexes for table `sizes`
@@ -506,6 +507,20 @@ ALTER TABLE `item_modifications`
 --
 ALTER TABLE `order_modifications`
   ADD CONSTRAINT `order_modifications_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`),
+  ADD CONSTRAINT `fk_size_id` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`size_id`);
+
+--
+-- Constraints for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `fk_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
