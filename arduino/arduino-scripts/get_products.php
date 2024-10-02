@@ -1,5 +1,5 @@
 <?php
-require "../dbconnection.php";
+require "../../dbconnection.php";
 
 if (isset($_GET['category_id'])) {
     $category_id = $_GET['category_id'];

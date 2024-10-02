@@ -1,5 +1,5 @@
 <?php
-require "../dbconnection.php";
+require "../../dbconnection.php";
 
 // Retrieve the JSON data sent by Arduino
 $data = file_get_contents("php://input");

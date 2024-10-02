@@ -1,6 +1,5 @@
 <?php
-// Database configuration
-require "../dbconnection.php";
+require "../../dbconnection.php";
 
 // Create a new PDO instance
 try {
@@ -12,12 +11,12 @@ try {
 }
 
 // Get the QR code from the request
-$qrcode = isset($_GET['qrcode']) ? intval($_GET['qrcode']) : 0;
+$qrcode = 654321;
 
 if ($qrcode > 0) {
     // Query to find the transaction related to the QR code
     $stmt = $pdo->prepare("SELECT t.transaction_id, t.order_id,
-                                  t.status, o.student_id, o.order_date 
+                                  t.status, o.order_date 
                             FROM transactions t 
                             JOIN orders o ON t.order_id = o.order_id 
                             WHERE t.qr_code = :qrcode AND t.status = 'unclaimed '");
@@ -37,7 +36,7 @@ if ($qrcode > 0) {
         $response = [
             "status" => "success",
             "transaction_id" => $transaction['transaction_id'],
-            "student_id" => $transaction['student_id'],
+            "order_id" => $transaction["order_id"],
             "order_date" => $transaction['order_date'],
             "items" => $items
         ];

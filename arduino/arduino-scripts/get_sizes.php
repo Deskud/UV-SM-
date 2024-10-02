@@ -1,5 +1,5 @@
 <?php
-require "../dbconnection.php";  // Assuming $conn is properly initialized in dbconnection.php
+require "../../dbconnection.php";
 
 if (isset($_GET['product_name'])) {
     $product_name = $_GET['product_name'];

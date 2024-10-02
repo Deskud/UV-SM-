@@ -1,5 +1,5 @@
 <?php
-require "../dbconnection.php";
+require "../../dbconnection.php";
 
 // Prepare the SQL query
 $query = "SELECT DISTINCT c.category_id, c.category_name
