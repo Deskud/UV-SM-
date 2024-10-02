@@ -45,6 +45,7 @@ $(document).ready(function () {
 
 
     });
+    
 
     // FOR closing ng update at finish order modal pero di mag 
     // c-close yung main modal window (proceed-order-modal) 

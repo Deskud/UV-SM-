@@ -21,22 +21,27 @@ require "dbconnection.php";
         <img style="margin-right: 10px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-2px;">Uniform Stock Monitoring System</h1>
 
-        <ul>
-            <li style="margin-left:955px;">
-                <a href="#"><i class="fa-solid fa-bell"></i></a>
-            </li>
-            <li style="margin-left:1000px;">
-                <a href="logout.php" style="color: white;"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
-            </li>
-        </ul>
+        <div class="sign-out">
+            <details class="drop-down">
+                <summary>Account</summary>
+                <form class="drop-down-content">
+ 
+                    <li>
+                        <a href="logout.php" style="color: white;"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
+                    </li>
+            
+                </form>
+            </details>
+        </div>
 
 
     </div>
     <div id="Sidebar-container">
         <ul class="Sidebar-links">
             <ul>
-                <h3 style="color: white; text-transform:uppercase;"><?php echo $_SESSION['username']; ?></h3>
-                <hr>
+                <div class="user-name">
+                    <h3 style="color: white; text-transform:uppercase;"><?php echo $_SESSION['username']; ?></h3>
+                </div>
                 <?php if ($_SESSION['access_id'] === 1): ?>
                     <li>
                         <a href="#" class="page-nav" data-target="./main-content/Dashboard.php">
@@ -108,18 +113,15 @@ require "dbconnection.php";
         <?php include "./main-content/Dashboard.php"; ?>
     </div>
     <div id="Right-container">
-        <h5 class="title-form">Live Notification</h5>
+        <h5 class="title-form">Notification</h5>
 
         <div id="notifcations-table">
             <!-- lalagay akong ajax dito para mag 
-
-
                      pakita mga notif real time -->
         </div>
-
     </div>
     <script src="./jquery/jquery-3.7.1.min.js"></script>
-    <script src="./Script.js"></script>
+    <script src="Script.js"></script>
     <script src="https://kit.fontawesome.com/883b8ee9d9.js" crossorigin="anonymous"></script>
 </body>
 

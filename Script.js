@@ -27,6 +27,7 @@ $(document).ready(function() {
 
         container.load('./main-content/' + page + '.php');
     }
+    
 
     // Call this function on page load to set initial content
     loadContentFromURL();

@@ -21,21 +21,25 @@ h1 {
     color: #ffffff;
 }
 
-h2,
+h2 {
+    font-family: "Roboto static", Arial, Helvetica, sans-serif;
+    color: white;
+}
+
 h3,
 h4 {
     font-family: "Roboto static", Arial, Helvetica, sans-serif;
 }
 
-
-h5, button{
+h5,
+ul {
     font-family: "Mulish", Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
 
 li {
     overflow: hidden;
     text-decoration: none;
-
 }
 
 a {
@@ -62,7 +66,7 @@ a {
 }
 
 .page-nav.activePage {
-    
+    width: 100%;
     height: 20px;
     background-color: #0454ac;
 }
@@ -357,6 +361,7 @@ th {
     background-color: #0454ac;
     display: flex;
     flex-direction: left;
+    flex-shrink: 0;
     width: 100%;
     height: 50px;
     white-space: nowrap;
@@ -364,32 +369,29 @@ th {
     border-bottom: solid 2px rgb(0, 0, 0, .5);
     padding: 9px;
     padding-left: 50px;
-    padding-bottom: 10px;
-
+    margin-left: 255px;
 }
 
 #Sidebar-container {
     top: 0;
     position: fixed;
     overflow: hidden;
-    background-color: #1e2125;
+    background-color: #343638;
     display: block;
     flex-direction: column;
     flex-shrink: 0;
     height: 100%;
     width: 270px;
     left: 0;
-    padding: 1rem;
+    padding: 5px;
     max-width: 35vw;
-    z-index: -1;
-    margin-top: 10px;
+    /* z-index: -1; */
     align-items: center;
-    border-right: 1px solid #0303048d;
 }
 
 #Sidebar-container ul {
+
     padding: 4px;
-    margin-top: 20px;
 }
 
 #Sidebar-container li {
@@ -397,15 +399,58 @@ th {
     margin-bottom: 20px;
 }
 
+
+
+.sign-out {
+
+    border-radius: 10px;
+    margin-top: -10px;
+    margin-left: 850px;
+
+}
+
+.drop-down {
+    text-align: center;
+    padding: 2px;
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 20px;
+    width: 150px;
+    height: 20px;
+    color: rgb(0, 102, 255);
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+}
+
+.d-down {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+
+}
+
+.drop-down-content {
+    background-color: rgb(228, 227, 227);
+    height: 40px;
+    z-index: 2;
+
+}
+
 /* Container of tables and styles */
+.user-name {
+    background-color: #0454ac;
+    width: 265px;
+    padding: 5px;
+    height: 70px;
+    margin-top: -45px;
+    margin-left: -10px;
+
+}
 
 #Main-container {
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    width: auto;
-    height: auto;
+    width: 800px;
+    height: 650px;
     max-width: 100%;
-    max-height: 50%;
+    max-height: 80%;
     position: fixed;
     display: block;
     padding: 5px;
@@ -429,12 +474,13 @@ th {
     display: block;
     padding: 5px;
     margin-top: 100px;
-    margin-left: 1160px;
-    margin-right: 1160px;
+    margin-left: 1200px;
+    margin-right: 1200px;
+    z-index: -2;
 
 }
 
-.notification{
+.notification {
     font-family: "Mulish", Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 15px;
@@ -450,8 +496,6 @@ th {
     padding: 5px;
     text-align: justify;
 
-
-
 }
 
 
@@ -463,7 +507,34 @@ th {
 
 /* Dashboard START */
 
+.dash-container {
+    padding: 20px;
+    margin-top: 30px;
+    margin-left: 120px;
 
+
+
+}
+
+.cell-one,
+.cell-two,
+.cell-three,
+.cell-four {
+    display: inline-block;
+    width: 220px;
+    height: 220px;
+    background-color: green;
+    margin-top: 10px;
+    margin-left: 20px;
+    border-radius: 5px;
+    border: solid 2px rgb(0, 92, 0);
+}
+
+
+
+
+
+/* Dashhboard END */
 
 
 /* Product Page */
@@ -675,11 +746,11 @@ th {
 
 .transaction-table {
 
-    width: 500px;
+    width: auto;
 }
 
 .download-purchase-history {
-    
+
     margin-top: 40px;
     margin-left: 25px;
     width: fit-content;
