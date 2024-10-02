@@ -43,15 +43,4 @@ $result = mysqli_query($conne, $query);
         <?php } ?>
     </table>
 
-    <!-- Pagination (example, modify as needed) -->
-    <div class="pagination">
-        <a href="#">&lsaquo;</a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">&rsaquo;</a>
-    </div>
-    <div class="pagination-info">
-        <p>Page 1 of #</p>
-    </div>
 </div>

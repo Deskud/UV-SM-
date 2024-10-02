@@ -202,7 +202,7 @@ include '../session_check.php';
                 notification.fadeOut(300, function() {
                     $(this).remove();
                 });
-            }, 5000);
+            }, 60000);
         }
 
 

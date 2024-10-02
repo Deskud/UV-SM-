@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
             // Update order status to 'completed'
-            $stmt = $conne->prepare("UPDATE orders SET status = 'pending' WHERE order_id = ?");
+            $stmt = $conne->prepare("UPDATE orders SET status = 'processed' WHERE order_id = ?");
             $stmt->bind_param('i', $orderId);
 
             if ($stmt->execute()) {

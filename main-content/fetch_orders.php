@@ -18,14 +18,25 @@ if ($result) {
 }
 // Fetch all items for pending orders
 $orderIds = array_column($orders, 'order_id');
-$itemsQuery = "SELECT * FROM items WHERE order_id IN (" . implode(',', $orderIds) . ")";
-$itemsResult = $conne->query($itemsQuery);
+// $itemsQuery = "SELECT * FROM items WHERE order_id IN (" . implode(',', $orderIds) . ")";
+// $itemsResult = $conne->query($itemsQuery);
 
 // Group items by order_id
 $groupedItems = [];
-while ($item = $itemsResult->fetch_assoc()) {
-    $groupedItems[$item['order_id']][] = $item;
+if (!empty($orderIds)) {
+    $itemsQuery = "SELECT * FROM items WHERE order_id IN (" . implode(',', $orderIds) . ")";
+    $itemsResult = $conne->query($itemsQuery);
+
+    // Group items by order_id
+    while ($item = $itemsResult->fetch_assoc()) {
+        $groupedItems[$item['order_id']][] = $item;
+    }
 }
+
+// while ($item = $itemsResult->fetch_assoc()) {
+//     $groupedItems[$item['order_id']][] = $item;
+// }
+
 ?>
 
 <table>
@@ -63,7 +74,8 @@ while ($item = $itemsResult->fetch_assoc()) {
                         <?php
                         if (isset($groupedItems[$order['order_id']])) {
                             foreach ($groupedItems[$order['order_id']] as $item) {
-                                echo "<h4>Item ID: {$item['item_id']} - Quantity: {$item['quantity']}</h4>";
+                                echo "<h6>Item ID: {$item['item_id']} - Quantity: {$item['quantity']}</h6>";
+                                echo "<h6>Date modified: {$item['updated_at']}</h6>";
                             }
                         } else {
                             echo "<h4>No items found for this order.</h4>";
@@ -82,19 +94,19 @@ while ($item = $itemsResult->fetch_assoc()) {
             <div id="qrCodeModal<?php echo $order['order_id']; ?>" class="modal">
                 <div class="modal-receipt-content">
                     <?php
-                    echo "<p>-------------------------------------------------------</p>
-                                <h4>Philippine Christian University - Dasmariñas</h4>
-                    <p>-------------------------------------------------------</p>
-                       <p>PCU College Building, Dasmariñas, 4114 Cavite</p>
-                    <p>-------------------------------------------------------</p>";
-                    echo "<h5>Order ID:{$order['order_id']}</h5>";
+                    echo "<h6>-------------------------------------------------------</h6>
+                                <h4>Philippine Christian University - Dasmariñas</h6>
+                    <h6>-------------------------------------------------------</h6>
+                       <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
+                    <h6>-------------------------------------------------------</h6>";
+                    echo "<h6>Order ID:{$order['order_id']}</h6>";
                     if (isset($groupedItems[$order['order_id']])) {
                         foreach ($groupedItems[$order['order_id']] as $item) {
-                            echo "<h5>Item ID: {$item['item_id']}--x{$item['quantity']}</h5>";
+                            echo "<h6>Item ID: {$item['item_id']}......x {$item['quantity']}</h6>";
                         }
                     }
                     ?>
-                    <h5>-------------------------Thank you!-------------------------</h5>
+                    <h6>-------------------------Thank you!-------------------------</h6>
                     <div id="qr-code-display<?php echo $order['order_id']; ?>">
                         <!-- QR code will be displayed here -->
                     </div>
@@ -113,7 +125,7 @@ while ($item = $itemsResult->fetch_assoc()) {
 
                     <form class="update-items" id="update-quantity-form-<?php echo $order['order_id']; ?>" method="POST">
                         <ul>
-                        <?php
+                            <?php
                             if (isset($groupedItems[$order['order_id']])) {
                                 foreach ($groupedItems[$order['order_id']] as $item) {
                                     echo "<h4>Item ID: " . $item['item_id'] . " - Quantity: <input type='number' class='quantity-input' data-item-id='" . $item['item_id'] . "' value='" . $item['quantity'] . "'></h4>";
