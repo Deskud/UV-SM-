@@ -33,7 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<h2 style="text-align: center;">Add Products</h2>
+
+<h3 class="title-form">Archived Products</h3>
+<hr>
 <!-- Add Products Modal -->
 <div id="add-product-modal" class="modal">
     <div class="modal-content">

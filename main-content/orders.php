@@ -3,11 +3,9 @@ require "../dbconnection.php"; // Include database connection
 include '../session_check.php';
 
 ?>
-
+<h3 class="title-form">Orders</h3>
+<hr>
 <div>
-    <h2 style="text-align: center;">Pending Orders</h2>
-
-
     <!-- Search Bar -->
     <input id="find-pending-orders" class="search-table" type="search" placeholder="Search...">
 

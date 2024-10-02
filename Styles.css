@@ -1,15 +1,5 @@
 /* Web Reso */
 
-@media (max-width: 480px) {
-    body {
-        font-size: 20px;
-    }
-
-    .container {
-        justify-content: space-around;
-        /* Space around items */
-    }
-}
 
 
 
@@ -43,7 +33,8 @@ li {
 }
 
 a {
-    font-family: "Roboto static", Arial, Helvetica, sans-serif;
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    font-size: 15px;
     text-decoration: none;
 
 
@@ -66,16 +57,16 @@ a {
 }
 
 .page-nav.activePage {
-    width: 100%;
     height: 20px;
-    background-color: #0454ac;
+    background: rgb(110, 179, 255);
+    background: linear-gradient(90deg, rgba(110, 179, 255, 1) 1%, rgba(0, 123, 255, 1) 9%, rgba(0, 41, 86, 1) 100%);
 }
 
 
 
 hr {
-    border: solid 1px white;
-    opacity: 1;
+    border: solid .25px rgb(119, 119, 119);
+    opacity: 0.5;
 
 }
 
@@ -350,7 +341,8 @@ th {
 
 #Main-body {
 
-    background-color: #cacdd1;
+    background: rgb(179, 178, 178);
+    /* background: linear-gradient(80deg, rgba(179, 178, 178, 1) 0%, rgba(255, 255, 255, 1) 100%); */
 }
 
 #Topnavigator-container {
@@ -358,30 +350,34 @@ th {
     top: 0;
     left: 0;
     overflow: hidden;
-    background-color: #0454ac;
+    background: rgb(0, 78, 164);
+    background: linear-gradient(90deg, rgba(0, 78, 164, 1) 1%, rgb(21, 107, 199) 50%, rgba(0, 78, 164, 1) 100%);
     display: flex;
-    flex-direction: left;
+    flex-direction: row;
     flex-shrink: 0;
     width: 100%;
     height: 50px;
     white-space: nowrap;
     padding: 5px;
-    border-bottom: solid 2px rgb(0, 0, 0, .5);
+    border-bottom: solid 2px rgb(0, 55, 115);
     padding: 9px;
     padding-left: 50px;
     margin-left: 255px;
 }
 
 #Sidebar-container {
-    top: 0;
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
     position: fixed;
     overflow: hidden;
-    background-color: #343638;
+    background: rgb(18,18,18);
+    background: linear-gradient(90deg, rgba(18,18,18,1) 0%, rgba(0,0,0,1) 100%);
+    border-right: solid 2px rgb(0, 0, 0);
     display: block;
     flex-direction: column;
     flex-shrink: 0;
     height: 100%;
     width: 270px;
+    top: 0;
     left: 0;
     padding: 5px;
     max-width: 35vw;
@@ -391,62 +387,49 @@ th {
 
 #Sidebar-container ul {
 
-    padding: 4px;
+    padding: 2px;
 }
 
 #Sidebar-container li {
+    font-family: "Roboto static", Arial, Helvetica, sans-serif;
     margin-top: 30px;
     margin-bottom: 20px;
 }
 
 
+.user-name {
+    margin-top: -25px;
+    text-align: center;
+    color: white;
+}
 
 .sign-out {
-
+    display: inline-block;
     border-radius: 10px;
-    margin-top: -10px;
-    margin-left: 850px;
-
-}
-
-.drop-down {
-    text-align: center;
-    padding: 2px;
     margin-top: 15px;
-    background-color: white;
-    border-radius: 20px;
-    width: 150px;
-    height: 20px;
-    color: rgb(0, 102, 255);
-    font-family: "Mulish", Arial, Helvetica, sans-serif;
-}
-
-.d-down {
-    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    margin-left: 830px;
+    color: white;
 
 }
 
-.drop-down-content {
-    background-color: rgb(228, 227, 227);
-    height: 40px;
-    z-index: 2;
+.sign-out a {
+
+    color: white;
+
+}
+
+.sign-out i:hover {
+
+    color: rgba(255, 255, 255, 0.382);
 
 }
 
 /* Container of tables and styles */
-.user-name {
-    background-color: #0454ac;
-    width: 265px;
-    padding: 5px;
-    height: 70px;
-    margin-top: -45px;
-    margin-left: -10px;
-
-}
-
 #Main-container {
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 45%, rgba(179, 178, 178, 1) 100%);
+    border-radius: 5px;
+    border: solid 2px rgb(255, 255, 255, 0.25);
     width: 800px;
     height: 650px;
     max-width: 100%;
@@ -463,11 +446,13 @@ th {
 }
 
 #Right-container {
-    background-color: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 45%, rgba(179, 178, 178, 1) 100%);
     border-radius: 10px;
+    border: solid 2px rgb(255, 255, 255, 0.25);
     width: fit-content;
     height: fit-content;
-    width: 450px;
+    width: 350px;
     max-width: 90%;
     max-height: 100%;
     position: fixed;
@@ -520,6 +505,7 @@ th {
 .cell-two,
 .cell-three,
 .cell-four {
+    text-align: center;
     display: inline-block;
     width: 220px;
     height: 220px;
@@ -580,6 +566,8 @@ th {
     margin-top: 5px;
     margin-left: 10px;
     margin-right: auto;
+    border-radius: 10px;
+    border:solid 1px #2d2d2d;
 
 }
 
@@ -598,26 +586,20 @@ th {
 
 #add-product-btn {
 
-    cursor: pointer;
-    border-radius: 10px;
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
     width: 120px;
-    height: 30px;
+    height: 40px;
     background-color: #00810b;
+    color: rgb(255, 255, 255);
     border: rgba(255, 255, 255, 0.609) solid;
-
-    color: white;
+    border-radius: 10px;
+    cursor: pointer;
 
 }
 
 #add-product-btn:hover {
 
-    cursor: pointer;
-    border: 2px solid#02bf12;
-    border-radius: 10px;
-    width: 120px;
-    height: 30px;
-    background-color: #00810b;
-    color: white;
+    border: 4px solid#02bf12;
 
 }
 
@@ -779,14 +761,14 @@ th {
 /* ORDERS START */
 
 .proceed-btn {
-    margin-left: 20px;
-    border-radius: 10px;
-    border: rgba(255, 255, 255, 0.609) solid;
-    width: 100px;
-    height: 30px;
-    cursor: pointer;
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    width: 120px;
+    height: 40px;
     background-color: #00810b;
-    color: white;
+    color: rgb(255, 255, 255);
+    border: rgba(255, 255, 255, 0.609) solid;
+    border-radius: 10px;
+    cursor: pointer;
 
 }
 
@@ -850,33 +832,50 @@ th {
     margin: 5px auto;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ORDERS END */
 
 
+/* CALENDAR START */
+
+
+#filter-date{
+
+width: 120px;
+height: 30px;
+border-radius: 10px;
+border:solid 1px #2d2d2d;
+}
+
+.filter-btn {
+
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    width: 80px;
+    height: 40px;
+    background-color: #00810b;
+    color: rgb(255, 255, 255);
+    border: rgba(255, 255, 255, 0.609) solid;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.filter-btn:hover{
+
+    border: 4px solid#02bf12;
+}
+
+
+
+
+
+/* CALENDAR END */
 /* ------------------------------------------------------- */
 /* MODAL WINDOWS */
+
+
+
+
+
 
 
 

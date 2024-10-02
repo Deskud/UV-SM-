@@ -17,31 +17,23 @@ require "dbconnection.php";
 </head>
 
 <body id="Main-body">
+
     <div id="Topnavigator-container">
         <img style="margin-right: 10px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-2px;">Uniform Stock Monitoring System</h1>
-
         <div class="sign-out">
-            <details class="drop-down">
-                <summary>Account</summary>
-                <form class="drop-down-content">
- 
-                    <li>
-                        <a href="logout.php" style="color: white;"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
-                    </li>
-            
-                </form>
-            </details>
+            <a href="logout.php"><i class="fa-solid fa-right-from-bracket"> Sign out</i></a>
         </div>
-
+    </div>
 
     </div>
     <div id="Sidebar-container">
         <ul class="Sidebar-links">
             <ul>
                 <div class="user-name">
-                    <h3 style="color: white; text-transform:uppercase;"><?php echo $_SESSION['username']; ?></h3>
+                    <h3><?php echo $_SESSION['username']; ?></h3>
                 </div>
+                <hr>
                 <?php if ($_SESSION['access_id'] === 1): ?>
                     <li>
                         <a href="#" class="page-nav" data-target="./main-content/Dashboard.php">

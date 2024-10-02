@@ -69,13 +69,13 @@ if (!empty($orderIds)) {
                     </span>
                     <h2>Order Details (ID: <?php echo $order['order_id']; ?>)</h2>
                     <h3>Order Date: <?php echo $order['order_date']; ?></h3>
+                    <h3>Date modified: <?php echo $order['updated_at']; ?></h3>
                     <h3>Items:</h3>
                     <ul>
                         <?php
                         if (isset($groupedItems[$order['order_id']])) {
                             foreach ($groupedItems[$order['order_id']] as $item) {
                                 echo "<h6>Item ID: {$item['item_id']} - Quantity: {$item['quantity']}</h6>";
-                                echo "<h6>Date modified: {$item['updated_at']}</h6>";
                             }
                         } else {
                             echo "<h4>No items found for this order.</h4>";

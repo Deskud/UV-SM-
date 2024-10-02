@@ -1,23 +1,44 @@
+
+// Pag pinindot yung side bar magkakaroon ng highlight. If ni reload yung page mag s-stay parin doon sa pinendot na link yung highlight.
 $(document).ready(function() {
-    $('.Sidebar-links a').on('click', function() {
 
+    function setActivePage(target) {
         $('.Sidebar-links a').removeClass('activePage');
-        $(this).addClass('activePage');
 
-        const target = $(this).data('target');
+        $('.Sidebar-links a[data-target="' + target + '"]').addClass('activePage');
+
         $('#Main-container').load(target);
+
+        localStorage.setItem('activePage', target);
+    }
+
+ 
+    $('.Sidebar-links a').on('click', function() {
+        const target = $(this).data('target');
+
+        // Set the active page and load the content
+        setActivePage(target);
     });
+
+    const savedPage = localStorage.getItem('activePage');
+
+    if (savedPage) {
+        setActivePage(savedPage);
+    } else {
+        setActivePage('./main-content/Dashboard.php');
+    }
 });
 
+
+// Dito yung part para sa walang reloading pag nag lilipat ng pages. (Single Page Application)
 $(document).ready(function() {
  
-    // var trigger = $('#Sidebar-container ul ul li a'),
     var trigger = $('.page-nav'),
         container = $('#Main-container');
 
     function loadContentFromURL() {
         var params = new URLSearchParams(window.location.search);
-        var page = params.get('page'); // Get the 'page' parameter from URL
+        var page = params.get('page');
 
         if (!page) {
             page = 'Dashboard'; 
@@ -29,7 +50,7 @@ $(document).ready(function() {
     }
     
 
-    // Call this function on page load to set initial content
+    // Mag lo-load content nung page
     loadContentFromURL();
 
     trigger.on('click', function(e) {
@@ -39,20 +60,17 @@ $(document).ready(function() {
             target = $this.data('target');
         console.log(target);
 
-        // Extract page name from the target URL (e.g., Products)
+    
         var page = target.replace('./main-content/', '').replace('.php', '');
 
-        // Load the content dynamically
         container.load(target);
 
-        // Change the URL using query parameters without reloading the page
         history.pushState(null, null, '?page=' + page);
 
 
         return false;
     });
 
-    // Handle the back/forward button navigation
     window.onpopstate = function() {
         loadContentFromURL(); // Reload content based on the current URL
     };

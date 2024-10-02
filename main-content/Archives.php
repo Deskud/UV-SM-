@@ -16,7 +16,8 @@ $query = "SELECT products.*, categories.category_name, sizes.size_name
 
 $result = mysqli_query($conne, $query);
 ?>
-
+<h3 class="title-form">Archived Products</h3>
+<hr>
 <div class="archive-table-container">
     <table class="archive-table">
         <tr>
