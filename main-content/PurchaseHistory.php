@@ -14,7 +14,7 @@ $display_purchase_history = mysqli_query($conne, $query);
     <input type="button" class="download-data" value="Download .csv" onclick="window.location.href='export_data.php'">
 </div>
 <div class="transactions-table-container">
-    <table class="transaction-table">
+    <table>
         <tr>
             <th>transaction_ID</th>
             <th>order_ID</th>

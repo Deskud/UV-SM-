@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h3 class="title-form">Archived Products</h3>
+<h3 class="title-form">Products</h3>
 <hr>
 <!-- Add Products Modal -->
 <div id="add-product-modal" class="modal">
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         <!-- Add Products Part -->
-        <h3 class="title-form">Add Product</h3>
+        <h3 class="title-form-product">Add Product</h3>
         <form action="" method="POST" enctype="multipart/form-data" id="input-form">
             <input type="hidden" name="product_id" id="product_id" value="">
             <h3 style="color: #0454ac;">Uniform Type</h3>
@@ -62,8 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="3">Large</option>
                 <option value="4">Extra Large</option>
             </select> -->
-            <h3 style="color: #0454ac;">Sizes</h3>
             <div class="sizes-container">
+                <h3 style="color: #0454ac;">Sizes</h3>
                 <input type="checkbox" value="1" name="size[]">Small
                 <input type="checkbox" value="2" name="size[]">Medium
                 <input type="checkbox" value="3" name="size[]">Large
@@ -170,22 +170,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (!product.error) {
                         // Populate the form fields with the fetched data
                         $('#product_id').val(product.product_id);
-                        $('select[name="name"]').val(product.product_name);
-                        $('select[name="size"]').val(product.size);
+                        $('select[name="name"]').val(product.category_id);
+                        $('select[name="size"]').val(product.size); // Assuming product.size is a single value or an array
                         $('select[name="gender"]').val(product.gender);
                         $('input[name="quantity"]').val(product.product_quantity);
                         $('input[name="price"]').val(product.price);
 
+                        // Hide the size checkboxes
+
+                  
+                        $('.sizes-container').css('display', 'none');
+                        $('.title-form-product').text('Edit Product');
                         $('#submit-btn').val('Update'); // Change button label to 'Update'
                         $('#add-product-modal').css('display', 'block');
 
                     } else {
                         alert('Error: ' + product.error);
                     }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert('Error fetching product details: ' + errorThrown);
                 }
+
             });
         });
 
@@ -308,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $('#search-result-table').css("display", "none");
             }
         });
-        
+
         // Function to load the product table
         // function loadTable() {
         //     console.log("Why are you in the console? A bit sussy i aint gonna lie brudder.");

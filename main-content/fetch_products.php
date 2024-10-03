@@ -46,13 +46,15 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
         <td><?php echo htmlspecialchars($row['price']); ?></td>
         <td><?php echo htmlspecialchars($row['product_quantity']); ?></td>
         <td><?php echo htmlspecialchars($row['date_added']); ?></td>
-        <td style="margin-left: 10px;">
-            <a class="edit-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square"></i></a>
-            <a class="delete-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-solid fa-box-archive"></i></a>
-        </td>
+        <div class="action-container">
+            <td style="margin-left: 10px;">
+                <a class="edit-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square"></i></a>
+                <a class="delete-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-solid fa-box-archive"></i></a>
+            </td>
+        </div>
         <td>
             <select class="cell-num-select" data-product-id="<?php echo htmlspecialchars($row['product_id']); ?>">
-                <option value="" disabled>Select Cell Number</option>
+                <option value="" disabled style="color: white;">Select Cell Number</option>
                 <option value="" <?php echo is_null($row['cell_num']) ? 'selected' : ''; ?>>NULL</option>
                 <?php for ($i = 1; $i <= 24; $i++): ?>
                     <?php if (!in_array($i, $used_cells) || $i == $row['cell_num']): ?>

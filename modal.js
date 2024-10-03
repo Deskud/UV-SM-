@@ -71,7 +71,6 @@ $(document).ready(function () {
 });
 // Pag cinlick ko yung edit tapos di ako naglagay babalik sa add product function.
 function resetModal() {
-
     $('#input-form')[0].reset(); // Reset the form
     $('#submit-btn').val('Add'); // Set button to 'Add'
     $('#cellSelect').prop('disabled', false); // Enable the cell number select
@@ -82,10 +81,12 @@ function resetModal() {
 
 //Para ito sa cell num same siya sa resetModal except dito para naman sa add produc tbutton
 $('#add-product-btn').on('click', function () {
-    $('#input-form')[0].reset(); // Reset the form
-    $('#submit-btn').val('Add'); // Set button to 'Add'
-    $('#cellSelect').prop('disabled', true); // Enable the cell number select
-    $('#add-product-modal').css('display', 'block'); // Open the modal
+    $('.title-form-product').text('Add Products');
+    $('#input-form')[0].reset();
+    $('input[name="size[]"]').prop('disabled', false);  // Enable checkboxes
+    $('.sizes-container').css('display', 'block'); // Show checkboxes
+    $('#submit-btn').val('Add');
+    $('#add-product-modal').css('display', 'block');
 });
 
 

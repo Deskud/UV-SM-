@@ -95,23 +95,16 @@ require "dbconnection.php";
             </ul>
         </ul>
         <hr>
-        <!-- <ul>
-            <li style="display: block;">
-                <a href="logout.php" style="color: white;"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
-            </li>
-        </ul> -->
     </div>
     <div id="Main-container">
         <?php include "./main-content/Dashboard.php"; ?>
     </div>
-    <div id="Right-container">
-        <h5 class="title-form">Notification</h5>
-
-        <div id="notifcations-table">
-            <!-- lalagay akong ajax dito para mag 
+                    
+    <div id="notifcations-table">
+        <!-- lalagay akong ajax dito para mag 
                      pakita mga notif real time -->
-        </div>
     </div>
+
     <script src="./jquery/jquery-3.7.1.min.js"></script>
     <script src="Script.js"></script>
     <script src="https://kit.fontawesome.com/883b8ee9d9.js" crossorigin="anonymous"></script>

@@ -173,41 +173,40 @@ include '../session_check.php';
             });
         }
 
-        // Once pinendot ito ng user may lalabas dapat na notification 
-        $('#confirm-print').on('click', function() {
-            console.log('Check for notifications on confirm-print');
+        // // Once pinendot ito ng user may lalabas dapat na notification 
+        // $('#confirm-print').on('click', function() {
 
-            checkForNewTransactions();
-        });
+        //     checkForNewTransactions();
+        // });
 
 
-        function checkForNewTransactions() {
+        // function checkForNewTransactions() {
 
-            $.ajax({
-                url: './main-content/transact_notif.php', // Endpoint to check for new transactions
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    if (data.newTransaction) {
-                        showNotification(data.message);
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error("Error fetching notifications:", textStatus, errorThrown);
-                }
-            });
-        }
+        //     $.ajax({
+        //         url: './main-content/transact_notif.php', // Endpoint to check for new transactions
+        //         method: 'GET',
+        //         dataType: 'json',
+        //         success: function(data) {
+        //             if (data.newTransaction) {
+        //                 showNotification(data.message);
+        //             }
+        //         },
+        //         error: function(jqXHR, textStatus, errorThrown) {
+        //             console.error("Error fetching notifications:", textStatus, errorThrown);
+        //         }
+        //     });
+        // }
 
-        function showNotification(message) {
-            var notification = $('<div class="notification">' + message + '</div>');
-            $('#notifcations-table').append(notification);
+        // function showNotification(message) {
+        //     var notification = $('<div class="notification">' + message + '</div>');
+        //     $('#notifcations-table').append(notification);
 
-            setTimeout(function() {
-                notification.fadeOut(300, function() {
-                    $(this).remove();
-                });
-            }, 60000);
-        }
+        //     setTimeout(function() {
+        //         notification.fadeOut(300, function() {
+        //             $(this).remove();
+        //         });
+        //     }, 60000);
+        // }
 
 
         // Print QR code function
