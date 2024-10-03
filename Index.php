@@ -22,7 +22,7 @@ require "dbconnection.php";
         <img style="margin-right: 10px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-2px;">Uniform Stock Monitoring System</h1>
         <div class="sign-out">
-            <a href="logout.php"><i class="fa-solid fa-right-from-bracket"> Sign out</i></a>
+            <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
         </div>
     </div>
 

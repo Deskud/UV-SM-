@@ -13,7 +13,7 @@ require "../dbconnection.php";
 $query = "SELECT products.*, categories.category_name, sizes.size_name, products.cell_num
           FROM products
           INNER JOIN categories ON products.category_id = categories.category_id
-          INNER JOIN sizes ON products.size = sizes.size_id
+          INNER JOIN sizes ON products.size_id = sizes.size_id
           WHERE products.is_archived = 0";
 
 $display_added = mysqli_query($conne, $query);

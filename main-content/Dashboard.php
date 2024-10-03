@@ -1,4 +1,14 @@
+
+<!-- fuck you php bat ayaw mo naman mag connect sa dbconnection.php ARRGARAGGRRGR -->
+
+<?php
+
+
+$query = "";
+
+?>
 <!-- Papakita yung 4(temp) na cell kung gaano kadami na lang laman -->
+
 <h3 class="title-form">Dashboard</h3>
 <hr>
 <div class="dash-container">

@@ -1,13 +1,14 @@
 <?php
 require "../dbconnection.php";
-// Check if there's a filter date in the request
-$filterDate = isset($_GET['filter_date']) ? $_GET['filter_date'] : null;
+
+$startDate = isset($_GET['start_date']) ? $_GET['start_date'] : null;
+$endDate = isset($_GET['end_date']) ? $_GET['end_date'] : null;
 
 $response = ['success' => false, 'transactions' => []];
 
-if ($filterDate) {
-    // Fetch transactions for the filtered date
-    $query = "SELECT transaction_id, transaction_date FROM transactions WHERE DATE(transaction_date) = '" . $filterDate . "'";
+if ($startDate && $endDate) {
+    // Fetch transactions for the date range
+    $query = "SELECT * FROM transactions WHERE DATE(transaction_date) BETWEEN '$startDate' AND '$endDate'";
     $result = mysqli_query($conne, $query);
 
     $transactions = [];
@@ -25,7 +26,6 @@ if ($filterDate) {
     }
 }
 
-// Send JSON response
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>

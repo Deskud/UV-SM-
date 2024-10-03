@@ -55,9 +55,11 @@ if (!empty($orderIds)) {
                 <td><?php echo $order['order_date']; ?></td>
                 <td><?php echo $order['status']; ?></td>
                 <td>
-                    <button class="proceed-btn" onclick="openModal(<?php echo $order['order_id']; ?>)">
-                        Proceed
-                    </button>
+                    <div class="prc-btn-container">
+                        <button class="proceed-btn" onclick="openModal(<?php echo $order['order_id']; ?>)">
+                            Proceed
+                        </button>
+                    </div>
                 </td>
             </tr>
 
@@ -69,7 +71,7 @@ if (!empty($orderIds)) {
                     </span>
                     <h2>Order Details (ID: <?php echo $order['order_id']; ?>)</h2>
                     <h3>Order Date: <?php echo $order['order_date']; ?></h3>
-                    <h3>Date modified: <?php echo $order['updated_at']; ?></h3>
+                    <h3 class="date-modified">Date modified: <?php echo $order['updated_at']; ?></h3>
                     <h3>Items:</h3>
                     <ul>
                         <?php
@@ -114,7 +116,8 @@ if (!empty($orderIds)) {
                 </div>
             </div>
 
-            <!-- Update Modal -->
+
+            <!--New  Update Modal -->
             <div id="updateModal<?php echo $order['order_id']; ?>" class="modal">
                 <div class="modal-order-content">
                     <span class="close-modal" onclick="closeUpdateModal(<?php echo $order['order_id']; ?>)">
@@ -128,7 +131,11 @@ if (!empty($orderIds)) {
                             <?php
                             if (isset($groupedItems[$order['order_id']])) {
                                 foreach ($groupedItems[$order['order_id']] as $item) {
-                                    echo "<h4>Item ID: " . $item['item_id'] . " - Quantity: <input type='number' class='quantity-input' data-item-id='" . $item['item_id'] . "' value='" . $item['quantity'] . "'></h4>";
+                                    echo "<li><h6>Item ID: " . $item['item_id'] . " - Quantity: 
+                              <input type='number' class='quantity-input' 
+                              data-item-id='" . $item['item_id'] . "' 
+                              value='" . $item['quantity'] . "' min='0'>
+                              </h6></li>";
                                 }
                             }
                             ?>

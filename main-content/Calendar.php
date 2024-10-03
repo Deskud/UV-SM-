@@ -4,23 +4,19 @@ require "../dbconnection.php";
 
 <h3 class="title-form">Calendar of Transactions</h3>
 <div>
-    <hr>
-    <input type="date" id="filter-date">
-    <button class="filter-btn" id="filter-btn">Filter</button>
+    <!-- Date Filters: Start Date and End Date -->
+    <input type="date" id="start-date" value="" placeholder="Start Date">
+    <input type="date" id="end-date" value="" placeholder="End Date">
+    <button id="filter-btn" class="filter-btn">Filter</button>
+
 </div>
 <div>
     <table class="calendar">
         <thead>
-
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
+            <th>Date</th>
+            <th>Transactions</th>
         </thead>
-        <tbody id="calendar-dates">
+        <tbody id="transaction-table-body">
 
         </tbody>
     </table>
@@ -28,92 +24,98 @@ require "../dbconnection.php";
 <script>
     // Para sa pag generate ng dates
     $(document).ready(function() {
-        // Check if there's a previously selected date in localStorage, else use today's date
-        let storedDate = localStorage.getItem('selectedDate');
+        // Check if there's a previously selected date range in localStorage
+        let storedStartDate = localStorage.getItem('startDate');
+        let storedEndDate = localStorage.getItem('endDate');
+
         let today = new Date();
-        let currentDate = storedDate ? new Date(storedDate) : today;
+        let currentStartDate = storedStartDate ? new Date(storedStartDate) : today;
+        let currentEndDate = storedEndDate ? new Date(storedEndDate) : today;
 
-        // Set the filter input to the stored date or today's date
-        $('#filter-date').val(currentDate.toISOString().slice(0, 10));
+        // Set the filter input values to the stored dates or today's date
+        $('#start-date').val(currentStartDate.toISOString().slice(0, 10));
+        $('#end-date').val(currentEndDate.toISOString().slice(0, 10));
 
-        // Initially generate the calendar based on stored date or today's date
-        generateCalendar(currentDate.getMonth(), currentDate.getFullYear());
+        // Initially generate the table based on stored date range or today's date
+        generateTransactionTable(currentStartDate, currentEndDate);
 
-        // Function to generate the calendar
-        function generateCalendar(month, year, transactions = {}) {
-            const daysInMonth = new Date(year, month + 1, 0).getDate(); // Total days in the month
-            const firstDay = new Date(year, month, 1).getDay(); // Day of the week for the 1st of the month
+        // Function to generate the transaction table
+        function generateTransactionTable(startDate, endDate, transactions = {}) {
+            let tableBody = document.getElementById('transaction-table-body');
+            tableBody.innerHTML = ""; // Clear previous table data
 
-            let tableBody = document.getElementById('calendar-dates');
-            let date = 1;
-            tableBody.innerHTML = ""; // Clear previous table
-
-            for (let i = 0; i < 6; i++) { // Max 6 weeks in a month
+            // Iterate through each day in the date range and display transactions
+            for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                let formattedDate = date.toISOString().slice(0, 10); // Format date YYYY-MM-DD
                 let row = document.createElement('tr');
-                for (let j = 0; j < 7; j++) {
-                    let cell = document.createElement('td');
-                    if (i === 0 && j < firstDay) {
-                        cell.innerText = ''; // Empty cell for days of the previous month
-                    } else if (date > daysInMonth) {
-                        cell.innerText = ''; // Empty cell after last day of the month
-                    } else {
-                        let currentDate = new Date(year, month, date);
-                        let formattedDate = currentDate.toISOString().slice(0, 10); // Format date YYYY-MM-DD
 
-                        // Display the day number in the cell
-                        cell.innerHTML = `<strong>${date}</strong><br/>`;
+                // Create a cell for the date
+                let dateCell = document.createElement('td');
+                dateCell.innerText = formattedDate;
+                row.appendChild(dateCell);
 
-                        if (transactions[formattedDate]) {
-                            // Add transaction details in the cell
-                            transactions[formattedDate].forEach(function(transaction) {
-                                cell.innerHTML += `Transaction ID: ${transaction.transaction_id}<br/>`;
-                            });
-                        }
+                // Check for transactions on this date
+                if (transactions[formattedDate]) {
+                    let transactionDetails = transactions[formattedDate].map(function(transaction) {
+                        return `Transaction ID: ${transaction.transaction_id}`;
+                    }).join('<br/>');
 
-                        date++;
-                    }
-                    row.appendChild(cell);
+                    // Create a cell for the transaction details
+                    let transactionsCell = document.createElement('td');
+                    transactionsCell.innerHTML = transactionDetails;
+                    row.appendChild(transactionsCell);
+                } else {
+                    // If no transactions, show an empty cell
+                    let emptyCell = document.createElement('td');
+                    emptyCell.innerText = 'No transactions';
+                    row.appendChild(emptyCell);
                 }
+
                 tableBody.appendChild(row);
             }
         }
 
         // Handle filtering with AJAX
         $('#filter-btn').click(function() {
-            let selectedDate = $('#filter-date').val();
-            if (selectedDate) {
-                let selectedMonth = new Date(selectedDate).getMonth();
-                let selectedYear = new Date(selectedDate).getFullYear();
+            let startDate = $('#start-date').val();
+            let endDate = $('#end-date').val();
 
-                // Save the selected date in localStorage
-                localStorage.setItem('selectedDate', selectedDate);
+            // Check if start and end dates are valid
+            if (startDate && endDate) {
+                // Save the selected start and end dates in localStorage
+                localStorage.setItem('startDate', startDate);
+                localStorage.setItem('endDate', endDate);
 
-                // Send AJAX request to fetch transactions for the selected date
+                // Send AJAX request to fetch transactions within the date range
                 $.ajax({
                     url: './main-content/fetch_calendar.php',
                     type: 'GET',
                     data: {
-                        filter_date: selectedDate
+                        start_date: startDate,
+                        end_date: endDate
                     },
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            // Generate calendar with the correct month/year and transactions
-                            generateCalendar(selectedMonth, selectedYear, response.transactions);
+                            // Generate table with the transaction data
+                            generateTransactionTable(new Date(startDate), new Date(endDate), response.transactions);
                         } else {
-                            alert('No transactions found for the selected date.');
+                            alert('No transactions found for the selected date range.');
                         }
                     },
                     error: function() {
                         alert('Error retrieving transactions.');
                     }
                 });
+            } else {
+                alert('Please select a valid start and end date.');
             }
         });
 
-        // Automatically generate the calendar for today's date or the selected date on page load
-        if (!storedDate) {
-            localStorage.setItem('selectedDate', today.toISOString().slice(0, 10));
+        // Automatically save today's date if no start and end dates are found
+        if (!storedStartDate || !storedEndDate) {
+            localStorage.setItem('startDate', today.toISOString().slice(0, 10));
+            localStorage.setItem('endDate', today.toISOString().slice(0, 10));
         }
     });
 </script>

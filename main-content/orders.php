@@ -91,19 +91,22 @@ include '../session_check.php';
             document.getElementById('qrCodeModal' + orderId).style.display = "none";
         }
 
+
         function updateOrder(orderId) {
 
-            var quantities = {}; // Object to hold item quantities
+            var quantities = {};
 
-            // Loop through each quantity input field to build the quantities object
-            $('.quantity-input').each(function() {
+            // Use a selector that targets only the inputs for the specific order
+            $('#updateModal'+orderId +' .quantity-input').each(function() {
                 var itemId = $(this).data('item-id'); // Get item ID
                 var quantity = $(this).val(); // Get updated quantity
-                quantities[itemId] = quantity; // Add to quantities object
-            });
 
-            // Check if quantities are defined
-            // Debugging line to check quantities
+                // Only add to quantities if quantity is not empty or 0
+                if (quantity) {
+                    quantities[itemId] = quantity; // Add to quantities object
+                }
+            });
+            console.log(quantities);
 
             $.ajax({
                 url: './main-content/orders_function.php', // URL to your PHP script
@@ -114,14 +117,17 @@ include '../session_check.php';
                     quantities: quantities // Send the quantities as an object
                 },
                 success: function(response) {
-                    console.log(response);
                     loadOrders();
+
+
+
                 },
                 error: function(xhr, status, error) {
                     alert('Error: ' + error); // Show error message
                 }
             });
         }
+
 
         // Finish order function
         function finishOrder(orderId) {
@@ -166,7 +172,7 @@ include '../session_check.php';
                 });
             });
         }
-        
+
         // Once pinendot ito ng user may lalabas dapat na notification 
         $('#confirm-print').on('click', function() {
             console.log('Check for notifications on confirm-print');
@@ -209,7 +215,7 @@ include '../session_check.php';
             var qrCodeImg = document.getElementById('qr-code-display' + orderId).innerHTML;
             print(qrCodeImg);
             loadOrders();
-    
+
         }
         // Function to fetch and display orders
         function loadOrders() {
