@@ -19,7 +19,7 @@ if ($qrcode > 0) {
                                   t.status, o.order_date 
                             FROM transactions t 
                             JOIN orders o ON t.order_id = o.order_id 
-                            WHERE t.qr_code = :qrcode AND t.status = 'unclaimed '");
+                            WHERE t.qr_code = :qrcode AND t.status = 'unclaimed'");
     $stmt->execute(['qrcode' => $qrcode]);
     $transaction = $stmt->fetch(PDO::FETCH_ASSOC);
 

@@ -3,7 +3,9 @@
 #include <ArduinoJson.h>
 #include <Servo.h>
 #include <SoftwareSerial.h>
+#include <LiquidCrystal_I2C.h>
 SoftwareSerial qrscanner(11, 12);
+LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 // Network settings
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
@@ -24,7 +26,8 @@ struct Item {
 const int maxItems = 5;
 Item items[maxItems];
 int itemCount = 0;
-
+int transaction_id;
+int order_id;
 const int irSensorPin = 3;
 const int numServos = 5;
 Servo servos[numServos];
@@ -32,6 +35,8 @@ int servoPins[numServos] = { 22, 23, 24, 25 };
 
 void setup() {
   Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();
   qrscanner.begin(9600);
   Ethernet.begin(mac, ip);
 
@@ -43,6 +48,11 @@ void setup() {
 }
 
 void loop() {
+  lcd.clear();
+  Serial.println("Scan QR code here to claim transaction...");
+  displayText(0, 0, "Scan QR code here to");
+  displayText(0, 1, "claim transaction...");
+
   String qrCode = "";
   while (true) {
     if (qrscanner.available())  // Check if there is Incoming Data in the Serial Buffer.
@@ -54,7 +64,10 @@ void loop() {
         delay(5);                       // A small delay
       }
       Serial.println("QR Code Data: " + qrCode);  // Print the QR code data
-      break;                                      // Exit the loop when a QR code value is scanned
+      displayText(0, 2, "QR Code Data:");
+      displayText(2, 3, qrCode);
+      delay(1500);
+      break;  // Exit the loop when a QR code value is scanned
     }
   }
 
@@ -63,14 +76,26 @@ void loop() {
     processServerResponse(qrCode);
   } else {
     Serial.println("Connection to server failed.");
+    lcd.clear();
+    displayText(0, 0, "Connection to server failed.");
+    delay(1000);
   }
   delay(100);
 }
 
+void displayText(int x, int y, String text) {
+  lcd.setCursor(x, y);
+  lcd.print(text);
+}
+
 bool connectToServer() {
   Serial.println("Connecting to server...");
+  // lcd.clear();
+  // displayText(0, 0, "Connecting to server...");
   if (client.connect(server, port)) {
-    Serial.println("Connected to server");
+    Serial.println("Connected to server.");
+    // lcd.clear();
+    // displayText(0, 0, "Connected to server.");
     return true;
   }
   return false;
@@ -78,7 +103,7 @@ bool connectToServer() {
 
 void processServerResponse(String qrCode) {
   String encodedQrCode = urlEncode(qrCode);
-  client.print("GET /vm-unif/main-content/search_transaction.php?qrcode=");
+  client.print("GET /uvm/arduino/arduino-scripts/search_transaction.php?qrcode=");
   client.print(encodedQrCode);
   client.println(" HTTP/1.1");
 
@@ -129,9 +154,17 @@ void parseJsonResponse(String jsonData) {
       if (strcmp(status, "success") == 0) {
         Serial.println("Transaction found!");
         itemCount = 0;  // Reset item count
+        transaction_id = doc["trasaaction_id"];
+        order_id = doc["order_id"];
+        Serial.println("Transaction ID: ");
+        Serial.println(transaction_id);
+        Serial.println("Order ID: ");
+        Serial.println(order_id);
 
         JsonArray itemArray = doc["items"];
-        Serial.println("Items for dispensing:");
+        Serial.println("Items to dispense:");
+        lcd.clear();
+        displayText(0, 0, "Items to dispense:");
 
         for (JsonObject item : itemArray) {
           if (itemCount < maxItems) {
@@ -142,7 +175,7 @@ void parseJsonResponse(String jsonData) {
 
             items[itemCount] = { productId, String(productName), cell_num, quantity, itemCount };
             itemCount++;
-            
+
             Serial.print("ID: ");
             Serial.print(productId);
             Serial.print("Item: ");
@@ -152,13 +185,22 @@ void parseJsonResponse(String jsonData) {
             Serial.print(" | Quantity: ");
             Serial.print(quantity);
             Serial.println();
+            displayText(0, 1, "ID: " + String(productId));
+            displayText(0, 2, "Name: " + String(productId));
+            displayText(0, 3, "Qty: " + String(quantity));
+            delay(1500);
           }
         }
-
-        Serial.println("Ready for dispensing.");
+        Serial.println("Ready to dispense...");
+        lcd.clear();
+        displayText(0, 0, "Ready to dispense...");
         dispenseItems();
       } else {
         Serial.println("Transaction not found or already processed.");
+        displayText(0, 0, "Transaction not");
+        displayText(0, 1, "found or already");
+        displayText(0, 2, "dispensed.");
+        delay(1500);
       }
     } else {
       Serial.print("Error parsing server response: ");
@@ -173,15 +215,21 @@ void dispenseItems() {
   int sensorValue = digitalRead(irSensorPin);
 
   for (int i = 0; i < itemCount; i++) {
+
     Serial.print("Dispensing on cell: ");
     Serial.println(items[i].cell_num);
     Serial.print("Item Name: ");
     Serial.println(items[i].productName);
     Serial.print("Quantity: ");
     Serial.println(items[i].quantity);
+    lcd.clear();
+    displayText(0, 0, "Dispensing item:");
+    displayText(0, 1, items[i].productName);
+    displayText(0, 2, "Qty: " + String(items[i].quantity));
 
     int j = 0;
     int servoIndex = items[i].cell_num - 1;
+    displayText(0, 3, "dispensed: " + String(j));
 
     while (j < items[i].quantity) {
       sensorValue = digitalRead(irSensorPin);
@@ -194,7 +242,15 @@ void dispenseItems() {
           sensorValue = digitalRead(irSensorPin);
         }
         j++;
-        updateStockOnServer(items[i].product_id, 1);
+        displayText(0, 3, "dispensed: " + String(j));
+        Serial.println("Order ID: ");
+        Serial.println(order_id);
+        Serial.println("Product ID: ");
+        Serial.println(items[i].product_id);
+        Serial.println("Quantity: ");
+        Serial.println(1);
+        updateStockOnServer(order_id, items[i].product_id, 1);
+        delay(1000);
       }
       delay(200);  // Wait before dispensing next item
     }
@@ -215,9 +271,11 @@ String urlEncode(const String& str) {
   return encoded;
 }
 
-void updateStockOnServer(const int product_id, int quantity) {
+void updateStockOnServer(const int order_id, const int product_id, int quantity) {
   if (connectToServer()) {
-    client.print("GET /vm-unif/main-content/update_stock.php?product_id=");
+    client.print("GET /uvm/arduino/arduino-scripts/update_stock.php?order_id=");
+    client.print(order_id);
+    client.print("&product_id=");
     client.print(product_id);
     client.print("&quantity=");
     client.println(quantity);
