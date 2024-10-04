@@ -18,10 +18,6 @@ if ($result) {
 }
 // Fetch all items for pending orders
 $orderIds = array_column($orders, 'order_id');
-// $itemsQuery = "SELECT * FROM items WHERE order_id IN (" . implode(',', $orderIds) . ")";
-// $itemsResult = $conne->query($itemsQuery);
-
-// Group items by order_id
 $groupedItems = [];
 if (!empty($orderIds)) {
     $itemsQuery = "SELECT * FROM items WHERE order_id IN (" . implode(',', $orderIds) . ")";
@@ -32,11 +28,6 @@ if (!empty($orderIds)) {
         $groupedItems[$item['order_id']][] = $item;
     }
 }
-
-// while ($item = $itemsResult->fetch_assoc()) {
-//     $groupedItems[$item['order_id']][] = $item;
-// }
-
 ?>
 
 <table>
@@ -96,11 +87,11 @@ if (!empty($orderIds)) {
             <div id="qrCodeModal<?php echo $order['order_id']; ?>" class="modal">
                 <div class="modal-receipt-content">
                     <?php
-                    echo "<h6>-------------------------------------------------------</h6>
-                                <h4>Philippine Christian University - Dasmariñas</h6>
-                    <h6>-------------------------------------------------------</h6>
-                       <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
-                    <h6>-------------------------------------------------------</h6>";
+                    echo "<h6>------------------------------------------------------------</h6>
+                            <h6>Philippine Christian University - Dasmariñas</h6>
+                    <h6>------------------------------------------------------------</h6>
+                    <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
+                   <h6>------------------------------------------------------------</h6>";
                     echo "<h6>Order ID:{$order['order_id']}</h6>";
                     if (isset($groupedItems[$order['order_id']])) {
                         foreach ($groupedItems[$order['order_id']] as $item) {

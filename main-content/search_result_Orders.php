@@ -19,20 +19,20 @@ if (isset($_POST['orderinput'])) {
         <table class="data-result-table">
             <thead>
                 <th>Order ID</th>
-                <th>Student No.</th>
                 <th>Order Date</th>
                 <th>Status</th>
+                <th>Updated</th>
+                <th>Created At</th>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
                         <td><?php echo htmlspecialchars($row['order_id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['order_date']); ?></td>
-                        <td><?php echo htmlspecialchars($row['status']); ?></td>
-                        <td style="text-align: center;">
-                            <button><a href="#" class="proceed-btn " data-order-id="' . htmlspecialchars($row['order_id']) . '">
-                                    Proceed</button>
-                            </a>
+                        <td><?php echo htmlspecialchars ($row['order_date']); ?></td>
+                        <td><?php echo htmlspecialchars( $row['status']); ?></td>
+                        <td><?php echo htmlspecialchars($row['updated_at']); ?></td>
+                        <td><?php echo htmlspecialchars($row['created_at']); ?></td>
+
                     </tr>
                 <?php } ?>
             </tbody>

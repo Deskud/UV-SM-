@@ -38,7 +38,7 @@ if (isset($_POST['input'])) {
                     <tr>
                         <td><?php echo htmlspecialchars($row['product_id']); ?></td>
                         <td><?php echo htmlspecialchars($row['category_name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['size']); ?></td>
+                        <td><?php echo htmlspecialchars($row['size_id']); ?></td>
                         <td><?php echo htmlspecialchars($row['gender']); ?></td>
                         <td><?php echo htmlspecialchars($row['price']); ?></td>
                         <td><?php echo htmlspecialchars($row['product_quantity']); ?></td>

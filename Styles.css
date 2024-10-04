@@ -260,11 +260,19 @@ th {
 }
 
 .Login-submit input {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
     text-align: center;
     height: 40px;
     width: 80px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
+    border: 4px solid  #011e3e ;
+    background-color: #0454ac;
+    color: white;
+}
+.Login-submit input:hover{
+    border: 4px solid  #0672e6 ;
+    border-radius: 8px;
 
 }
 
@@ -523,7 +531,15 @@ th {
 .cell-one,
 .cell-two,
 .cell-three,
-.cell-four {
+.cell-four,
+.cell-five,
+.cell-six,
+.cell-seven,
+.cell-eight,
+.cell-nine,
+.cell-ten,
+.cell-eleven,
+.cell-twelve {
     text-align: center;
     display: inline-block;
     width: 220px;
@@ -536,7 +552,12 @@ th {
     border: solid 2px rgb(147, 147, 147);
 }
 
+.cell-icon{
+width: 50%;
+height: 50%;
+align-items: center;
 
+}
 
 
 
