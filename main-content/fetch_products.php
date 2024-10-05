@@ -27,31 +27,18 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
 }
 ?>
 <tr>
+    <th>Unit Num.</th>
     <th>Product Name</th>
     <th>Size</th>
-    <th>Gender</th>
     <th>Price</th>
     <th>Quantity</th>
-    <th>Date Added</th>
     <th>Action</th>
-    <th>Cell Num.</th>
+
 
 </tr>
 
 <?php while ($row = mysqli_fetch_assoc($display_added)) { ?>
     <tr>
-        <td><?php echo htmlspecialchars($row['category_name']); ?></td>
-        <td><?php echo htmlspecialchars($row['size_name']); ?></td>
-        <td><?php echo htmlspecialchars($row['gender']); ?></td>
-        <td><?php echo htmlspecialchars($row['price']); ?></td>
-        <td><?php echo htmlspecialchars($row['product_quantity']); ?></td>
-        <td><?php echo htmlspecialchars($row['date_added']); ?></td>
-        <div class="action-container">
-            <td style="margin-left: 10px;">
-                <a class="edit-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square"></i></a>
-                <a class="delete-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-solid fa-box-archive"></i></a>
-            </td>
-        </div>
         <td>
             <select class="cell-num-select" data-product-id="<?php echo htmlspecialchars($row['product_id']); ?>">
                 <option value="" disabled style="color: white;">Select Cell Number</option>
@@ -65,6 +52,17 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
                 <?php endfor; ?>
             </select>
         </td>
+        <td><?php echo htmlspecialchars($row['product_name']); ?></td>
+        <td><?php echo htmlspecialchars($row['size_name']); ?></td>
+        <td><?php echo htmlspecialchars($row['price']); ?></td>
+        <td><?php echo htmlspecialchars($row['product_quantity']); ?></td>
+        <div class="action-container">
+            <td style="margin-left: 10px;">
+                <a class="edit-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square"></i></a>
+                <a class="delete-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-solid fa-box-archive"></i></a>
+                <a class="info-btn" data-id = "<?php echo htmlspecialchars($row['product_id']);?>"><i style = "color: black;" class="fa-solid fa-circle-info"></i></a>
+            </td>
+        </div>
     </tr>
 <?php } ?>
 <script>

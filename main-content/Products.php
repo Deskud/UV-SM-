@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Add Products Part End -->
 
 <!-- Modal window for confirmation of archiving -->
-<div id=confirmation-modal class="modal">
+<div id= "confirmation-modal" class="modal">
     <div class="modal-confirm-content">
         <h3 class="title-form">Confirm Action</h3>
         <p>Are you sure you want to archive this product?</p>
@@ -102,14 +102,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-
-<!-- Button for add product modal window -->
-<div class="open-product-modal">
-    <button type="button" id="add-product-btn"><i id="icon-plus" class="fa-solid fa-plus"></i>Add Product</button>
-
+<!-- Modal window para sa information ng products -->
+<div id="info-modal" class="modal">
+    <div class="modal-content">
+    <span class="close-modal"><i id="close-icon" class="fa-solid fa-xmark"></i></span>
+        <h3 class="title-form">Product Information</h3>
+    
+    </div>
 </div>
-
-
 
 
 <!-- Start Table Display -->
@@ -118,9 +118,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
+    <!-- Button for add product modal window -->
+    <div class="open-product-modal">
+        <!-- Search bar -->
+        <input id="find-data" class="search-table" type="search" placeholder="Search...">
+        <button type="button" id="add-product-btn"><i id="icon-plus" class="fa-solid fa-plus"></i>Add Product</button>
 
+    </div>
     <!-- Search bar -->
-    <input id="find-data" class="search-table" type="search" placeholder="Search...">
+    <!-- <input id="find-data" class="search-table" type="search" placeholder="Search..."> -->
 
     <!-- Table para mapakita yung data na sinearch ng user -->
     <table class="search-result-table" id="search-result-table"></table>
@@ -152,6 +158,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $(document).ready(function() {
         loadTable();
 
+        $(document).on('click', '.info-btn', function() {
+            console.log("click");
+            $('#info-modal').css('display', 'block');
+
+        });
+
 
         $(document).off('click', '.edit-btn').on('click', '.edit-btn', function() {
             var productId = $(this).data('id');
@@ -178,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         // Hide the size checkboxes
 
-                  
+
                         $('.sizes-container').css('display', 'none');
                         $('.title-form-product').text('Edit Product');
                         $('#submit-btn').val('Update'); // Change button label to 'Update'
@@ -219,39 +231,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
         });
-        // Cell number add
-        $(document).on('click', '.cell-btn', function() {
-            $('#add-cell-num').css('display', 'block');
-            loadCellNumbers()
+     
 
-            $('#submit-cell').off('click').on('click', function() {
-                var selectedCell = $('#cellSelect').val();
-                if (selectedCell) {
-                    $.ajax({
-                        url: './main-content/update-cell-num.php',
-                        method: 'POST',
-                        data: {
-                            product_id: productId,
-                            cell_num: selectedCell
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                alert('Cell number updated successfully');
-                                $('#add-cell-num').css('display', 'none');
-                                loadTable(); // Refresh the product table
-                            } else {
-                                alert('Error updating cell number: ' + response.error);
-                            }
-                        },
-                        error: function() {
-                            alert('Error');
-                        }
-                    })
-                }
-            });
-        })
-
-        // Archive
+       // Archive
         $(document).on('click', '.delete-btn', function() {
             var productId = $(this).data('id');
 

@@ -6,8 +6,11 @@ include '../session_check.php';
 <h3 class="title-form">Orders</h3>
 <hr>
 <div>
-    <!-- Search Bar -->
-    <input id="find-pending-orders" class="search-table" type="search" placeholder="Search...">
+    <div class="order-search-bar">
+        <!-- Search Bar -->
+        <input id="find-pending-orders" class="search-table" type="search" placeholder="Search...">
+    </div>
+
 
     <table id="search-order-table" class="search-result-table"></table>
     <!-- Dito mag di-display yung table sa sinearch na order. -->

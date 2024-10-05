@@ -21,23 +21,19 @@ $result = mysqli_query($conne, $query);
 <div class="archive-table-container">
     <table class="archive-table">
         <tr>
-            <th>ID</th>
             <th>Product</th>
             <th>Size</th>
             <th>Price</th>
-            <th>Gender</th>
             <th>Sold Quantity</th>
             <th>Date Archived</th>
         </tr>
 
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
-                <td><?php echo htmlspecialchars($row['product_id']); ?></td>
                 <!-- Binago ko into category_name para ma display yung name base sa foreign key na category_id -->
                 <td><?php echo htmlspecialchars($row['category_name']); ?></td>
                 <td><?php echo htmlspecialchars($row['size_name']); ?></td>
                 <td><?php echo htmlspecialchars($row['price']); ?></td>
-                <td><?php echo htmlspecialchars($row['gender']); ?></td>
                 <td><?php echo htmlspecialchars($row['sold_quantity']); ?></td>
                 <td><?php echo htmlspecialchars($row['date_archived']); ?></td>
             </tr>

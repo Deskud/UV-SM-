@@ -13,7 +13,7 @@ $display_purchase_history = mysqli_query($conne, $query);
 
 <div class="download-purchase-history">
 
-        <input type="button" class="download-data" value="Download .csv" onclick="window.location.href='download_data.php'">
+        <input type="button" class="download-data" value="Export .csv" onclick="window.location.href='download_data.php'">
     </form>
 </div>
 <div class="transactions-table-container">

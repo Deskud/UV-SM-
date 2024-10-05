@@ -30,7 +30,7 @@ if (!empty($orderIds)) {
 }
 ?>
 
-<table>
+<table class="order-table">
     <thead>
         <tr>
             <th>Order ID</th>
