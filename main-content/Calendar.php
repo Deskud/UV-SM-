@@ -3,8 +3,9 @@ require "../dbconnection.php";
 ?>
 
 <h3 class="title-form">Calendar of Transactions</h3>
+<hr>
 <div>
-    <!-- Date Filters: Start Date and End Date -->
+
     <input type="date" id="start-date" value="" placeholder="Start Date">
     <input type="date" id="end-date" value="" placeholder="End Date">
     <button id="filter-btn" class="filter-btn">Filter</button>
@@ -36,7 +37,7 @@ require "../dbconnection.php";
         $('#start-date').val(currentStartDate.toISOString().slice(0, 10));
         $('#end-date').val(currentEndDate.toISOString().slice(0, 10));
 
-        // Initially generate the table based on stored date range or today's date
+        // Automatically load transactions using stored dates on page load
         generateTransactionTable(currentStartDate, currentEndDate);
 
         // Function to generate the transaction table
@@ -116,6 +117,28 @@ require "../dbconnection.php";
         if (!storedStartDate || !storedEndDate) {
             localStorage.setItem('startDate', today.toISOString().slice(0, 10));
             localStorage.setItem('endDate', today.toISOString().slice(0, 10));
+        } else {
+            // Send AJAX request to load transactions for the previously stored date range
+            $.ajax({
+                url: './main-content/fetch_calendar.php',
+                type: 'GET',
+                data: {
+                    start_date: storedStartDate,
+                    end_date: storedEndDate
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        // Generate table with the transaction data
+                        generateTransactionTable(new Date(storedStartDate), new Date(storedEndDate), response.transactions);
+                    } else {
+                        alert('No transactions found for the selected date range.');
+                    }
+                },
+                error: function() {
+                    alert('Error retrieving transactions.');
+                }
+            });
         }
     });
 </script>

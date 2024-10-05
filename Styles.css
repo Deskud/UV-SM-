@@ -266,12 +266,13 @@ th {
     width: 80px;
     padding: 10px;
     border-radius: 8px;
-    border: 4px solid  #011e3e ;
+    border: 4px solid #011e3e;
     background-color: #0454ac;
     color: white;
 }
-.Login-submit input:hover{
-    border: 4px solid  #0672e6 ;
+
+.Login-submit input:hover {
+    border: 4px solid #0672e6;
     border-radius: 8px;
 
 }
@@ -543,19 +544,20 @@ th {
     text-align: center;
     display: inline-block;
     width: 220px;
-    height: 220px;
+    height: 320px;
     background: rgb(255, 255, 255);
     background: radial-gradient(circle, rgba(255, 255, 255, 1) 38%, rgba(209, 209, 209, 1) 100%, rgba(252, 252, 252, 1) 100%);
     margin-top: 10px;
     margin-left: 35px;
     border-radius: 5px;
-    border: solid 2px rgb(147, 147, 147);
+    border: solid 2px rgb(0, 0, 0);
 }
 
-.cell-icon{
-width: 50%;
-height: 50%;
-align-items: center;
+.cell-icon {
+    width: 50%;
+    height: 50%;
+    align-items: center;
+
 
 }
 
@@ -821,12 +823,19 @@ align-items: center;
 
 /* ORDERS START */
 
-.prc-btn-container {
+.prc-btn-container,
+.order-btn-container,
+.order-upd-container {
     text-align: center;
 
 }
 
+.submit-finish-order,
+.submit-update-order,
+.update-order,
+.print,
 .proceed-btn {
+
     font-family: "Mulish", Arial, Helvetica, sans-serif;
     width: 120px;
     height: 40px;
@@ -839,65 +848,29 @@ align-items: center;
 
 }
 
+.submit-finish-order:hover,
+.submit-update-order:hover,
+.update-order:hover,
+.print:hover,
 .proceed-btn:hover {
-    border: #02bf12;
-}
 
-
-.buttons-order-container {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
+    border: 4px solid#02bf12;
 
 }
-
-.submit-finish-order,
-.submit-update-order,
-.update-order,
-.print {
-
-    width: 150px;
-    height: 30px;
-    color: white;
-    background-color: green;
-    display: inline-block;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin: 5px auto;
-
-}
-
-
-.generate:hover {
-
-    border: 2px solid#02bf12;
-
-}
-
-.updateOrder:hover {
-    border: 2px solid#02bf12;
-
-}
-
-.finishOrder:hover {
-    border: 2px solid#02bf12;
-
-}
-
-#update-order-btn {
+.remove-item{
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
     width: 100px;
-    height: 30px;
-    display: block;
-    border: 2px solid;
-    cursor: pointer;
-    background-color: #00810b;
-    color: white;
+    height: 35px;
+    background-color: #d90b0b;
+    color: rgb(255, 255, 255);
+    border: rgba(255, 255, 255, 0.609) solid;
     border-radius: 10px;
-    margin-top: 10px;
-    margin: 5px auto;
+    cursor: pointer;
 }
+.remove-item:hover{
+    border: 4px solid #7d0303;
+}
+
 
 /* ORDERS END */
 
@@ -934,15 +907,9 @@ align-items: center;
 
 
 
-
-
 /* CALENDAR END */
 /* ------------------------------------------------------- */
 /* MODAL WINDOWS */
-
-
-
-
 
 
 
@@ -963,11 +930,11 @@ align-items: center;
     height: fit-content;
     margin: 15% auto;
     margin-top: 8%;
-    padding: 20px;
+    padding: 12px;
     border: solid 1px black;
     border-radius: 10px;
     width: 500px;
-    max-height: 70%;
+    max-height: 90%;
 
 
 }

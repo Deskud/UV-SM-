@@ -71,7 +71,3 @@ function loadTable() {
     });
 }
 
-
-// NOTIFICATIONS
-
-

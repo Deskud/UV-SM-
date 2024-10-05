@@ -60,9 +60,9 @@ if (!empty($orderIds)) {
                     <span class="close-modal" onclick="closeModal(<?php echo $order['order_id']; ?>)">
                         <i id="close-icon" class="fa-solid fa-xmark"></i>
                     </span>
-                    <h2>Order Details (ID: <?php echo $order['order_id']; ?>)</h2>
-                    <h3>Order Date: <?php echo $order['order_date']; ?></h3>
-                    <h3 class="date-modified">Date modified: <?php echo $order['updated_at']; ?></h3>
+                    <h2 style="text-align: center;">Order Details (ID: <?php echo $order['order_id']; ?>)</h2>
+                    <h3 style="text-align: center;">Order Date: <?php echo $order['order_date']; ?></h3>
+                    <h3 style="text-align: center;">Date modified: <?php echo $order['updated_at']; ?></h3>
                     <h3>Items:</h3>
                     <ul>
                         <?php
@@ -73,12 +73,15 @@ if (!empty($orderIds)) {
                         } else {
                             echo "<h4>No items found for this order.</h4>";
                         }
+
                         ?>
                     </ul>
                     <form id="order-form-<?php echo $order['order_id']; ?>" method="POST">
                         <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                        <button type="button" class="submit-update-order" onclick="openUpdateModal(<?php echo $order['order_id']; ?>)">Update</button>
-                        <button type="button" class="submit-finish-order" onclick="finishOrder(<?php echo $order['order_id']; ?>)">Finish</button>
+                        <div class="order-btn-container">
+                            <button type="button" class="submit-update-order" onclick="openUpdateModal(<?php echo $order['order_id']; ?>)">Update</button>
+                            <button type="button" class="submit-finish-order" onclick="finishOrder(<?php echo $order['order_id']; ?>)">Finish</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -115,23 +118,32 @@ if (!empty($orderIds)) {
                         <i id="close-icon" class="fa-solid fa-xmark"></i>
                     </span>
                     <h3 class="title-form">Update Order</h3>
-                    <h5>Update Quantity for Order ID: <?php echo $order['order_id']; ?></h5>
+                    <h5 style="text-align: center;">Update Quantity for Order ID: <?php echo $order['order_id']; ?></h5>
 
                     <form class="update-items" id="update-quantity-form-<?php echo $order['order_id']; ?>" method="POST">
                         <ul>
                             <?php
                             if (isset($groupedItems[$order['order_id']])) {
                                 foreach ($groupedItems[$order['order_id']] as $item) {
-                                    echo "<li><h6>Item ID: " . $item['item_id'] . " - Quantity: 
-                              <input type='number' class='quantity-input' 
-                              data-item-id='" . $item['item_id'] . "' 
-                              value='" . $item['quantity'] . "' min='0'>
-                              </h6></li>";
+                                    echo "
+                                    <li>
+                                        <h6>
+                                        Item ID: " . $item['item_id'] . " - Quantity: 
+                                        <input type='number' class='quantity-input' 
+                                        data-item-id='" . $item['item_id'] . "' 
+                                        value='" . $item['quantity'] . "' min='0'>
+                                          <button class='remove-item' 
+                                            data-item-id='" . $item['item_id'] . "' 
+                                            data-order-id='" . $order['order_id'] . "'>Remove</button>
+                                        </h6>
+                                    </li>";
                                 }
                             }
                             ?>
                         </ul>
-                        <button type="button" class="update-order" onclick="updateOrder(<?php echo $order['order_id']; ?>)">Update Changes</button>
+                        <div class=" order-upd-container">
+                            <button type="button" class="update-order" onclick="updateOrder(<?php echo $order['order_id']; ?>)">Update Changes</button>
+                        </div>
                     </form>
                 </div>
             </div>

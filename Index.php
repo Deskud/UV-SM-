@@ -101,10 +101,10 @@ require "dbconnection.php";
         <?php include "./main-content/Dashboard.php"; ?>
     </div>
                     
-    <div id="notifcations-table">
+    <!-- <div id="notifcations-table">
         <!-- lalagay akong ajax dito para mag 
                      pakita mga notif real time -->
-    </div>
+    </div> -->
 
     <script src="./jquery/jquery-3.7.1.min.js"></script>
     <script src="Script.js"></script>

@@ -30,8 +30,8 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
     <th>Product Name</th>
     <th>Size</th>
     <th>Gender</th>
-    <th>Price <a href="#"><i class="fa-solid fa-sort"></i></a></th>
-    <th>Quantity <a href="#"><i class="fa-solid fa-sort"></i></a></th>
+    <th>Price</th>
+    <th>Quantity</th>
     <th>Date Added</th>
     <th>Action</th>
     <th>Cell Num.</th>

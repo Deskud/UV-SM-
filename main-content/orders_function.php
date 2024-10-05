@@ -1,5 +1,5 @@
 <?php
-require "../dbconnection.php"; 
+require "../dbconnection.php";
 include '../phpqrcode/qrlib.php';
 include '../session_check.php';
 
@@ -58,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conne->begin_transaction();
 
             try {
-                // Loop through the new quantities and update items table
                 foreach ($quantities as $itemId => $newQuantity) {
                     $itemId = intval($itemId);
                     $newQuantity = intval($newQuantity);
@@ -88,40 +87,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $newTotalQuantity += $quantityDifference;  // Adjust by difference
                     $newTotalAmount += ($newPrice - $prevPrice);  // Adjust by price difference
 
+                    // Insert into item_modifications table
+                    $stmt = $conne->prepare("
+                        INSERT INTO item_modifications 
+                        (modification_id, item_id, order_id, prev_quantity, new_quantity, prev_price, new_price, modification_reason, modified_by, modification_timestamp)
+                        VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param('iiiiiisss', $itemId, $orderId, $prevQuantity, $newQuantity, $prevPrice, $newPrice, $modificationReason, $modifiedBy, $modificationTimestamp);
+                    $stmt->execute();
+                    $stmt->close();
+
                     // Update or remove items in the items table based on quantity
                     if ($newQuantity > 0) {
                         // Update item with new quantity
                         $stmt = $conne->prepare("UPDATE items SET quantity = ? WHERE item_id = ? AND order_id = ?");
                         $stmt->bind_param('iii', $newQuantity, $itemId, $orderId);
                     } else {
-                        // Remove the item if the quantity is 0
+                        // Remove the item if the quantity is 0 and also update order_modifications
                         $stmt = $conne->prepare("DELETE FROM items WHERE item_id = ? AND order_id = ?");
                         $stmt->bind_param('ii', $itemId, $orderId);
-                    }
-                    $stmt->execute();
-                    $stmt->close();
 
-                    // Insert into item_modifications table
-                    $stmt = $conne->prepare("
-                                INSERT INTO item_modifications 
-                                (modification_id, item_id, order_id, prev_quantity, new_quantity, prev_price, new_price, modification_reason, modified_by, modification_timestamp)
-                                VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param('iiiiiisss', $itemId, $orderId, $prevQuantity, $newQuantity, $prevPrice, $newPrice, $modificationReason, $modifiedBy, $modificationTimestamp);
-                    $stmt->execute();
-                    $stmt->close();
+                        // Update order_modifications to reflect this change as well
+                        $stmt->execute();
+                        $stmt->close();
+                    }
                 }
 
-                // Insert into order_modifications table
+                // Insert into order_modifications table to reflect overall order changes
                 $stmt = $conne->prepare("
-                            INSERT INTO order_modifications 
-                            (modification_id, order_id, prev_total_quantity, new_total_quantity, prev_total_amount, new_total_amount, modification_reason, modified_by, modification_timestamp)
-                            VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    INSERT INTO order_modifications 
+                    (modification_id, order_id, prev_total_quantity, new_total_quantity, prev_total_amount, new_total_amount, modification_reason, modified_by, modification_timestamp)
+                    VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param('iiiiisss', $orderId, $prevTotalQuantity, $newTotalQuantity, $prevTotalAmount, $newTotalAmount, $modificationReason, $modifiedBy, $modificationTimestamp);
                 $stmt->execute();
                 $stmt->close();
 
                 // Commit the transaction
                 $conne->commit();
+
 
                 // Return success response
                 echo json_encode(['success' => 'Order updated successfully']);
@@ -139,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             SELECT i.item_id, i.quantity, p.price 
             FROM items i 
             JOIN products p ON i.product_id = p.product_id 
-            WHERE i.order_id = ?"; 
+            WHERE i.order_id = ?";
 
             $stmt = $conne->prepare($itemsQuery);
             $stmt->bind_param('i', $orderId);

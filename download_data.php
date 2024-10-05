@@ -8,7 +8,7 @@ header('Content-Disposition: attachment; filename='.$filename);
 
 $output = fopen('php://output', 'w');
 
-fputcsv($output, array('Transaction_ID', 'Order_ID', 'User_ID', 'Total_Quantity', 'Total Amount', 'Transaction_Date', 'QR_Code', 'Status'));
+fputcsv($output, array('Transaction_ID', 'Order_ID', 'User_ID', 'Total_Quantity', 'Total Amount', 'Transaction_Date', 'QR_Code', 'Status', 'Quantitiy_Dispensed', 'Is_fully_fulffiled'));
 
 $query = "SELECT * FROM transactions ";
 

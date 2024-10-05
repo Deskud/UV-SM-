@@ -64,11 +64,7 @@ include '../session_check.php';
         // Close modal function
         function closeModal(orderId) {
             document.getElementById('orderModal' + orderId).style.display = "none";
-            // closeUpdateModal(orderId); // Close update modal if open
-            // closeQRModal(orderId); // Close QR modal if open
 
-            // // Re-enable the proceed button when the modal is closed
-            // document.getElementById('proceed-btn-' + orderId).disabled = false; // Re-enable the button
         }
 
         // Open update modal
@@ -97,7 +93,7 @@ include '../session_check.php';
             var quantities = {};
 
             // Use a selector that targets only the inputs for the specific order
-            $('#updateModal'+orderId +' .quantity-input').each(function() {
+            $('#updateModal' + orderId + ' .quantity-input').each(function() {
                 var itemId = $(this).data('item-id'); // Get item ID
                 var quantity = $(this).val(); // Get updated quantity
 
@@ -172,42 +168,6 @@ include '../session_check.php';
                 });
             });
         }
-
-        // // Once pinendot ito ng user may lalabas dapat na notification 
-        // $('#confirm-print').on('click', function() {
-
-        //     checkForNewTransactions();
-        // });
-
-
-        // function checkForNewTransactions() {
-
-        //     $.ajax({
-        //         url: './main-content/transact_notif.php', // Endpoint to check for new transactions
-        //         method: 'GET',
-        //         dataType: 'json',
-        //         success: function(data) {
-        //             if (data.newTransaction) {
-        //                 showNotification(data.message);
-        //             }
-        //         },
-        //         error: function(jqXHR, textStatus, errorThrown) {
-        //             console.error("Error fetching notifications:", textStatus, errorThrown);
-        //         }
-        //     });
-        // }
-
-        // function showNotification(message) {
-        //     var notification = $('<div class="notification">' + message + '</div>');
-        //     $('#notifcations-table').append(notification);
-
-        //     setTimeout(function() {
-        //         notification.fadeOut(300, function() {
-        //             $(this).remove();
-        //         });
-        //     }, 60000);
-        // }
-
 
         // Print QR code function
         function printQRCode(orderId) {
