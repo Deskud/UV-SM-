@@ -11,7 +11,7 @@ try {
 }
 
 // Get the QR code from the request
-$qrcode = 654321;
+$qrcode = 654321; // isset($_GET['qrcode']) ? intval($_GET['qrcode']) : 0;
 
 if ($qrcode > 0) {
     // Query to find the transaction related to the QR code
@@ -28,7 +28,8 @@ if ($qrcode > 0) {
         $stmtItems = $pdo->prepare("SELECT i.product_id, p.product_name, p.cell_num, i.quantity 
                                      FROM items i 
                                      JOIN products p ON i.product_id = p.product_id 
-                                     WHERE i.order_id = :order_id");
+                                     WHERE i.order_id = :order_id
+                                     AND i.is_fully_fulfilled = 0");
         $stmtItems->execute(['order_id' => $transaction['order_id']]);
         $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
 
