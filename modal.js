@@ -3,13 +3,13 @@
 
 $(document).ready(function () {
     var modalProduct = $('#add-product-modal'); // Modal window para sa add product
-    var modalCell = $('#add-cell-num'); //Modal window para sa pag lagay ng cell number each products (12-24)
+    var modalProdInfo = $('#info-modal'); //Para sa info button sa product
     var modalConfirm = $('#confirmation-modal');//Modal confirmation para sa archive/orders
     var modalOrders = $('#proceed-order-modal');//Modal winodw para sa orders
     var modalUpdateorder = $('#update-orders');
     var modalReturn = $('#return');
     var closeModal = $('.close-modal'); // Get the <span> element that closes the modal
-
+   
     //Bubukas modal window pag pinendot yung button (ADD PRODUCT)
     $('#add-product-btn').on('click', function () {
         console.log("click click");
@@ -20,8 +20,7 @@ $(document).ready(function () {
     closeModal.on('click', function () {
         modalProduct.css('display', 'none');
         modalOrders.css('display', 'none');
-        modalCell.css('display', 'none');
-
+        modalProdInfo.css('display', 'none');
     });
 
 
@@ -42,6 +41,7 @@ $(document).ready(function () {
         if ($(event.target).is(modalOrders)) {
             modalOrders.css('display', 'none');
         }
+        
 
 
     });
@@ -84,6 +84,7 @@ $('#add-product-btn').on('click', function () {
     $('.title-form-product').text('Add Products');
     $('#input-form')[0].reset();
     $('input[name="size[]"]').prop('disabled', false);  // Enable checkboxes
+    $('.gender-container').css('display', 'block');
     $('.sizes-container').css('display', 'block'); // Show checkboxes
     $('#submit-btn').val('Add');
     $('#add-product-modal').css('display', 'block');

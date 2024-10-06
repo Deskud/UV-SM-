@@ -116,16 +116,78 @@ include '../session_check.php';
                     quantities: quantities // Send the quantities as an object
                 },
                 success: function(response) {
-                    loadOrders();
-
-
-
+                    loadOrders()
+                    console.log(response);
+                 
+                    
+        
                 },
                 error: function(xhr, status, error) {
                     alert('Error: ' + error); // Show error message
                 }
             });
         }
+
+
+        // function updateOrder(orderId) {
+        //     var quantities = {};
+
+        //     // Use a selector that targets only the inputs for the specific order
+        //     $('#updateModal' + orderId + ' .quantity-input').each(function() {
+        //         var itemId = $(this).data('item-id'); // Get item ID
+        //         var quantity = $(this).val(); // Get updated quantity
+
+        //         // Only add to quantities if quantity is not empty or 0
+        //         if (quantity) {
+        //             quantities[itemId] = quantity; // Add to quantities object
+        //         }
+        //     });
+
+        //     console.log(quantities);
+
+        //     $.ajax({
+        //         url: './main-content/orders_function.php', // URL to your PHP script
+        //         type: 'POST',
+        //         data: {
+        //             action: 'update',
+        //             order_id: orderId,
+        //             quantities: quantities
+        //         },
+        //         success: function(response) {
+        //             // Parse the response if it is JSON
+        //             var data = JSON.parse(response);
+
+        //             if (data.success) {
+        //                 // Loop through the items and update their values in the modal
+        //                 $('#updateModal' + orderId + ' .quantity-input').each(function() {
+        //                     var itemId = $(this).data('item-id'); // Get the item ID
+        //                     var newQuantity = quantities[itemId]; // Get the updated quantity
+
+        //                     // Update the input value if it was changed
+        //                     if (newQuantity !== undefined) {
+        //                         $(this).val(newQuantity);
+        //                     }
+
+        //                     // If quantity is 0, remove the item from the modal
+        //                     if (newQuantity == 0) {
+        //                         $(this).closest('li').remove(); // Remove the item row
+        //                     }
+        //                 });
+
+        //                 // If no items remain, close the modal automatically
+        //                 if ($('#updateModal' + orderId + ' .quantity-input').length === 0) {
+        //                     closeUpdateModal(orderId);
+        //                 }
+        //             } else {
+        //                 alert('Failed to update order.');
+        //             }
+        //         },
+        //         error: function(xhr, status, error) {
+        //             alert('Error: ' + error); // Show error message
+        //         }
+        //     });
+        // }
+
 
 
         // Finish order function
@@ -171,6 +233,43 @@ include '../session_check.php';
                 });
             });
         }
+
+        $(document).ready(function() {
+            // Function to remove an item from the order
+            function removeItem(itemId, orderId, itemElement) {
+                $.ajax({
+                    url: './main-content/orders_function.php', // Correct path to your orders_function.php
+                    type: 'POST',
+                    data: {
+                        action: 'remove', // Call the 'remove' case in orders_function.php
+                        item_id: itemId,
+                        order_id: orderId
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Remove the item from the DOM
+                            itemElement.remove();
+                            loadOrders();
+                        } else {
+                            // Display error message
+                            alert('Error: ' + response.error);
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred. Please try again.'); // Handle AJAX error
+                    }
+                });
+            }
+
+            $(document).on('click', '.remove-item', function() {
+                var itemId = $(this).data('item-id');
+                var orderId = $(this).data('order-id');
+                var itemElement = $('#item-' + itemId); // Use the ID to find the correct item in the DOM
+
+                removeItem(itemId, orderId, itemElement);
+            });
+        });
+
 
         // Print QR code function
         function printQRCode(orderId) {

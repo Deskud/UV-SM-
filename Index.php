@@ -13,15 +13,15 @@ require "dbconnection.php";
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@706&family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
-    
+
     <title>Dashboard</title>
 </head>
 
 <body id="Main-body">
 
     <div id="Topnavigator-container">
-        <img style="margin-right: 10px;" src="./Images/PCU Logo.png">
-        <h1 style="padding:10px;margin:-2px;">Uniform Stock Monitoring System</h1>
+        <img style="margin-right: 20px;" src="./Images/PCU Logo.png">
+        <h1 style="padding:10px;margin:-5px;">Uniform Stock Monitoring System</h1>
         <div class="sign-out">
             <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
         </div>
@@ -45,7 +45,7 @@ require "dbconnection.php";
                     <li>
                         <a href="#" class="page-nav" data-target="./main-content/PurchaseHistory.php">
                             <i class="fa-solid fa-arrow-trend-up"></i>
-                            Purchase History
+                            Transactions
                         </a>
                     </li>
                     <li>
@@ -100,11 +100,8 @@ require "dbconnection.php";
     <div id="Main-container">
         <?php include "./main-content/Dashboard.php"; ?>
     </div>
-                    
-    <!-- <div id="notifcations-table">
-        <!-- lalagay akong ajax dito para mag 
-                     pakita mga notif real time -->
-    </div> -->
+
+    </div>
 
     <script src="./jquery/jquery-3.7.1.min.js"></script>
     <script src="Script.js"></script>

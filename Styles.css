@@ -11,13 +11,13 @@
     scrollbar-color: #0454ac rgb(255, 255, 255);
 }
 
-/* body {
+/* *body {
     width: 100%;
     height: 100%;
     max-width: 1920px;
     max-height: 911px;
-    min-width: 1360px;
-    min-width: 764px;
+    min-width: 1366px;
+    min-width: 599px;
 } */
 
 h1 {
@@ -53,6 +53,7 @@ a {
 
 
 }
+
 
 
 .page-nav {
@@ -110,16 +111,13 @@ table {
     font-family: "Mulish", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    /* max-width: 1200px; */
     margin-top: 5px;
-    /* margin-left: 250px;
-    margin-right: 250px; */
     margin-left: auto;
     margin-right: auto;
-    /* border-radius: 4px; */
+    min-width: 450px;
     align-content: center;
     position: relative;
-    overflow: scroll;
+    overflow-x:auto;
 
 }
 
@@ -179,7 +177,7 @@ th {
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    display: block;
+    display: inline-block;
 }
 
 .Login-title {
@@ -364,8 +362,7 @@ th {
 
 #Main-body {
 
-    background: rgb(219, 219, 219);
-    background: linear-gradient(80deg, rgb(255, 255, 255) 0%, rgb(200, 200, 200) 100%);
+    background: rgb(227, 227, 227);
 }
 
 #Topnavigator-container {
@@ -380,12 +377,17 @@ th {
     flex-shrink: 0;
     width: 100%;
     height: 50px;
+    max-width: 83vw;
+    max-height: 6vh;
+    min-width: 83vw;
+    min-height: 4vh;
     white-space: nowrap;
     padding: 5px;
     border-bottom: solid 2px rgb(0, 55, 115);
-    padding: 9px;
-    padding-left: 50px;
-    margin-left: 255px;
+    padding: 10px;
+    padding-left: 13vw;
+    margin-left: 13vh;
+    
 }
 
 #Sidebar-container {
@@ -399,11 +401,11 @@ th {
     flex-direction: column;
     flex-shrink: 0;
     height: 100%;
-    width: 270px;
+    max-width: 16vw;
+    min-width: 16vw;
     top: 0;
     left: 0;
     padding: 5px;
-    max-width: 35vw;
     /* z-index: -1; */
     align-items: center;
 }
@@ -430,7 +432,9 @@ th {
     display: inline-block;
     border-radius: 10px;
     margin-top: 15px;
-    margin-left: 45%;
+    margin-left: 75vh;
+    max-width: 50vh;
+    min-width: 50vh;
     color: white;
 
 }
@@ -447,21 +451,19 @@ th {
 #Main-container {
     background: rgb(255, 255, 255);
     border-radius: 5px;
-    border: solid 1px rgb(27, 133, 246);
+    border: solid 2px rgb(27, 133, 246);
     width: 100%;
     height: 90%;
-    max-width: 1360px;
-    max-height: 750px;
-    min-width: 150px;
-    min-height: 450px;
+    max-width: 80vh;
+    max-height: 84vh;
+    min-width: 79vw;
+    min-height: 83vh;
     position: fixed;
     display: block;
     padding: 5px;
-    margin-top: 5%;
+    margin-top: 10vh;
     margin-left: 18%;
-    margin-right: 18%;
     /* justify-content: safe center; */
-
     overflow: auto;
 }
 
@@ -530,49 +532,25 @@ th {
 
 }
 
-.cell-one,
-.cell-two,
-.cell-three,
-.cell-four,
-.cell-five,
-.cell-six,
-.cell-seven,
-.cell-eight,
-.cell-nine,
-.cell-ten,
-.cell-eleven,
-.cell-twelve,
-.cell-thirteen,
-.cell-fourteen,
-.cell-fifteen,
-.cell-sixteen,
-.cell-seventeen,
-.cell-eighteen,
-.cell-nineteen,
-.cell-twenty,
-.cell-twentyone,
-.cell-twentytwo,
-.cell-twentythree,
-.cell-twentyfour 
+.unit-containers
 {
     text-align: center;
     display: inline-block;
-    width: 220px;
     height: 320px;
-    background: rgb(255, 255, 255);
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 38%, rgba(209, 209, 209, 1) 100%, rgba(252, 252, 252, 1) 100%);
-    margin-top: 10px;
+    background:  rgb(255, 255, 255);
+    /* background: radial-gradient(circle, rgba(255, 255, 255, 1) 38%, rgba(209, 209, 209, 1) 100%, rgba(252, 252, 252, 1) 100%); */
+    margin-top: 15px;
     margin-left: 35px;
     border-radius: 5px;
-    border: solid 2px rgb(0, 0, 0);
+    border: solid 2px rgb(7, 101, 201);
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
 .cell-icon {
     width: 50%;
     height: 50%;
     align-items: center;
-
-
 }
 
 
@@ -809,12 +787,18 @@ th {
 
 
 /* Purchase History Start */
+.filter-container{
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: 25px;
+    text-align: right;
+}
 
 .download-purchase-history {
 
     /* margin-top: 40px;
     margin-left: 25px; */
-    margin-left: 90%;
+    margin-left: 80%;
     width: fit-content;
     max-height: fit-content;
 
@@ -1019,6 +1003,7 @@ margin-left: 70%;
     border: solid 1px black;
     border-radius: 10px;
     width: 500px;
+    overflow: auto;
 
 }
 

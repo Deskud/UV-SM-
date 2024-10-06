@@ -58,9 +58,9 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
         <td><?php echo htmlspecialchars($row['product_quantity']); ?></td>
         <div class="action-container">
             <td style="margin-left: 10px;">
-                <a class="edit-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square"></i></a>
-                <a class="delete-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-solid fa-box-archive"></i></a>
-                <a class="info-btn" data-id = "<?php echo htmlspecialchars($row['product_id']);?>"><i style = "color: black;" class="fa-solid fa-circle-info"></i></a>
+                <a class="edit-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square fa-lg"></i></a>
+                <a class="delete-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-solid fa-box-archive fa-lg"></i></a>
+                <a class="info-btn" data-id = "<?php echo htmlspecialchars($row['product_id']);?>"><i style = "color: black;" class="fa-solid fa-circle-info fa-lg"></i></a>
             </td>
         </div>
     </tr>

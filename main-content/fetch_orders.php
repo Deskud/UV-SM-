@@ -20,7 +20,15 @@ if ($result) {
 $orderIds = array_column($orders, 'order_id');
 $groupedItems = [];
 if (!empty($orderIds)) {
-    $itemsQuery = "SELECT * FROM items WHERE order_id IN (" . implode(',', $orderIds) . ")";
+    $itemsQuery = "
+    SELECT i.*, im.modification_timestamp
+    FROM items i
+    LEFT JOIN (
+        SELECT item_id, MAX(modification_timestamp) as modification_timestamp
+        FROM item_modifications
+        GROUP BY item_id
+    ) im ON i.item_id = im.item_id
+    WHERE i.order_id IN (" . implode(',', $orderIds) . ")";
     $itemsResult = $conne->query($itemsQuery);
 
     // Group items by order_id
@@ -60,31 +68,30 @@ if (!empty($orderIds)) {
                     <span class="close-modal" onclick="closeModal(<?php echo $order['order_id']; ?>)">
                         <i id="close-icon" class="fa-solid fa-xmark"></i>
                     </span>
-                    <h2 style="text-align: center;">Order Details (ID: <?php echo $order['order_id']; ?>)</h2>
-                    <h3 style="text-align: center;">Order Date: <?php echo $order['order_date']; ?></h3>
-                    <h3 style="text-align: center;">Date modified: <?php echo $order['updated_at']; ?></h3>
+                    <h2 style="color: black;">Order Details ID: <?php echo $order['order_id']; ?></h2>
+                    <h3>Order Date: <?php echo $order['order_date']; ?></h3>
+                    <h3 class="date-modified">Date modified: <?php echo $order['updated_at']; ?></h3>
                     <h3>Items:</h3>
                     <ul>
                         <?php
                         if (isset($groupedItems[$order['order_id']])) {
                             foreach ($groupedItems[$order['order_id']] as $item) {
-                                echo "<h6>Item ID: {$item['item_id']} - Quantity: {$item['quantity']}</h6>";
+                                echo "<h6>Item ID: {$item['item_id']} - Quantity: {$item['quantity']} </h6>";
                             }
                         } else {
                             echo "<h4>No items found for this order.</h4>";
                         }
-
                         ?>
                     </ul>
                     <form id="order-form-<?php echo $order['order_id']; ?>" method="POST">
                         <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                        <div class="order-btn-container">
-                            <button type="button" class="submit-update-order" onclick="openUpdateModal(<?php echo $order['order_id']; ?>)">Update</button>
-                            <button type="button" class="submit-finish-order" onclick="finishOrder(<?php echo $order['order_id']; ?>)">Finish</button>
-                        </div>
+                        <button type="button" class="submit-update-order" onclick="openUpdateModal(<?php echo $order['order_id']; ?>)">Update</button>
+                        <button type="button" class="submit-finish-order" onclick="finishOrder(<?php echo $order['order_id']; ?>)">Finish</button>
                     </form>
                 </div>
             </div>
+
+
 
             <!-- QR Code Modal -->
             <div id="qrCodeModal<?php echo $order['order_id']; ?>" class="modal">
@@ -141,7 +148,7 @@ if (!empty($orderIds)) {
                             }
                             ?>
                         </ul>
-                        <div class=" order-upd-container">
+                        <div class="order-upd-container">
                             <button type="button" class="update-order" onclick="updateOrder(<?php echo $order['order_id']; ?>)">Update Changes</button>
                         </div>
                     </form>

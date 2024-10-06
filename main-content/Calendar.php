@@ -4,7 +4,7 @@ require "../dbconnection.php";
 
 <h3 class="title-form">Calendar of Transactions</h3>
 <hr>
-<div>
+<div class="filter-container">
 
     <input type="date" id="start-date" value="" placeholder="Start Date">
     <input type="date" id="end-date" value="" placeholder="End Date">

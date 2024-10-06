@@ -55,13 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="3">Others</option>
             </select>
 
-            <!-- <select class="select-uniform-size" name="size" required>
-                <option value="" disabled selected>Uniform Size</option>
-                <option value="1">Small</option>
-                <option value="2">Medium</option>
-                <option value="3">Large</option>
-                <option value="4">Extra Large</option>
-            </select> -->
             <div class="sizes-container">
                 <h3 style="color: #0454ac;">Sizes</h3>
                 <input type="checkbox" value="1" name="size[]">Small
@@ -69,13 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="checkbox" value="3" name="size[]">Large
                 <input type="checkbox" value="4" name="size[]">Extra Large
             </div>
-            <h3 style="color: #0454ac;">Gender</h3>
-            <select class="select-gender" name="gender" required>
-                <option value="" disabled selected>Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="unisex">Unisex</option>
-            </select>
+            <div class="gender-container">
+                <h3 style="color: #0454ac;">Gender</h3>
+                <select class="select-gender" name="gender" required>
+                    <option value="" disabled selected>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="unisex">Unisex</option>
+                </select>
+            </div>
 
             <!-- 
                 minimum input ay 0 tapos bawal maglagay ng negative number LESGOOOOO BABY (THANKS GOOGLE) 
@@ -93,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Add Products Part End -->
 
 <!-- Modal window for confirmation of archiving -->
-<div id= "confirmation-modal" class="modal">
+<div id="confirmation-modal" class="modal">
     <div class="modal-confirm-content">
         <h3 class="title-form">Confirm Action</h3>
         <p>Are you sure you want to archive this product?</p>
@@ -105,9 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Modal window para sa information ng products -->
 <div id="info-modal" class="modal">
     <div class="modal-content">
-    <span class="close-modal"><i id="close-icon" class="fa-solid fa-xmark"></i></span>
+        <span class="close-modal"><i id="close-icon" class="fa-solid fa-xmark"></i></span>
         <h3 class="title-form">Product Information</h3>
-    
+        <div class="product-info">
+
+        </div>
+        </p>
     </div>
 </div>
 
@@ -158,12 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $(document).ready(function() {
         loadTable();
 
-        $(document).on('click', '.info-btn', function() {
-            console.log("click");
-            $('#info-modal').css('display', 'block');
-
-        });
-
 
         $(document).off('click', '.edit-btn').on('click', '.edit-btn', function() {
             var productId = $(this).data('id');
@@ -183,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // Populate the form fields with the fetched data
                         $('#product_id').val(product.product_id);
                         $('select[name="name"]').val(product.category_id);
-                        $('select[name="size"]').val(product.size); // Assuming product.size is a single value or an array
+                        $('select[name="size"]').val(product.size);
                         $('select[name="gender"]').val(product.gender);
                         $('input[name="quantity"]').val(product.product_quantity);
                         $('input[name="price"]').val(product.price);
@@ -192,6 +184,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                         $('.sizes-container').css('display', 'none');
+                        $('.gender-container').css('display', 'none');
+
                         $('.title-form-product').text('Edit Product');
                         $('#submit-btn').val('Update'); // Change button label to 'Update'
                         $('#add-product-modal').css('display', 'block');
@@ -231,9 +225,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
         });
-     
 
-       // Archive
+
+        // Archive
         $(document).on('click', '.delete-btn', function() {
             var productId = $(this).data('id');
 
@@ -266,6 +260,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             });
 
+        });
+
+
+        // Para sa modal window ng information button
+        $(document).on('click', '.info-btn', function() {
+            var productId = $(this).data('id'); 
+
+            $.ajax({
+                url: './main-content/get_product_info.php', // PHP file to handle the request
+                type: 'POST',
+                data: {
+                    product_id: productId
+                },
+                success: function(response) {
+                    var data = JSON.parse(response);
+
+                    if (data.success) {
+                
+                        $('#info-modal .product-info').html(`
+                    <p>Product ID: ${data.product_id}</p>
+                    <p>Date Added: ${data.date_added}</p>
+                    <p>Gender: ${data.gender}</p>
+                    <p>Sold Quantity: ${data.sold_quantity}</p>
+                `);
+                        $('#info-modal').css('display', 'block'); // Show the modal
+                    } else {
+                        alert('Failed to fetch product information.');
+                    }
+                },
+                error: function() {
+                    alert('An error occurred. Please try again.');
+                }
+            });
         });
 
 

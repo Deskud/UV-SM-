@@ -52,7 +52,7 @@ $(document).ready(function() {
 
 });
 
-// Table loading logic remains unchanged
+// Reload table para sa products
 function loadTable() {
     console.log("Why are you in the console? A bit sussy I ain't gonna lie brudder.");
 

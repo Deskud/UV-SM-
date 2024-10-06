@@ -19,7 +19,7 @@ $result = mysqli_query($conne, $query);
 <h3 class="title-form">Archived Products</h3>
 <hr>
 <div class="archive-table-container">
-    <table class="archive-table">
+    <table>
         <tr>
             <th>Product</th>
             <th>Size</th>
