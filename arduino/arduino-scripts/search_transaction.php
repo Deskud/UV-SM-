@@ -11,7 +11,7 @@ try {
 }
 
 // Get the QR code from the request
-$qrcode = 654321; // isset($_GET['qrcode']) ? intval($_GET['qrcode']) : 0;
+$qrcode = isset($_GET['qrcode']) ? intval($_GET['qrcode']) : 0;
 
 if ($qrcode > 0) {
     // Query to find the transaction related to the QR code
