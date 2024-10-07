@@ -107,6 +107,7 @@ footer {
 
 
 table {
+    border-radius: 2px solid;
     background-color: rgb(255, 255, 255);
     font-family: "Mulish", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -177,7 +178,7 @@ th {
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    display: inline-block;
+    display: block;
 }
 
 .Login-title {
@@ -234,7 +235,7 @@ th {
 
 .Login-container {
 
-    margin-top: 40px;
+    margin-top: -5vh;
 }
 
 .Login-form {
@@ -362,7 +363,8 @@ th {
 
 #Main-body {
 
-    background: rgb(227, 227, 227);
+    background:#f5f8ff;
+    /* background: radial-gradient(circle, rgba(167,170,188,1) 22%, rgba(67,70,86,1) 100%); */
 }
 
 #Topnavigator-container {
@@ -383,7 +385,7 @@ th {
     min-height: 4vh;
     white-space: nowrap;
     padding: 5px;
-    border-bottom: solid 2px rgb(0, 55, 115);
+    border-bottom: solid 2px rgb(236, 236, 236);
     padding: 10px;
     padding-left: 13vw;
     margin-left: 13vh;
