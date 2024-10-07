@@ -61,18 +61,55 @@ include '../session_check.php';
         });
         // Open modal function
         function openModal(orderId) {
+            // Disable the button for other users while the modal is open
+            document.querySelector(`#proceed-btn-${orderId}`).disabled = true;
+
+            // Show the modal window
             document.getElementById('orderModal' + orderId).style.display = "block";
+
+            // Make an AJAX call to update the order status to 'processed'
+            $.ajax({
+                url: './main-content/order_status.php',
+                type: 'POST',
+                data: {
+                    order_id: orderId
+                },
+                success: function(response) {
+                    document.getElementById(`order-row-${orderId}`).cells[2].innerText = response;
+                },
+                error: function() {
+                    alert('Error processing the order.');
+                }
+            });
         }
 
         // Close modal function
         function closeModal(orderId) {
             document.getElementById('orderModal' + orderId).style.display = "none";
 
+            $.ajax({
+                url: './main-content/order_status.php',
+                type: 'POST',
+                data: {
+                    order_id: orderId
+                },
+                success: function(response) {
+                    document.getElementById(`order-row-${orderId}`).cells[2].innerText = response;
+
+                    // Re-enable the "Proceed" button
+                    document.querySelector(`#proceed-btn-${orderId}`).disabled = false;
+                },
+                error: function() {
+                    alert('Error reverting the order status.');
+                }
+            });
+
         }
 
         // Open update modal
         function openUpdateModal(orderId) {
             document.getElementById('updateModal' + orderId).style.display = "block";
+        
         }
 
         // Close update modal
@@ -91,45 +128,8 @@ include '../session_check.php';
         }
 
 
-        function updateOrder(orderId) {
-
-            var quantities = {};
-
-            // Use a selector that targets only the inputs for the specific order
-            $('#updateModal' + orderId + ' .quantity-input').each(function() {
-                var itemId = $(this).data('item-id'); // Get item ID
-                var quantity = $(this).val(); // Get updated quantity
-
-                // Only add to quantities if quantity is not empty or 0
-                if (quantity) {
-                    quantities[itemId] = quantity; // Add to quantities object
-                }
-            });
-            console.log(quantities);
-
-            $.ajax({
-                url: './main-content/orders_function.php', // URL to your PHP script
-                type: 'POST',
-                data: {
-                    action: 'update', // Specify action
-                    order_id: orderId, // Send the order ID
-                    quantities: quantities // Send the quantities as an object
-                },
-                success: function(response) {
-                    loadOrders()
-                    console.log(response);
-                 
-                    
-        
-                },
-                error: function(xhr, status, error) {
-                    alert('Error: ' + error); // Show error message
-                }
-            });
-        }
-
-
         // function updateOrder(orderId) {
+
         //     var quantities = {};
 
         //     // Use a selector that targets only the inputs for the specific order
@@ -142,51 +142,63 @@ include '../session_check.php';
         //             quantities[itemId] = quantity; // Add to quantities object
         //         }
         //     });
-
         //     console.log(quantities);
 
         //     $.ajax({
         //         url: './main-content/orders_function.php', // URL to your PHP script
         //         type: 'POST',
         //         data: {
-        //             action: 'update',
-        //             order_id: orderId,
-        //             quantities: quantities
+        //             action: 'update', // Specify action
+        //             order_id: orderId, // Send the order ID
+        //             quantities: quantities // Send the quantities as an object
         //         },
         //         success: function(response) {
-        //             // Parse the response if it is JSON
-        //             var data = JSON.parse(response);
+        //             loadOrders()
+        //             console.log(response);
 
-        //             if (data.success) {
-        //                 // Loop through the items and update their values in the modal
-        //                 $('#updateModal' + orderId + ' .quantity-input').each(function() {
-        //                     var itemId = $(this).data('item-id'); // Get the item ID
-        //                     var newQuantity = quantities[itemId]; // Get the updated quantity
 
-        //                     // Update the input value if it was changed
-        //                     if (newQuantity !== undefined) {
-        //                         $(this).val(newQuantity);
-        //                     }
 
-        //                     // If quantity is 0, remove the item from the modal
-        //                     if (newQuantity == 0) {
-        //                         $(this).closest('li').remove(); // Remove the item row
-        //                     }
-        //                 });
-
-        //                 // If no items remain, close the modal automatically
-        //                 if ($('#updateModal' + orderId + ' .quantity-input').length === 0) {
-        //                     closeUpdateModal(orderId);
-        //                 }
-        //             } else {
-        //                 alert('Failed to update order.');
-        //             }
         //         },
         //         error: function(xhr, status, error) {
         //             alert('Error: ' + error); // Show error message
         //         }
         //     });
         // }
+
+        function updateOrder(orderId) {
+            var quantities = {};
+
+            // Gather all updated quantities from the modal
+            $('#updateModal' + orderId + ' .quantity-input').each(function() {
+                var itemId = $(this).data('item-id');
+                var quantity = $(this).val();
+
+                if (quantity) {
+                    quantities[itemId] = quantity;
+                }
+            });
+
+            console.log(quantities);
+
+            $.ajax({
+                url: './main-content/orders_function.php',
+                type: 'POST',
+                data: {
+                    action: 'update',
+                    order_id: orderId,
+                    quantities: quantities
+                },
+                success: function(response) {
+                    console.log(response);
+
+                    loadOrderDetails(orderId);
+
+                },
+                error: function(xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            });
+        }
 
 
 
@@ -278,6 +290,35 @@ include '../session_check.php';
             loadOrders();
 
         }
+
+
+        function loadOrderDetails(orderId) {
+            $.ajax({
+                url: './main-content/update_order_modal.php', // Your PHP script to fetch order details
+                type: 'GET',
+                data: {
+                    order_id: orderId
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        let itemList = '';
+                        $.each(response.items, function(index, item) {
+                            itemList += `<h6>Item ID: ${item.item_id} - Quantity: ${item.quantity}</h6>`;
+                        });
+                        // Insert the new item list into the modal
+                        $('#orderModal' + orderId + ' ul').html(itemList);
+                    } else {
+                        $('#orderModal' + orderId + ' ul').html('<h4>No items found for this order.</h4>');
+                    }
+                },
+                error: function() {
+                    alert('Error retrieving order details.');
+                }
+            });
+        }
+
+
         // Function to fetch and display orders
         function loadOrders() {
             $.ajax({

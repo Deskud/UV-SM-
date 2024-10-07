@@ -55,7 +55,7 @@ if (!empty($orderIds)) {
                 <td><?php echo $order['status']; ?></td>
                 <td>
                     <div class="prc-btn-container">
-                        <button class="proceed-btn" onclick="openModal(<?php echo $order['order_id']; ?>)">
+                        <button class="proceed-btn" id="proceed-btn-<?php echo $order['order_id']; ?>" onclick="openModal(<?php echo $order['order_id']; ?>)">
                             Proceed
                         </button>
                     </div>

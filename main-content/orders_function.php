@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmt->execute(); // Run the delete query
                         $stmt->close(); // Close after delete
 
-        
+
                     }
                 }
 
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             QRcode::png($qrData, $filePath);
 
             // Update order status to 'processed'
-            $stmt = $conne->prepare("UPDATE orders SET status = 'processed' WHERE order_id = ?");
+            $stmt = $conne->prepare("UPDATE orders SET status = 'completed' WHERE order_id = ?");
             $stmt->bind_param('i', $orderId);
 
             if ($stmt->execute()) {
@@ -248,8 +248,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->execute();
                     $stmt->close();
 
-
-
                     // Fetch the previous total quantity and total amount for the order
                     $stmt = $conne->prepare("SELECT SUM(quantity) AS prev_total_quantity, SUM(quantity * price) AS prev_total_amount
                                                   FROM items 
@@ -274,6 +272,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->execute();
                     $stmt->close();
 
+                    // Remove the item from the items table
+                    $stmt = $conne->prepare("DELETE FROM items WHERE item_id = ? AND order_id = ?");
+                    $stmt->bind_param('ii', $itemId, $orderId);
+                    $stmt->execute();
+                    $stmt->close();
+
                     // Commit the transaction
                     $conne->commit();
                     echo json_encode(['success' => true]);
@@ -286,8 +290,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['error' => 'Item ID or Order ID not provided']);
             }
             break;
-
-
 
         default:
             echo json_encode(['error' => 'Invalid action']);
