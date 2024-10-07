@@ -363,7 +363,7 @@ th {
 
 #Main-body {
 
-    background:#f5f8ff;
+    background: #f5f8ff;
     /* background: radial-gradient(circle, rgba(167,170,188,1) 22%, rgba(67,70,86,1) 100%); */
 }
 
@@ -535,7 +535,9 @@ th {
 
 .unit-containers {
     text-align: center;
+    justify-content: baseline;
     display: inline-block;
+    width: 300px;
     height: 320px;
     background: rgb(255, 255, 255);
     /* background: radial-gradient(circle, rgba(255, 255, 255, 1) 38%, rgba(209, 209, 209, 1) 100%, rgba(252, 252, 252, 1) 100%); */
@@ -575,6 +577,21 @@ th {
 
 }
 
+.product-name {
+    align-items: center;
+
+}
+
+.product-name input {
+    width: 480px;
+    height: 80px;
+}
+
+.confirmation-btn {
+    text-align: center;
+
+}
+
 .add-product {
     display: inline-block;
     width: 800px;
@@ -602,7 +619,7 @@ th {
     margin-left: 10px;
     margin-right: auto;
     border-radius: 10px;
-    border: solid 1px #2d2d2d;
+    border: solid 2px #2d2d2d;
 
 }
 
@@ -710,6 +727,7 @@ th {
 
 .submit-add-product,
 .submit-add-cell {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
     width: 100px;
     height: 30px;
     display: block;
@@ -731,21 +749,35 @@ th {
 #confirm-orders,
 #cancel-orders,
 #confirm-archive,
-#cancel-archive,
 #confirm-print,
 #cancel-print {
-    width: 100px;
-    height: 30px;
-    display: block;
-    border: 2px solid;
-    cursor: pointer;
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    width: 120px;
+    height: 40px;
     background-color: #00810b;
-    color: white;
+    color: rgb(255, 255, 255);
+    border: rgba(255, 255, 255, 0.609) solid;
     border-radius: 10px;
-    /* margin-left: auto;
-    margin-right: auto; */
-    margin-top: 10px;
-    margin: 5px auto;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+#cancel-archive {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    width: 120px;
+    height: 40px;
+    background-color: #d90b0b;
+    color: rgb(255, 255, 255);
+    border: rgba(255, 255, 255, 0.609) solid;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#cancel-archive:hover {
+
+    border: 4px solid #7d0303;
 
 }
 
@@ -798,7 +830,7 @@ th {
 
     /* margin-top: 40px;
     margin-left: 25px; */
-    margin-left: 80%;
+    margin-left: 88%;
     width: fit-content;
     max-height: fit-content;
 
@@ -824,9 +856,21 @@ th {
 
 /* ORDERS START */
 
+.update-details{
+    text-align: center;
+
+}
+.order-details {
+    text-align: center;
+}
+
 .order-table {
 
     width: 80%;
+}
+
+.order-modal-btn {
+    text-align: center;
 }
 
 .prc-btn-container,
@@ -851,6 +895,7 @@ th {
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
+    padding: 2px;
 
 }
 
@@ -865,14 +910,14 @@ th {
 }
 
 .order-search-bar {
-    margin-left: 70%;
+    margin-left: 66%;
 
 }
 
 .remove-item {
     font-family: "Mulish", Arial, Helvetica, sans-serif;
-    width: 100px;
-    height: 35px;
+    width: 35px;
+    height: 25px;
     background-color: #d90b0b;
     color: rgb(255, 255, 255);
     border: rgba(255, 255, 255, 0.609) solid;
@@ -884,6 +929,13 @@ th {
     border: 4px solid #7d0303;
 }
 
+.quantity-input{
+    width: 40px;
+}
+
+#confirmation-modal {
+    text-align: center;
+}
 
 /* ORDERS END */
 
@@ -935,30 +987,34 @@ th {
     margin: 15% auto;
     padding: 20px;
     max-height: 90%;
+    width: 30vw;
 }
 
 
 .modal-order-content {
     background-color: #ffffff;
     height: fit-content;
+    max-height: 400px;
+    min-height: 100px;
     margin: 15% auto;
     margin-top: 8%;
-    padding: 12px;
+    padding: 40px;
     border: solid 1px black;
     border-radius: 10px;
     width: 500px;
-    max-height: 90%;
-
-
+    overflow: auto;
 }
 
 .modal-receipt-content {
     background-color: #ffffff;
+    max-height: 800px;
+    min-height: 400px;
     height: fit-content;
     margin: 5% auto;
     padding: 20px;
     border: solid 1px rgb(255, 255, 255);
-    width: 400px;
+    width:fit-content;
+    overflow: auto;
 
 }
 
@@ -975,14 +1031,15 @@ th {
 
 .modal-content {
     background-color: #ffffff;
-    height: fit-content;
-    max-height: 90%;
+    max-height: 400px;
+    min-height: 100px;
     margin: 10% auto;
-
+    padding-top: 5px;
     padding: 20px;
     border: solid 1px black;
-    border-radius: 10px;
-    width: 500px;
+    border-radius: 5px;
+    width: fit-content;
+    overflow: auto;
 }
 
 .modal-confirm-content {
@@ -995,6 +1052,18 @@ th {
     padding: 20px;
 }
 
+.modal-info-content {
+    background-color: #ffffff;
+    max-height: 400px;
+    min-height: 100px;
+    margin: 10% auto;
+    padding-top: 5px;
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+    width: 500px;
+
+}
 
 .modal-order-contents {
     background-color: #ffffff;
@@ -1011,6 +1080,8 @@ th {
 
 
 #close-icon {
+    position: absolute;
+    margin-left: -8px;
     color: rgb(255, 80, 80);
 
 
@@ -1027,6 +1098,7 @@ th {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    padding: 2px;
     cursor: pointer;
 }
 
@@ -1037,12 +1109,14 @@ th {
 }
 
 
-#return {
-    color: #00810b;
+#return-icon {
+    position: absolute;
+    margin-left: -8px;
+    color: #9a9a9a;
 }
 
-#return:hover {
-    color: #04b513;
+#return-icon:hover {
+    color: #9a9a9a8b;
 
 }
 

@@ -7,18 +7,18 @@ checkAccess(ADMIN); // Ensure only admins can access this page
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Retrieve posted data
+    $product_category = $_POST['category'];
     $product_name = $_POST['name'];
     $product_sizes = $_POST['size'];
     $product_gender = $_POST['gender'];
-    // $product_cell 
     $product_quantity = $_POST['quantity'];
     $product_price = $_POST['price'];
 
     if (!empty($product_sizes)) {
         foreach ($product_sizes as $size) {
             // Insert a row for each selected size and set cell_num to NULL
-            $insert_new_product = "INSERT INTO products (category_id, size_id, gender, product_quantity, price, cell_num) 
-                                   VALUES ('$product_name', '$size', '$product_gender', '$product_quantity', '$product_price', NULL)";
+            $insert_new_product = "INSERT INTO products (category_id, product_name, size_id, gender, product_quantity, price, cell_num) 
+                                   VALUES ('$product_category','$product_name', '$size', '$product_gender', '$product_quantity', '$product_price', NULL)";
 
             $add_new_product = mysqli_query($conne, $insert_new_product);
 
@@ -48,12 +48,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="" method="POST" enctype="multipart/form-data" id="input-form">
             <input type="hidden" name="product_id" id="product_id" value="">
             <h3 style="color: #0454ac;">Uniform Type</h3>
-            <select class="select-uniform-name" name="name" required>
+            <select class="select-uniform-name" name="category" required>
                 <option value="" disabled selected>...</option>
                 <option value="1">Regular Uniform</option>
                 <option value="2">P.E. Uniform</option>
                 <option value="3">Others</option>
             </select>
+
+
+            <div class="product-name">
+                <h3 style="color: #0454ac;">Name</h3>
+                <input type="text" name="name">
+            </div>
 
             <div class="sizes-container">
                 <h3 style="color: #0454ac;">Sizes</h3>
@@ -92,14 +98,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="modal-confirm-content">
         <h3 class="title-form">Confirm Action</h3>
         <p>Are you sure you want to archive this product?</p>
-        <button type="button" id="confirm-archive" class="confirm-btn">Yes</button>
-        <button type="button" id="cancel-archive" class="cancel-btn">No</button>
+        <div class="confirmation-btn">
+            <button type="button" id="confirm-archive" class="confirm-btn">Yes</button>
+            <button type="button" id="cancel-archive" class="cancel-btn">No</button>
+        </div>
     </div>
 </div>
 
 <!-- Modal window para sa information ng products -->
 <div id="info-modal" class="modal">
-    <div class="modal-content">
+    <div class="modal-info-content">
         <span class="close-modal"><i id="close-icon" class="fa-solid fa-xmark"></i></span>
         <h3 class="title-form">Product Information</h3>
         <div class="product-info">
@@ -146,9 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     EVENT DELEGATION WOW! COOL CONCEPT NOICE
      https://www.youtube.com/watch?v=aZ3JWv0ofuA
 
-             gr8 video
-             
-                  
+             gr8 video        
 -->
 <!-- Para sa modal windows jscript -->
 <script type="text/javascript" src="modal.js"></script>
@@ -173,14 +179,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     if (!product.error) {
                         // Populate the form fields with the fetched data
+
                         $('#product_id').val(product.product_id);
-                        $('select[name="name"]').val(product.category_id);
+                        $('input[name="name"]').val(product.product_name);
+                        $('select[name="category"]').val(product.category_id);
                         $('select[name="size"]').val(product.size);
                         $('select[name="gender"]').val(product.gender);
                         $('input[name="quantity"]').val(product.product_quantity);
                         $('input[name="price"]').val(product.price);
-
-                        // Hide the size checkboxes
 
 
                         $('.sizes-container').css('display', 'none');
@@ -189,6 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $('.title-form-product').text('Edit Product');
                         $('#submit-btn').val('Update'); // Change button label to 'Update'
                         $('#add-product-modal').css('display', 'block');
+
 
                     } else {
                         alert('Error: ' + product.error);
@@ -203,7 +210,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             e.preventDefault();
 
             var formData = $(this).serialize();
-            // Disable the submit button to prevent multiple submissions
             $('#submit-btn').prop('disabled', true);
 
             $.ajax({
@@ -215,12 +221,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $('#input-form')[0].reset();
                     $('#submit-btn').val('Add');
                     $('#cellSelect').prop('disabled', true);
-                    loadTable();
-
                     $('#submit-btn').prop('disabled', false);
+                    
+                    $('#add-product-modal').css('display', 'none'); 
+                    loadTable();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    // Re-enable the submit button
                     $('#submit-btn').prop('disabled', false);
                 }
             });
@@ -265,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Para sa modal window ng information button
         $(document).on('click', '.info-btn', function() {
-            var productId = $(this).data('id'); 
+            var productId = $(this).data('id');
 
             $.ajax({
                 url: './main-content/get_product_info.php', // PHP file to handle the request
@@ -277,7 +283,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     var data = JSON.parse(response);
 
                     if (data.success) {
-                
+
                         $('#info-modal .product-info').html(`
                     <p>Product ID: ${data.product_id}</p>
                     <p>Date Added: ${data.date_added}</p>
@@ -297,7 +303,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         // data search stuff
-
         $('#find-data').keyup(function() {
             var input = $(this).val();
             if (input != '') {
@@ -320,24 +325,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $('#search-result-table').css("display", "none");
             }
         });
-
-        // Function to load the product table
-        // function loadTable() {
-        //     console.log("Why are you in the console? A bit sussy i aint gonna lie brudder.");
-
-        //     $.ajax({
-        //         url: './main-content/fetch_products.php',
-        //         type: 'GET',
-        //         data: {
-        //             _: new Date().getTime()
-        //         },
-        //         success: function(data) {
-        //             $('#products-table').html(data); // Update the table content
-        //         },
-        //         error: function(jqXHR, textStatus, errorThrown) {
-        //             $('#products-table').html('<tr><td colspan="10">Error loading table data</td></tr>'); // Error message
-        //         }
-        //     });
-        // }
     });
 </script>

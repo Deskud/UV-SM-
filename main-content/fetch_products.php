@@ -20,10 +20,10 @@ $display_added = mysqli_query($conne, $query);
 
 // Fetch all assigned cell numbers
 $used_cells_query = "SELECT DISTINCT cell_num FROM products WHERE cell_num IS NOT NULL";
-$used_cells_result = mysqli_query($conne, $used_cells_query);  // Fix variable name here
-$used_cells = [];  // Initialize empty array for used cell numbers
+$used_cells_result = mysqli_query($conne, $used_cells_query); 
+$used_cells = []; 
 while ($row = mysqli_fetch_assoc($used_cells_result)) {
-    $used_cells[] = $row['cell_num'];  // Populate the array with cell numbers
+    $used_cells[] = $row['cell_num'];  
 }
 ?>
 <tr>
@@ -33,10 +33,7 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
     <th>Price</th>
     <th>Quantity</th>
     <th>Action</th>
-
-
 </tr>
-
 <?php while ($row = mysqli_fetch_assoc($display_added)) { ?>
     <tr>
         <td>

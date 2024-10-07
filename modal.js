@@ -29,10 +29,10 @@ $(document).ready(function () {
     //Pag pinidot yung background mag c-close yung window. (PRODUCT at ARCHIVE)
     $(window).on('click', function (event) {
 
-        if ($(event.target).is(modalProduct)) {
-            resetModal();
-            modalProduct.css('display', 'none');
-        }
+        // if ($(event.target).is(modalProduct)) {
+        //     resetModal();
+        //     modalProduct.css('display', 'none');
+        // }
 
         // if ($(event.target).is(modalConfirm)) {
         //     modalConfirm.css('display', 'none');
@@ -73,7 +73,6 @@ $(document).ready(function () {
 function resetModal() {
     $('#input-form')[0].reset(); // Reset the form
     $('#submit-btn').val('Add'); // Set button to 'Add'
-    $('#cellSelect').prop('disabled', false); // Enable the cell number select
     $('#add-product-modal').css('display', 'block'); // Open the modal
 
 

@@ -109,7 +109,7 @@ include '../session_check.php';
         // Open update modal
         function openUpdateModal(orderId) {
             document.getElementById('updateModal' + orderId).style.display = "block";
-        
+
         }
 
         // Close update modal
@@ -119,7 +119,12 @@ include '../session_check.php';
 
         // Open QR code modal
         function openQRModal(orderId) {
+            var studentId = $('#orderModal' + orderId + ' input[name="student-id"]').val();
+            $('#qr-student-id-' + orderId).text(studentId);
+
             document.getElementById('qrCodeModal' + orderId).style.display = "block";
+
+
         }
 
         // Close QR code modal
@@ -190,9 +195,9 @@ include '../session_check.php';
                 },
                 success: function(response) {
                     console.log(response);
-
                     loadOrderDetails(orderId);
-
+                    $('#updateModal' + orderId).css('display', 'none');
+                
                 },
                 error: function(xhr, status, error) {
                     alert('Error: ' + error);
@@ -247,21 +252,19 @@ include '../session_check.php';
         }
 
         $(document).ready(function() {
-            // Function to remove an item from the order
             function removeItem(itemId, orderId, itemElement) {
                 $.ajax({
-                    url: './main-content/orders_function.php', // Correct path to your orders_function.php
+                    url: './main-content/orders_function.php',
                     type: 'POST',
                     data: {
-                        action: 'remove', // Call the 'remove' case in orders_function.php
+                        action: 'remove', 
                         item_id: itemId,
                         order_id: orderId
                     },
                     success: function(response) {
                         if (response.success) {
-                            // Remove the item from the DOM
-                            itemElement.remove();
-                            loadOrders();
+                            itemElement.remove(); 
+                            loadOrderDetails(orderId); 
                         } else {
                             // Display error message
                             alert('Error: ' + response.error);
@@ -273,14 +276,16 @@ include '../session_check.php';
                 });
             }
 
+            // Event listener for remove buttons
             $(document).on('click', '.remove-item', function() {
                 var itemId = $(this).data('item-id');
                 var orderId = $(this).data('order-id');
-                var itemElement = $('#item-' + itemId); // Use the ID to find the correct item in the DOM
+                var itemElement = $('#item-id-' + itemId); // Target the correct item by its ID
 
                 removeItem(itemId, orderId, itemElement);
             });
         });
+
 
 
         // Print QR code function

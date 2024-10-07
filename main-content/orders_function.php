@@ -211,14 +211,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $orderId = intval($_POST['order_id']);
                 $modificationReason = "Item removed.";
 
-                $modifiedBy = $_SESSION['user_id']; // Replace with dynamic user session
+                $modifiedBy = $_SESSION['user_id'];
                 $modificationTime = date('Y-m-d H:i:s');
 
                 // Begin transaction
                 $conne->begin_transaction();
 
                 try {
-                    // Fetch previous quantity and product_id for the item
                     $stmt = $conne->prepare("SELECT quantity, product_id FROM items WHERE item_id = ? AND order_id = ?");
                     $stmt->bind_param('ii', $itemId, $orderId);
                     $stmt->execute();
@@ -226,7 +225,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->fetch();
                     $stmt->close();
 
-                    // Get the price of the product
+                    if ($prevQuantity === null) {
+                        throw new Exception("Item not found or already removed.");
+                    }
+
                     $stmt = $conne->prepare("SELECT price FROM products WHERE product_id = ?");
                     $stmt->bind_param('i', $productId);
                     $stmt->execute();
@@ -234,45 +236,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->fetch();
                     $stmt->close();
 
-                    // Calculate the previous price based on the quantity
                     $prevPrice = $prevQuantity * $productPrice;
 
-                    // Insert into item_modifications for removal
-                    $newQuantity = 0; // Set new quantity to 0
-                    $newPrice = 0;    // Set new price to 0
-                    $stmt = $conne->prepare("
-                            INSERT INTO item_modifications 
-                            (modification_id, item_id, order_id, prev_quantity, new_quantity, prev_price, new_price, modification_reason, modified_by, modification_timestamp)
-                            VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param('iiiiiisss', $itemId, $orderId, $prevQuantity, $newQuantity, $prevPrice, $newPrice, $modificationReason, $modifiedBy, $modificationTime);
-                    $stmt->execute();
-                    $stmt->close();
-
-                    // Fetch the previous total quantity and total amount for the order
                     $stmt = $conne->prepare("SELECT SUM(quantity) AS prev_total_quantity, SUM(quantity * price) AS prev_total_amount
-                                                  FROM items 
-                                                  JOIN products ON items.product_id = products.product_id
-                                                  WHERE order_id = ?");
+                                                      FROM items 
+                                                      JOIN products ON items.product_id = products.product_id
+                                                      WHERE order_id = ?");
                     $stmt->bind_param('i', $orderId);
                     $stmt->execute();
                     $stmt->bind_result($prevTotalQuantity, $prevTotalAmount);
                     $stmt->fetch();
                     $stmt->close();
 
-                    // Calculate new total quantity and total amount after item removal
+                    // Calculate new totals
                     $newTotalQuantity = $prevTotalQuantity - $prevQuantity;
                     $newTotalAmount = $prevTotalAmount - $prevPrice;
 
-                    // Insert into order_modifications for the updated totals
                     $stmt = $conne->prepare("
-                            INSERT INTO order_modifications 
-                            (modification_id, order_id, prev_total_quantity, new_total_quantity, prev_total_amount, new_total_amount, modification_reason, modified_by, modification_timestamp)
-                            VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param('iiiiisss', $orderId, $prevTotalQuantity, $newTotalQuantity, $prevTotalAmount, $newTotalAmount, $modificationReason, $modifiedBy, $modificationTime);
+                                    INSERT INTO item_modifications 
+                                    (modification_id, item_id, order_id, prev_quantity, new_quantity, prev_price, new_price, modification_reason, modified_by, modification_timestamp)
+                                    VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param('iiiiiisss', $itemId, $orderId, $prevQuantity, $newQuantity, $prevPrice, $newPrice, $modificationReason, $modifiedBy, $modificationTime);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Failed to insert into item_modifications: " . $stmt->error);
+                    }
+                    $stmt->close();
+
+
+                    // Insert into order_modifications for updated totals
+                    $stmt = $conne->prepare("
+                                    INSERT INTO item_modifications 
+                                    (modification_id, item_id, order_id, prev_quantity, new_quantity, prev_price, new_price, modification_reason, modified_by, modification_timestamp)
+                                    VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param('iiiiiisss', $itemId, $orderId, $prevQuantity, $newQuantity, $prevPrice, $newPrice, $modificationReason, $modifiedBy, $modificationTimestamp);
                     $stmt->execute();
                     $stmt->close();
 
-                    // Remove the item from the items table
+                    // Delete the item from the items table
                     $stmt = $conne->prepare("DELETE FROM items WHERE item_id = ? AND order_id = ?");
                     $stmt->bind_param('ii', $itemId, $orderId);
                     $stmt->execute();
@@ -282,7 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $conne->commit();
                     echo json_encode(['success' => true]);
                 } catch (Exception $e) {
-                    // Rollback transaction on error
+                    // Rollback on failure
                     $conne->rollback();
                     echo json_encode(['error' => 'Failed to remove item: ' . $e->getMessage()]);
                 }
@@ -290,6 +290,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['error' => 'Item ID or Order ID not provided']);
             }
             break;
+
+
 
         default:
             echo json_encode(['error' => 'Invalid action']);
