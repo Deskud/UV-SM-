@@ -818,6 +818,7 @@ th {
 }
 
 
+
 /* Add Product End */
 
 
@@ -948,6 +949,19 @@ th {
     text-align: center;
 }
 
+
+/* hide button if mag p-print na ng receipt */
+@media print{
+
+    #print{
+        display: none;
+    }
+}
+
+#qr-code-display{
+    align-items: center;
+}
+
 /* ORDERS END */
 
 
@@ -1022,10 +1036,11 @@ th {
     min-height: 400px;
     height: fit-content;
     margin: 5% auto;
-    padding: 20px;
+    padding: 10px;
     border: solid 1px rgb(255, 255, 255);
     width: fit-content;
     overflow: auto;
+    align-content: center;
 
 }
 

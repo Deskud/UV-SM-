@@ -114,7 +114,7 @@ if (!empty($orderIds)) {
                     <div id="qr-code-display<?php echo $order['order_id']; ?>">
                         <!-- QR code will be displayed here -->
                     </div>
-                    <button class="print" onclick="printQRCode(<?php echo $order['order_id']; ?>)">Print QR Code</button>
+                    <button id="print"  class="print" onclick="printQRCode(<?php echo $order['order_id']; ?>)">Print QR Code</button>
                 </div>
             </div>
 
