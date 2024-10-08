@@ -73,7 +73,7 @@ if (!empty($orderIds)) {
                             <?php
                             if (isset($groupedItems[$order['order_id']])) {
                                 foreach ($groupedItems[$order['order_id']] as $item) {
-                                    echo "<h6>Item: {$item['product_name']} - Quantity: {$item['quantity']} </h6>";
+                                    echo "<h6 class='order-items'>{$item['product_name']} - Quantity:{$item['quantity']} </h6>";
                                 }
                             } else {
                                 echo "<h4>No items found for this order.</h4>";
