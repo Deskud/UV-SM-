@@ -154,7 +154,7 @@ void parseJsonResponse(String jsonData) {
       if (strcmp(status, "success") == 0) {
         Serial.println("Transaction found!");
         itemCount = 0;  // Reset item count
-        transaction_id = doc["trasaaction_id"];
+        transaction_id = doc["transaction_id"];
         order_id = doc["order_id"];
         Serial.println("Transaction ID: ");
         Serial.println(transaction_id);
