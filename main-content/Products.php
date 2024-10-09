@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h3 class="title-form-product">Add Product</h3>
         <form action="" method="POST" enctype="multipart/form-data" id="input-form">
             <input type="hidden" name="product_id" id="product_id" value="">
+            <h3 style="color: #0454ac; text-align:center;">Uniform Type</h3>
             <select class="select-uniform-name" name="category" required>
-                <h3 style="color: #0454ac;">Uniform Type</h3>
                 <option value="" disabled selected>...</option>
                 <option value="1">Regular Uniform</option>
                 <option value="2">P.E. Uniform</option>

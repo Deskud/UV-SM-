@@ -1,5 +1,5 @@
 <?php
-require "../dbconnection.php"; // Include database connection
+require "../dbconnection.php"; 
 include '../session_check.php';
 
 $query = "SELECT * FROM transactions";

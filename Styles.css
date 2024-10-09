@@ -522,20 +522,21 @@ th {
 /* Dashboard START */
 
 .dash-container {
-    padding: 20px;
-    margin-top: 30px;
-    margin-left: 120px;
+    align-items: center;
+    padding: 5px;
+    margin: auto;
+ 
+   
 }
 
 .dash-container h2 {
 
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 
 }
 
 .unit-containers {
     text-align: center;
-    justify-content: baseline;
     display: inline-block;
     width: 300px;
     height: 320px;
@@ -548,11 +549,15 @@ th {
     padding: 5px;
     margin-bottom: 5px;
 }
-
+.unit-number{
+    width: 100%;
+    background-color: #0454ac;
+    border-radius: 5px;
+}
 .cell-icon {
     width: 30%;
     height: 30%;
-    padding-top: 25px;
+    padding: 1px;
     align-items: center;
 }
 
