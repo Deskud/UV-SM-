@@ -9,7 +9,7 @@ if (isset($_GET['category_id'])) {
               FROM products
               WHERE category_id = ?
               AND is_archived = 0
-              AND cell_num IS NOT NULL
+              AND unit_num IS NOT NULL
               AND product_quantity != 0";
 
     // Prepare the statement

@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['product_id'])) {
         $product_id = intval($_POST['product_id']); // Sanitize input
 
-        $archive_query = "UPDATE products SET is_archived = 1, date_archived = NOW(), cell_num = NULL WHERE product_id = ?";
+        $archive_query = "UPDATE products SET is_archived = 1, date_archived = NOW(), unit_num = NULL WHERE product_id = ?";
         $stmt = $conne->prepare($archive_query);
 
         if ($stmt === false) {

@@ -19,7 +19,7 @@ EthernetClient client;
 struct Item {
   int product_id;
   String productName;
-  int cell_num;
+  int unit_num;
   int quantity;
   int index;
 };
@@ -170,10 +170,10 @@ void parseJsonResponse(String jsonData) {
           if (itemCount < maxItems) {
             const int productId = item["product_id"];
             const char* productName = item["product_name"];
-            int cell_num = item["cell_num"];
+            int unit_num = item["unit_num"];
             int quantity = item["quantity"];
 
-            items[itemCount] = { productId, String(productName), cell_num, quantity, itemCount };
+            items[itemCount] = { productId, String(productName), unit_num, quantity, itemCount };
             itemCount++;
 
             Serial.print("ID: ");
@@ -181,7 +181,7 @@ void parseJsonResponse(String jsonData) {
             Serial.print("Item: ");
             Serial.print(productName);
             Serial.print(" | Cell: ");
-            Serial.print(cell_num);
+            Serial.print(unit_num);
             Serial.print(" | Quantity: ");
             Serial.print(quantity);
             Serial.println();
@@ -217,7 +217,7 @@ void dispenseItems() {
   for (int i = 0; i < itemCount; i++) {
 
     Serial.print("Dispensing on cell: ");
-    Serial.println(items[i].cell_num);
+    Serial.println(items[i].unit_num);
     Serial.print("Item Name: ");
     Serial.println(items[i].productName);
     Serial.print("Quantity: ");
@@ -228,7 +228,7 @@ void dispenseItems() {
     displayText(0, 2, "Qty: " + String(items[i].quantity));
 
     int j = 0;
-    int servoIndex = items[i].cell_num - 1;
+    int servoIndex = items[i].unit_num - 1;
     displayText(0, 3, "dispensed: " + String(j));
 
     while (j < items[i].quantity) {

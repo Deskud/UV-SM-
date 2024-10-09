@@ -5,12 +5,12 @@ require "../dbconnection.php";
 
 // $query = "SELECT * FROM products WHERE is_archived = 0";
 
-// $query_product_name = "SELECT products.product_id, products.product_name, products.size, products.gender, products.cell_num, products.price, products.product_quantity, products.date_added, products.is_archived, categories.category_id
+// $query_product_name = "SELECT products.product_id, products.product_name, products.size, products.gender, products.unit_num, products.price, products.product_quantity, products.date_added, products.is_archived, categories.category_id
 // FROM products INNER JOIN categories ON products.product_name = categories.category_id";
 
 // Updated na para ma check properly yung foreign keys which is yung category_id
 // Fetch products that are not archived along with their cell numbers
-$query = "SELECT products.*, categories.category_name, sizes.size_name, products.cell_num
+$query = "SELECT products.*, categories.category_name, sizes.size_name, products.unit_num
           FROM products
           INNER JOIN categories ON products.category_id = categories.category_id
           INNER JOIN sizes ON products.size_id = sizes.size_id
@@ -19,11 +19,11 @@ $query = "SELECT products.*, categories.category_name, sizes.size_name, products
 $display_added = mysqli_query($conne, $query);
 
 // Fetch all assigned cell numbers
-$used_cells_query = "SELECT DISTINCT cell_num FROM products WHERE cell_num IS NOT NULL";
+$used_cells_query = "SELECT DISTINCT unit_num FROM products WHERE unit_num IS NOT NULL";
 $used_cells_result = mysqli_query($conne, $used_cells_query); 
 $used_cells = []; 
 while ($row = mysqli_fetch_assoc($used_cells_result)) {
-    $used_cells[] = $row['cell_num'];  
+    $used_cells[] = $row['unit_num'];  
 }
 ?>
 <tr>
@@ -39,10 +39,10 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
         <td>
             <select class="cell-num-select" data-product-id="<?php echo htmlspecialchars($row['product_id']); ?>">
                 <option value="" disabled style="color: white;">Select Cell Number</option>
-                <option value="" <?php echo is_null($row['cell_num']) ? 'selected' : ''; ?>>NULL</option>
+                <option value="" <?php echo is_null($row['unit_num']) ? 'selected' : ''; ?>>NULL</option>
                 <?php for ($i = 1; $i <= 24; $i++): ?>
-                    <?php if (!in_array($i, $used_cells) || $i == $row['cell_num']): ?>
-                        <option value="<?php echo $i; ?>" <?php echo $i == $row['cell_num'] ? 'selected' : ''; ?>>
+                    <?php if (!in_array($i, $used_cells) || $i == $row['unit_num']): ?>
+                        <option value="<?php echo $i; ?>" <?php echo $i == $row['unit_num'] ? 'selected' : ''; ?>>
                             <?php echo $i; ?>
                         </option>
                     <?php endif; ?>
@@ -83,13 +83,13 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
                 usedCells.push(newCellNum);
             }
 
-            // Send AJAX request to update the cell_num in the database
+            // Send AJAX request to update the unit_num in the database
             $.ajax({
-                url: './main-content/update_cell_num.php',
+                url: './main-content/update_unit_num.php',
                 type: 'POST',
                 data: {
                     product_id: productId,
-                    cell_num: newCellNum
+                    unit_num: newCellNum
                 },
                 dataType: 'json',
                 success: function(response) {

@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($product_sizes)) {
         foreach ($product_sizes as $size) {
-            // Insert a row for each selected size and set cell_num to NULL
-            $insert_new_product = "INSERT INTO products (category_id, product_name, size_id, gender, product_quantity, price, cell_num) 
+            // Insert a row for each selected size and set unit_num to NULL
+            $insert_new_product = "INSERT INTO products (category_id, product_name, size_id, gender, product_quantity, price, unit_num) 
                                    VALUES ('$product_category','$product_name', '$size', '$product_gender', '$product_quantity', '$product_price', NULL)";
 
             $add_new_product = mysqli_query($conne, $insert_new_product);

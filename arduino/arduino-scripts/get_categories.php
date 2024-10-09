@@ -7,7 +7,7 @@ $query = "SELECT DISTINCT c.category_id, c.category_name
           JOIN categories c
           ON p.category_id = c.category_id
           WHERE is_archived = 0
-          AND cell_num IS NOT NULL
+          AND unit_num IS NOT NULL
           AND product_quantity != 0
           ORDER BY c.category_id ASC";
 
