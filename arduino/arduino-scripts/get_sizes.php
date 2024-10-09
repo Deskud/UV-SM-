@@ -7,10 +7,10 @@ if (isset($_GET['product_name'])) {
     // Prepare the SQL query with placeholders
     $query = "SELECT p.product_id, s.size_id, s.size_name
               FROM products p 
-              JOIN sizes s ON p.size = s.size_id
+              JOIN sizes s ON p.size_id = s.size_id
               WHERE p.product_name = ?
               AND p.is_archived = 0
-              AND p.cell_num IS NOT NULL
+              AND p.unit_num IS NOT NULL
               AND p.product_quantity != 0";
 
     // Prepare the statement

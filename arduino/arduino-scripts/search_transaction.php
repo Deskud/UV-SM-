@@ -25,7 +25,7 @@ if ($qrcode > 0) {
 
     if ($transaction) {
         // Fetch items for the found order
-        $stmtItems = $pdo->prepare("SELECT i.product_id, p.product_name, p.cell_num, i.quantity 
+        $stmtItems = $pdo->prepare("SELECT i.product_id, p.product_name, p.unit_num, i.quantity 
                                      FROM items i 
                                      JOIN products p ON i.product_id = p.product_id 
                                      WHERE i.order_id = :order_id

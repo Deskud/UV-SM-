@@ -2,11 +2,11 @@
 require "../dbconnection.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['product_id']) && isset($_POST['cell_num'])) {
+    if (isset($_POST['product_id']) && isset($_POST['unit_num'])) {
         $product_id = intval($_POST['product_id']);
-        $cell_num = $_POST['cell_num'] === '' ? NULL : intval($_POST['cell_num']); // Set to NULL if empty
+        $unit_num = $_POST['unit_num'] === '' ? NULL : intval($_POST['unit_num']); // Set to NULL if empty
 
-        $update_query = "UPDATE products SET cell_num = ? WHERE product_id = ?";
+        $update_query = "UPDATE products SET unit_num = ? WHERE product_id = ?";
         $stmt = $conne->prepare($update_query);
         
         if ($stmt === false) {
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $stmt->bind_param('ii', $cell_num, $product_id);
+        $stmt->bind_param('ii', $unit_num, $product_id);
         if ($stmt->execute()) {
             echo json_encode(['success' => true]);
         } else {
