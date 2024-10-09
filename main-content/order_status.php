@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Toggle the order status
         if ($currentStatus === 'pending') {
             // Update status to 'processed'
-            $newStatus = 'processed';
+            $newStatus = 'processing';
         } else {
             // Revert status back to 'pending'
             $newStatus = 'pending';

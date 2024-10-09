@@ -32,6 +32,7 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
     <th>Size</th>
     <th>Price</th>
     <th>Quantity</th>
+    <th>Sold Quantity</th>
     <th>Action</th>
 </tr>
 <?php while ($row = mysqli_fetch_assoc($display_added)) { ?>
@@ -53,6 +54,7 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
         <td><?php echo htmlspecialchars($row['size_name']); ?></td>
         <td><?php echo htmlspecialchars($row['price']); ?></td>
         <td><?php echo htmlspecialchars($row['product_quantity']); ?></td>
+        <td><?php echo htmlspecialchars($row['sold_quantity']); ?></td>
         <div class="action-container">
             <td style="margin-left: 10px;">
                 <a class="edit-btn" data-id="<?php echo htmlspecialchars($row['product_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square fa-lg"></i></a>

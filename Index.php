@@ -74,19 +74,19 @@ require "dbconnection.php";
                     </li>
                 <?php elseif ($_SESSION['access_id'] === 2): ?>
                     <li>
-                        <a href="#" data-target="./main-content/Dashboard.php">
+                        <a href="#" class="page-nav" data-target="./main-content/Dashboard.php">
                             <i class="fa-solid fa-gauge"></i>
                             Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-target="./main-content/orders.php">
+                        <a href="#" class="page-nav" data-target="./main-content/orders.php">
                             <i class="fa-solid fa-qrcode"></i>
                             Orders
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-target="./main-content/PurchaseHistory.php">
+                        <a href="#" class="page-nav" data-target="./main-content/PurchaseHistory.php">
                             <i class="fa-solid fa-arrow-trend-up"></i>
                             Purchase History
                         </a>

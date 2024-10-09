@@ -25,6 +25,7 @@ $display_purchase_history = mysqli_query($conne, $query);
             <th>Total Amount</th>
             <th>Transaction Date</th>
             <th>QR Code</th>
+            <th>Quantity Dispensed</th>
             <th>Status</th>
         </tr>
         <tr>
@@ -36,8 +37,8 @@ $display_purchase_history = mysqli_query($conne, $query);
                 <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
                 <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
                 <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
+                <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
                 <td><?php echo htmlspecialchars($row['status']); ?></td>
-
             </tr>
             <?php
             }
