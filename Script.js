@@ -20,7 +20,6 @@ $(document).ready(function() {
         }
     }
 
-    // Click event for sidebar links
     $('.Sidebar-links a').on('click', function(e) {
         e.preventDefault();  // Prevent default link behavior
 
@@ -34,7 +33,7 @@ $(document).ready(function() {
         let page = params.get('page') || 'Dashboard'; // Default to 'Dashboard'
 
         let target = './main-content/' + page + '.php';
-        setActivePage(target, false);  // Load the content without updating URL (since it matches already)
+        setActivePage(target, false);  // 
     }
 
     // Handle back/forward browser buttons (popstate event)
@@ -42,7 +41,6 @@ $(document).ready(function() {
         loadContentFromURL();  // Reload content based on current URL
     };
 
-    // Check if a page is saved in localStorage or load from URL (initial page load)
     const savedPage = localStorage.getItem('activePage');
     if (savedPage) {
         setActivePage(savedPage, false); // Load the saved page without updating the URL
@@ -60,7 +58,7 @@ function loadTable() {
         url: './main-content/fetch_products.php',
         type: 'GET',
         data: {
-            _: new Date().getTime() // Cache buster
+            _: new Date().getTime() 
         },
         success: function(data) {
             $('#products-table').html(data); // Update table content

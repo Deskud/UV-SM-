@@ -80,12 +80,10 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
             var productId = $(this).data('product-id');
             var newCellNum = $(this).val();
 
-            // Update the global usedCells array
             if (newCellNum) {
                 usedCells.push(newCellNum);
             }
 
-            // Send AJAX request to update the unit_num in the database
             $.ajax({
                 url: './main-content/update_unit_num.php',
                 type: 'POST',
@@ -97,7 +95,7 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
                 success: function(response) {
                     if (response.success) {
                         // alert('Cell number updated successfully!');
-                        loadTable(); // Reload table to update dropdowns
+                        loadTable(); 
 
                         // Update the dropdowns to remove used numbers
                         $('.cell-num-select').each(function() {
