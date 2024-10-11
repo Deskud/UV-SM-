@@ -51,21 +51,5 @@ $(document).ready(function() {
 });
 
 // Reload table para sa products
-function loadTable() {
-    console.log("Why are you in the console? A bit sussy I ain't gonna lie brudder.");
 
-    $.ajax({
-        url: './main-content/fetch_products.php',
-        type: 'GET',
-        data: {
-            _: new Date().getTime() 
-        },
-        success: function(data) {
-            $('#products-table').html(data); // Update table content
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $('#products-table').html('<tr><td colspan="10">Error loading table data</td></tr>'); // Error message
-        }
-    });
-}
 

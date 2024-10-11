@@ -3,8 +3,8 @@
 <div class="dash-container">
     <!-- Dito lalabas yung mga update dynbamically -->
 </div>
-<script>
 
+<script>
     // ito na yung ajax polling 
     // every 5 seconds nag re-request ang server.
     //  Literal na pseudo real time ang nangyayari. 
@@ -16,11 +16,11 @@
 
             url: './server/dashboard_poll.php',
             type: 'GET',
-            data: 'json',
+            dataType: 'json',
             success: function(response) {
                 $('.dash-container').empty();
 
-                for (cell = 1; cell <= 24; cell++) {
+                for (let cell = 1; cell <= 24; cell++) {
                     let cellData = response[cell] || {
                         product_name: 'No Data',
                         size_name: 'No Data',
@@ -48,7 +48,7 @@
             }
         });
     }
-    setInterval(dashPoll, 5000);
+    setInterval(dashPoll, 3000);
 
     dashPoll();
 </script>

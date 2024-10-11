@@ -38,9 +38,9 @@ $(document).ready(function () {
         //     modalConfirm.css('display', 'none');
         // }
 
-        if ($(event.target).is(modalOrders)) {
-            modalOrders.css('display', 'none');
-        }
+        // if ($(event.target).is(modalOrders)) {
+        //     modalOrders.css('display', 'none');
+        // }
         
 
 

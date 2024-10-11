@@ -122,8 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class=" products-table-container">
 
-
-
     <!-- Button for add product modal window -->
     <div class="open-product-modal">
         <!-- Search bar -->
@@ -140,27 +138,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Table para ma display yung changes sa table. -->
     <table class="products-table" id="products-table">
-
-
-
+        <!-- Dito mag di-display products -->
     </table>
     <!-- Previous page || Next page -->
 </div>
 <!-- Table Display End -->
-
-<!-- 
-    AJAX SCRIPTS
-
-    EVENT DELEGATION WOW! COOL CONCEPT NOICE
-     https://www.youtube.com/watch?v=aZ3JWv0ofuA
-
-             gr8 video        
--->
+<!-- ------------------------------------------------------------------------------------------------------- -->
 <!-- Para sa modal windows jscript -->
 <script type="text/javascript" src="modal.js"></script>
 <script>
     $(document).ready(function() {
-        loadTable();
+    
 
 
         $(document).off('click', '.edit-btn').on('click', '.edit-btn', function() {
@@ -326,4 +314,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         });
     });
+    function loadTable() {
+    console.log("Why are you in the console? A bit sussy I ain't gonna lie brudder.");
+
+    $.ajax({
+        url: './main-content/fetch_products.php',
+        type: 'GET',
+        data: {
+            _: new Date().getTime() 
+        },
+        success: function(data) {
+            $('#products-table').html(data); // Update table content
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $('#products-table').html('<tr><td colspan="10">Error loading table data</td></tr>'); // Error message
+        }
+
+        
+    });
+}
+setInterval(loadTable, 3000);
+loadTable();
+
 </script>

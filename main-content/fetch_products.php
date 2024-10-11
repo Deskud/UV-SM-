@@ -1,13 +1,6 @@
 <?php
 require "../dbconnection.php";
 
-// Fetch products that are not archived
-
-// $query = "SELECT * FROM products WHERE is_archived = 0";
-
-// $query_product_name = "SELECT products.product_id, products.product_name, products.size, products.gender, products.unit_num, products.price, products.product_quantity, products.date_added, products.is_archived, categories.category_id
-// FROM products INNER JOIN categories ON products.product_name = categories.category_id";
-
 // Updated na para ma check properly yung foreign keys which is yung category_id
 // Fetch products that are not archived along with their cell numbers
 $query = "SELECT products.*, categories.category_name, sizes.size_name, products.unit_num
