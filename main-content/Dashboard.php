@@ -11,6 +11,8 @@
     // I guess recommendation sa future ay gumamit ng websockets kaysa dito.
     // Late ko na din kasi nalaman may ganto pala. Big bruh moment.
 
+    dashPoll();
+
     function dashPoll() {
         $.ajax({
 
@@ -49,6 +51,4 @@
         });
     }
     setInterval(dashPoll, 3000);
-
-    dashPoll();
 </script>

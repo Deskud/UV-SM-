@@ -282,7 +282,7 @@ th {
     width: 80px;
     padding: 5px;
     border-radius: 8px;
-    border: 4px solid #011e3e;
+    border: 4px solid #044992;
     background-color: #0454ac;
     color: white;
 }
@@ -462,6 +462,10 @@ th {
 
 }
 
+.notification {
+    display: inline-block;
+  
+}
 
 
 /* Container of tables and styles */

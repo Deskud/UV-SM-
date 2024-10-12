@@ -32,42 +32,46 @@ include '../session_check.php';
 
     <script type="text/javascript" src="modal.js"></script>
     <script>
-        $(document).ready(function() {
-            loadOrders();
-            $('#find-pending-orders').keyup(function() {
-                var orderinput = $(this).val();
-                if (orderinput != '') {
+        // mag lo-load dapat yung mga data sa table ng orders
+        loadOrders();
 
-                    $.ajax({
+        // ito pang search lang ng mga orders
+        $('#find-pending-orders').keyup(function() {
+            var orderinput = $(this).val();
+            if (orderinput != '') {
 
-                        url: './main-content/search_result_Orders.php',
-                        method: 'POST',
-                        data: {
+                $.ajax({
 
-                            orderinput: orderinput
+                    url: './main-content/search_result_Orders.php',
+                    method: 'POST',
+                    data: {
 
-                        },
-                        success: function(data) {
+                        orderinput: orderinput
 
-                            $('#search-order-table').html(data);
-                            $('#search-order-table').css('display', 'block');
-                        }
+                    },
+                    success: function(data) {
 
-                    });
-                } else {
-                    $('#search-order-table').css('display', 'none');
-                }
-            });
+                        $('#search-order-table').html(data);
+                        $('#search-order-table').css('display', 'block');
+                    }
+
+                });
+            } else {
+                $('#search-order-table').css('display', 'none');
+            }
         });
+
         // Open modal function
         function openModal(orderId) {
-            // Disable the button for other users while the modal is open
-            document.querySelector(`#proceed-btn-${orderId}`).disabled = true;
+            // Ensure the button is being selected correctly
+            const proceedButton = document.querySelector(`#proceed-btn-${orderId}`);
+            if (proceedButton) {
+                proceedButton.disabled = true; // Disable the button
+            }
 
-            // Show the modal window
+            // Open the modal window
             document.getElementById('orderModal' + orderId).style.display = "block";
 
-            // Make an AJAX call to update the order status to 'processed'
             $.ajax({
                 url: './main-content/order_status.php',
                 type: 'POST',
@@ -76,6 +80,7 @@ include '../session_check.php';
                 },
                 success: function(response) {
                     document.getElementById(`order-row-${orderId}`).cells[2].innerText = response;
+
                 },
                 error: function() {
                     alert('Error processing the order.');
@@ -97,14 +102,17 @@ include '../session_check.php';
                     document.getElementById(`order-row-${orderId}`).cells[2].innerText = response;
 
                     // Re-enable the "Proceed" button
-                    document.querySelector(`#proceed-btn-${orderId}`).disabled = false;
+                    const proceedButton = document.querySelector(`#proceed-btn-${orderId}`);
+                    if (proceedButton) {
+                        proceedButton.disabled = false; // Re-enable the button
+                    }
                 },
                 error: function() {
                     alert('Error reverting the order status.');
                 }
             });
-
         }
+
 
         // Open update modal
         function openUpdateModal(orderId) {
@@ -115,6 +123,7 @@ include '../session_check.php';
         // Close update modal
         function closeUpdateModal(orderId) {
             document.getElementById('updateModal' + orderId).style.display = "none";
+
         }
 
         // Open QR code modal
@@ -133,22 +142,25 @@ include '../session_check.php';
         }
 
 
-       
+
 
         function updateOrder(orderId) {
             var quantities = {};
+            var productNames = {}; // New object to hold product names
 
-            // Gather all updated quantities from the modal
             $('#updateModal' + orderId + ' .quantity-input').each(function() {
                 var itemId = $(this).data('item-id');
                 var quantity = $(this).val();
+                var productName = $(this).closest('li').find('h6').text().split(' x ')[0]; // Get the product name from the list
 
                 if (quantity) {
                     quantities[itemId] = quantity;
+                    productNames[itemId] = productName; // Store product name
                 }
             });
 
             console.log(quantities);
+            console.log(productNames); // Log product names for debugging
 
             $.ajax({
                 url: './main-content/orders_function.php',
@@ -156,19 +168,20 @@ include '../session_check.php';
                 data: {
                     action: 'update',
                     order_id: orderId,
-                    quantities: quantities
+                    quantities: quantities,
+                    product_names: productNames 
                 },
                 success: function(response) {
                     console.log(response);
                     loadOrderDetails(orderId);
                     $('#updateModal' + orderId).css('display', 'none');
-                
                 },
                 error: function(xhr, status, error) {
                     alert('Error: ' + error);
                 }
             });
         }
+
 
 
 
@@ -222,14 +235,18 @@ include '../session_check.php';
                     url: './main-content/orders_function.php',
                     type: 'POST',
                     data: {
-                        action: 'remove', 
+                        action: 'remove',
                         item_id: itemId,
                         order_id: orderId
                     },
                     success: function(response) {
                         if (response.success) {
-                            itemElement.remove(); 
-                            loadOrderDetails(orderId); 
+                            // Remove the item from the order list
+                            itemElement.remove();
+
+                            $('#item-id-' + itemId).remove(); // Adjusted to match the correct ID format
+
+                            loadOrderDetails(orderId);
                         } else {
                             // Display error message
                             alert('Error: ' + response.error);
@@ -241,11 +258,10 @@ include '../session_check.php';
                 });
             }
 
-            // Event listener for remove buttons
-            $(document).on('click', '.remove-item', function() {
+            $(document).on('click', '.remove-item', function(event) {
                 var itemId = $(this).data('item-id');
                 var orderId = $(this).data('order-id');
-                var itemElement = $('#item-id-' + itemId); // Target the correct item by its ID
+                var itemElement = $('#item-id-' + itemId);
 
                 removeItem(itemId, orderId, itemElement);
             });
@@ -264,7 +280,7 @@ include '../session_check.php';
 
         function loadOrderDetails(orderId) {
             $.ajax({
-                url: './main-content/update_order_modal.php', // Your PHP script to fetch order details
+                url: './main-content/update_order_modal.php',
                 type: 'GET',
                 data: {
                     order_id: orderId
@@ -288,8 +304,6 @@ include '../session_check.php';
             });
         }
 
-
-        // Function to fetch and display orders
         function loadOrders() {
             $.ajax({
                 url: './main-content/fetch_orders.php',
@@ -302,5 +316,39 @@ include '../session_check.php';
                 }
             });
         }
-        
+
+        function pollOrders() {
+            $.ajax({
+                url: './server/orders_poll.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(orders) {
+                    let shouldReload = false;
+
+                    orders.forEach(order => {
+                        const row = document.getElementById(`order-row-${order.order_id}`);
+                        if (row) {
+                            row.cells[2].innerText = order.status; // Update status
+
+                            // If yung status ay completed tatawagin ang loadOrders function 
+                            //para ma reload yung table para sa bagong update
+                            if (order.status === 'completed') {
+                                shouldReload = true;
+                            }
+                        }
+                    });
+
+                    // If any order has a status of "Completed," reload the orders table
+                    if (shouldReload) {
+                        loadOrders();
+                    }
+                },
+                error: function() {
+                    console.error('Error fetching orders.');
+                }
+            });
+        }
+
+        // 3 seconds
+        setInterval(pollOrders, 3000);
     </script>

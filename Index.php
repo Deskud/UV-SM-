@@ -21,8 +21,12 @@ require "dbconnection.php";
 <body id="Main-body">
 
     <div id="Topnavigator-container">
+
         <img style="margin-right: 20px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-5px;">Uniform Stock Monitoring System</h1>
+        <!-- <div class="notification">
+            <i class="fa-solid fa-bell"></i>
+        </div> -->
         <div class="sign-out">
             <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
         </div>

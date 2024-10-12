@@ -114,7 +114,7 @@ if (!empty($orderIds)) {
                     <div id="qr-code-display<?php echo $order['order_id']; ?>">
                         <!-- QR code will be displayed here -->
                     </div>
-                    <button id="print"  class="print" onclick="printQRCode(<?php echo $order['order_id']; ?>)">Print QR Code</button>
+                    <button id="print" class="print" onclick="printQRCode(<?php echo $order['order_id']; ?>)">Print QR Code</button>
                 </div>
             </div>
 
@@ -134,17 +134,17 @@ if (!empty($orderIds)) {
                                 if (isset($groupedItems[$order['order_id']])) {
                                     foreach ($groupedItems[$order['order_id']] as $item) {
                                         echo "
-                                        <li id='.item-id-" . $item['item_id'] . "'>
-                                            <h6 style='text-align: center;'>
-                                                " . $item['product_name'] . " x 
-                                                <input type='number' class='quantity-input' 
-                                                       data-item-id='" . $item['item_id'] . "' 
-                                                       value='" . $item['quantity'] . "' min='0'>
-                                                <button class='remove-item' 
-                                                        data-item-id='" . $item['item_id'] . "' 
-                                                        data-order-id='" . $order['order_id'] . "'> X </button>
-                                            </h6>
-                                        </li>";
+                            <li id='item-id-" . $item['item_id'] . "'>
+                                <h6 style='text-align: center;'>
+                                    " . $item['product_name'] . " x 
+                                    <input type='number' class='quantity-input' 
+                                           data-item-id='" . $item['item_id'] . "' 
+                                           value='" . $item['quantity'] . "' min='0'>
+                                    <button type='button' class='remove-item' 
+                                            data-item-id='" . $item['item_id'] . "' 
+                                            data-order-id='" . $order['order_id'] . "'> X </button>
+                                </h6>
+                            </li>";
                                     }
                                 }
                                 ?>
@@ -156,6 +156,7 @@ if (!empty($orderIds)) {
                     </form>
                 </div>
             </div>
+
         <?php endforeach; ?>
     </tbody>
 </table>
