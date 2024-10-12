@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script type="text/javascript" src="modal.js"></script>
 <script>
     $(document).ready(function() {
-    
+        loadTable();
 
 
         $(document).off('click', '.edit-btn').on('click', '.edit-btn', function() {
@@ -314,26 +314,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         });
     });
+
     function loadTable() {
-    console.log("Why are you in the console? A bit sussy I ain't gonna lie brudder.");
+        console.log("Why are you in the console? A bit sussy I ain't gonna lie brudder.");
 
-    $.ajax({
-        url: './main-content/fetch_products.php',
-        type: 'GET',
-        data: {
-            _: new Date().getTime() 
-        },
-        success: function(data) {
-            $('#products-table').html(data); // Update table content
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $('#products-table').html('<tr><td colspan="10">Error loading table data</td></tr>'); // Error message
-        }
+        $.ajax({
+            url: './main-content/fetch_products.php',
+            type: 'GET',
+            data: {
+                _: new Date().getTime()
+            },
+            success: function(data) {
+                $('#products-table').html(data); // Update table content
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#products-table').html('<tr><td colspan="10">Error loading table data</td></tr>'); // Error message
+            }
 
-        
-    });
-}
-setInterval(loadTable, 3000);
-loadTable();
 
+        });
+    }
 </script>

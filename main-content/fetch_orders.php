@@ -10,7 +10,7 @@ if ($conne->connect_error) {
 // Fetch pending orders
 
 $orders = [];
-$result = $conne->query("SELECT * FROM orders WHERE status = 'pending'");
+$result = $conne->query("SELECT * FROM orders WHERE status = 'pending' OR status = 'processing'");
 if ($result) {
     while ($row = $result->fetch_assoc()) {
         $orders[] = $row;

@@ -133,42 +133,7 @@ include '../session_check.php';
         }
 
 
-        // function updateOrder(orderId) {
-
-        //     var quantities = {};
-
-        //     // Use a selector that targets only the inputs for the specific order
-        //     $('#updateModal' + orderId + ' .quantity-input').each(function() {
-        //         var itemId = $(this).data('item-id'); // Get item ID
-        //         var quantity = $(this).val(); // Get updated quantity
-
-        //         // Only add to quantities if quantity is not empty or 0
-        //         if (quantity) {
-        //             quantities[itemId] = quantity; // Add to quantities object
-        //         }
-        //     });
-        //     console.log(quantities);
-
-        //     $.ajax({
-        //         url: './main-content/orders_function.php', // URL to your PHP script
-        //         type: 'POST',
-        //         data: {
-        //             action: 'update', // Specify action
-        //             order_id: orderId, // Send the order ID
-        //             quantities: quantities // Send the quantities as an object
-        //         },
-        //         success: function(response) {
-        //             loadOrders()
-        //             console.log(response);
-
-
-
-        //         },
-        //         error: function(xhr, status, error) {
-        //             alert('Error: ' + error); // Show error message
-        //         }
-        //     });
-        // }
+       
 
         function updateOrder(orderId) {
             var quantities = {};

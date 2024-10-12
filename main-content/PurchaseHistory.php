@@ -1,5 +1,5 @@
 <?php
-require "../dbconnection.php"; 
+require "../dbconnection.php";
 include '../session_check.php';
 
 $query = "SELECT * FROM transactions";
@@ -30,18 +30,32 @@ $display_purchase_history = mysqli_query($conne, $query);
         </tr>
         <tr>
             <?php while ($row = mysqli_fetch_assoc($display_purchase_history)) { ?>
-            <tr>
-                <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
-                <td><?php echo htmlspecialchars($row['order_id']); ?></td>
-                <td><?php echo htmlspecialchars($row['total_quantity']); ?></td>
-                <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
-                <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
-                <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
-                <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
-                <td><?php echo htmlspecialchars($row['status']); ?></td>
-            </tr>
-            <?php
+        <tr>
+            <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
+            <td><?php echo htmlspecialchars($row['order_id']); ?></td>
+            <td><?php echo htmlspecialchars($row['total_quantity']); ?></td>
+            <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
+            <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
+            <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
+            <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
+            <td><?php echo htmlspecialchars($row['status']); ?></td>
+        </tr>
+    <?php
             }
-            ?>
+    ?>
     </table>
 </div>
+<script>
+    function purchasePoll() {
+        $.ajax({
+            url: '',
+            type: 'GET',
+            dataType: 'json',
+
+            success: function(response) {
+                
+            }
+
+        });
+    }
+</script>
