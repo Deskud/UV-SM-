@@ -34,6 +34,8 @@ if (!empty($orderIds)) {
 }
 ?>
 
+
+
 <?php foreach ($orders as $order): ?>
 
     <div id="orderModal<?php echo $order['order_id']; ?>" class="modal">
@@ -72,10 +74,10 @@ if (!empty($orderIds)) {
         <div class="modal-receipt-content">
             <?php
             echo "<h6>------------------------------------------------------------</h6>
-                        <h6>Philippine Christian University - Dasmariñas</h6>
-                <h6>------------------------------------------------------------</h6>
-                <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
-               <h6>------------------------------------------------------------</h6>";
+                <h6>Philippine Christian University - Dasmariñas</h6>
+        <h6>------------------------------------------------------------</h6>
+        <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
+       <h6>------------------------------------------------------------</h6>";
             echo "<h6>Order ID:{$order['order_id']}</h6>";
             echo "<h6>Student Number:<span id='qr-student-id-{$order['order_id']}'></span></h6>";
             if (isset($groupedItems[$order['order_id']])) {
@@ -108,17 +110,17 @@ if (!empty($orderIds)) {
                         if (isset($groupedItems[$order['order_id']])) {
                             foreach ($groupedItems[$order['order_id']] as $item) {
                                 echo "
-                        <li id='item-id-" . $item['item_id'] . "'>
-                            <h6 style='text-align: center;'>
-                                " . $item['product_name'] . " x 
-                                <input type='number' class='quantity-input' 
-                                       data-item-id='" . $item['item_id'] . "' 
-                                       value='" . $item['quantity'] . "' min='0'>
-                                <button type='button' class='remove-item' 
-                                        data-item-id='" . $item['item_id'] . "' 
-                                        data-order-id='" . $order['order_id'] . "'> X </button>
-                            </h6>
-                        </li>";
+                <li id='item-id-" . $item['item_id'] . "'>
+                    <h6 style='text-align: center;'>
+                        " . $item['product_name'] . " x 
+                        <input type='number' class='quantity-input' 
+                               data-item-id='" . $item['item_id'] . "' 
+                               value='" . $item['quantity'] . "' min='0'>
+                        <button type='button' class='remove-item' 
+                                data-item-id='" . $item['item_id'] . "' 
+                                data-order-id='" . $order['order_id'] . "'> X </button>
+                    </h6>
+                </li>";
                             }
                         }
                         ?>
@@ -131,6 +133,8 @@ if (!empty($orderIds)) {
         </div>
     </div>
 <?php endforeach; ?>
+
+
 
 <!-- FUCKING TABLES AND STUFF -->
 <h3 class="title-form">Orders</h3>
@@ -411,7 +415,7 @@ if (!empty($orderIds)) {
         function printQRCode(orderId) {
             var qrCodeImg = document.getElementById('qr-code-display' + orderId).innerHTML;
             print(qrCodeImg);
-            $('#qrCodeModal' + orderId).css('display', 'none');
+            // $('#qrCodeModal' + orderId).css('display', 'none');
 
         }
 
@@ -470,16 +474,16 @@ if (!empty($orderIds)) {
 
                             // If yung status ay completed tatawagin ang loadOrders function 
                             //para ma reload yung table para sa bagong update
-                            if (order.status === 'completed') {
-                                shouldReload = true;
-                            }
+                            // if (order.status === 'completed') {
+                            //     shouldReload = true;
+                            // }
                         }
                     });
 
                     // If any order has a status of "Completed," reload the orders table
-                    if (shouldReload) {
-                        loadOrders();
-                    }
+                    // if (shouldReload) {
+                    //     loadOrders();
+                    // }
                 },
                 error: function() {
                     console.error('Error fetching orders.');
@@ -488,7 +492,8 @@ if (!empty($orderIds)) {
         }
 
         setInterval(pollOrders, 3000);
-        setInterval(loadOrders, 3000);
+        
+        setInterval(loadOrders, 10000);
 
 
 

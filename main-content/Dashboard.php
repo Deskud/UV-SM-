@@ -1,9 +1,9 @@
 <h3 class="title-form">Dashboard</h3>
 <hr>
 
-<!-- <div id="products-chart">
-
-</div> -->
+<!-- Chart -->
+<div id="products-chart">
+</div>
 
 
 
@@ -20,7 +20,7 @@
     // Late ko na din kasi nalaman may ganto pala. Big bruh moment.
 
     dashPoll();
-    // productChart();
+    productChart();
 
     function dashPoll() {
         $.ajax({
@@ -62,48 +62,48 @@
     }
     setInterval(dashPoll, 3000);
 
-    // function productChart() {
+    function productChart() {
 
-    //     $.ajax({
-    //         url: './server/products_chart.php',
-    //         type: 'GET',
-    //         dataType: 'json',
-    //         success: function(response) {
-    //             var dataPoints = [];
+        $.ajax({
+            url: './server/products_chart.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var dataPoints = [];
 
-    //             response.forEach(function(product) {
-    //                 dataPoints.push({
-    //                     label: product.gender,
-    //                     y: product.price
-    //                 });
-    //             });
+                response.forEach(function(product) {
+                    dataPoints.push({
+                        label: product.gender,
+                        y: product.product_quantity
+                    });
+                });
 
-    //             var options = {
-    //                 animationEnabled: true,
-    //                 title: {
-    //                     text: "Product Stocks"
-    //                 },
-    //                 axisY: {
-    //                     title: "Stock Quantity"
-    //                 },
-    //                 axisX: {
-    //                     title: "Products"
-    //                 },
-    //                 data: [{
-    //                     type: "column",
-    //                     yValueFormatString: "#,##0.0#",
-    //                     dataPoints: dataPoints
-    //                 }]
+                var options = {
+                    animationEnabled: true,
+                    title: {
+                        text: "Product Stocks"
+                    },
+                    axisY: {
+                        title: "Stock Quantity"
+                    },
+                    axisX: {
+                        title: "Products"
+                    },
+                    data: [{
+                        type: "column",
+                        yValueFormatString: "#,##0.0#",
+                        dataPoints: dataPoints
+                    }]
 
 
-    //             };
+                };
 
-    //             $("#products-chart").CanvasJSChart(options);
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.error('Error fetching product data: ' + error);
-    //         }
-    //     });
-    // }
-    // setInterval(productChart, 10000);
+                $("#products-chart").CanvasJSChart(options);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching product data: ' + error);
+            }
+        });
+    }
+    setInterval(productChart, 10000);
 </script>

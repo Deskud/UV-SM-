@@ -32,6 +32,10 @@ if (!empty($orderIds)) {
         $groupedItems[$item['order_id']][] = $item;
     }
 }
+else{
+echo"No orders.";
+
+}
 ?>
 
 <table class="order-table">
@@ -57,11 +61,10 @@ if (!empty($orderIds)) {
                     </div>
                 </td>
             </tr>
-
         <?php endforeach; ?>
+
     </tbody>
 </table>
-
 
 
 
