@@ -29,7 +29,7 @@ if ($qrcode > 0) {
                                      FROM items i 
                                      JOIN products p ON i.product_id = p.product_id 
                                      WHERE i.order_id = :order_id
-                                     AND i.is_fully_fulfilled = 0");
+                                     AND i.status = 'unclaimed' OR i.status = 'partially claimed'");
         $stmtItems->execute(['order_id' => $transaction['order_id']]);
         $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
 

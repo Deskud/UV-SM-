@@ -41,7 +41,7 @@ if (isset($_GET['order_id']) && isset($_GET['product_id']) && isset($_GET['quant
 
     // Prepare and bind statement
     $stmt = $conne->prepare($sql);
-    $stmt->bind_param("iiiiiiiiii", $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $product_id, $product_id, $order_id, $order_id);
+    $stmt->bind_param("iiiiiiiiiiii", $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $product_id, $product_id, $order_id, $order_id);
 
     // Execute the statement
     if ($stmt->execute()) {
