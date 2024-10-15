@@ -41,7 +41,9 @@ byte rowPins[ROWS] = { 22, 23, 24, 25 };
 byte colPins[COLS] = { 26, 27, 28, 29 };
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
-// LiquidCrystal_I2C tft(0x27, 20, 4);
+unsigned long lastActivityTime = 0;           // To track the last time of user interaction
+const unsigned long timeoutDuration = 60000;  // 10 seconds timeout
+
 typedef String (*GetNameFunc)(void* item);
 // to hold category data
 struct Category {
@@ -144,10 +146,12 @@ void loop() {
 
     char key = keypad.getKey();
     while (key != 'A' && key != 'B') {
+      systemTimeout();
       key = keypad.getKey();
       delay(100);
     }
     if (key == 'B') break;  // Exit loop if user does not want to add more
+    lastActivityTime = millis();
   }
 
   tft.fillScreen(BLACK);
@@ -163,6 +167,15 @@ void loop() {
   tft.fillScreen(BLACK);
   displayText(30, 30, "Thank you!", 3, YELLOW);
   delay(2000);
+}
+
+void systemTimeout() {
+  if (millis() - lastActivityTime >= timeoutDuration) {
+    tft.fillScreen(BLACK);
+    displayText(30, 30, "Session timed out.\nReturning to start...", 2, RED);
+    delay(2000);
+    asm volatile("  jmp 0");
+  }
 }
 
 void keyToStart(char expectedKey) {
@@ -248,12 +261,12 @@ void fetchData(String endpoint, int selectedId) {
       connected = true;  // Set the flag if connected
       Serial.println("Connected to server");
 
-      if (endpoint == "/vm-unif/arduino/arduino-scripts/get_products.php") {
+      if (endpoint == "/uvm/arduino/arduino-scripts/get_products.php") {
         endpoint += "?category_id=" + String(selectedId);
-      } else if (endpoint == "/vm-unif/arduino/arduino-scripts/get_sizes.php") {
+      } else if (endpoint == "/uvm/arduino/arduino-scripts/get_sizes.php") {
         String encodedProductName = urlencode(products[selectedId].product_name);
         endpoint += "?product_name=" + encodedProductName;
-      } else if (endpoint == "/vm-unif/arduino/arduino-scripts/get_quantities.php") {
+      } else if (endpoint == "/uvm/arduino/arduino-scripts/get_quantities.php") {
         endpoint += "?product_id=" + String(selectedId);
       }
 
@@ -336,7 +349,7 @@ void parseJsonData(String jsonResponse, String endpoint) {
     return;
   }
 
-  if (endpoint.startsWith("/vm-unif/arduino/arduino-scripts/get_categories.php")) {
+  if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_categories.php")) {
     categoryCount = 0;
     JsonArray categoriesArray = doc.as<JsonArray>();
 
@@ -345,7 +358,7 @@ void parseJsonData(String jsonResponse, String endpoint) {
       categories[categoryCount].category_name = String(category["category_name"].as<const char*>());
       categoryCount++;
     }
-  } else if (endpoint.startsWith("/vm-unif/arduino/arduino-scripts/get_products.php")) {
+  } else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_products.php")) {
     productCount = 0;
     JsonArray productsArray = doc.as<JsonArray>();
 
@@ -353,7 +366,7 @@ void parseJsonData(String jsonResponse, String endpoint) {
       products[productCount].product_name = String(product["product_name"].as<const char*>());
       productCount++;
     }
-  } else if (endpoint.startsWith("/vm-unif/arduino/arduino-scripts/get_sizes.php")) {
+  } else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_sizes.php")) {
     sizeCount = 0;
     JsonArray sizesArray = doc.as<JsonArray>();
 
@@ -363,30 +376,30 @@ void parseJsonData(String jsonResponse, String endpoint) {
       sizes[sizeCount].size_name = String(size["size_name"].as<const char*>());
       sizeCount++;
     }
-  } else if (endpoint.startsWith("/vm-unif/arduino/arduino-scripts/get_quantities.php")) {
+  } else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_quantities.php")) {
     product_quantity = doc[0]["product_quantity"];
   }
 }
 
 int categorySelection() {
-  fetchData("/vm-unif/arduino/arduino-scripts/get_categories.php", 0);
+  fetchData("/uvm/arduino/arduino-scripts/get_categories.php", 0);
   return handleSelection("Categories", categories, categoryCount, sizeof(Category), getCategoryName, 1);
 }
 
 int productSelection(int categoryId) {
-  fetchData("/vm-unif/arduino/arduino-scripts/get_products.php", categoryId);
+  fetchData("/uvm/arduino/arduino-scripts/get_products.php", categoryId);
   return handleSelection("Products", products, productCount, sizeof(Product), getProductName, 0);
 }
 
 int sizeSelection(int productIndex) {
-  fetchData("/vm-unif/arduino/arduino-scripts/get_sizes.php", productIndex);
+  fetchData("/uvm/arduino/arduino-scripts/get_sizes.php", productIndex);
   return handleSelection("Sizes", sizes, sizeCount, sizeof(Size), getSizeName, 0);
 }
 
 int quantitySelection(int productId) {
-  fetchData("/vm-unif/arduino/arduino-scripts/get_quantities.php", productId);  // Fetch available quantity
-  int availableQuantity = product_quantity;                 // Get available quantity
-  return handleQuantitySelection(availableQuantity);        // Pass available quantity to handle function
+  fetchData("/uvm/arduino/arduino-scripts/get_quantities.php", productId);  // Fetch available quantity
+  int availableQuantity = product_quantity;                                 // Get available quantity
+  return handleQuantitySelection(availableQuantity);                        // Pass available quantity to handle function
 }
 
 // Function to display a list of items
@@ -428,8 +441,9 @@ int handleSelection(const char* title, void* items, int itemCount, int itemSize,
   int selectedIndex = -1;
   tft.fillScreen(BLACK);
   displayList(title, items, itemCount, itemSize, getName);
-
+  lastActivityTime = millis();
   while (true) {
+    systemTimeout();
     key = keypad.getKey();
 
     // Check if the input is valid (between '1' and the number of items)
@@ -444,10 +458,25 @@ int handleSelection(const char* title, void* items, int itemCount, int itemSize,
         delay(1500);
         return selectedIndex + displayOffset;  // Return the selected index with offset (e.g., category_id)
       }
+    } else if (key == 'D') {
+      tft.fillScreen(BLACK);
+      displayText(30, 30, "Cancel order?", 2, WHITE);
+      displayText(30, 390, "'C' = Yes | 'D' = No", 2, WHITE);
+      while (true) {
+        key = keypad.getKey();
+        if (key == 'C') {
+          asm volatile("  jmp 0");
+        } else if (key == 'D') {
+          tft.fillScreen(BLACK);
+          displayList(title, items, itemCount, itemSize, getName);
+          break;
+        }
+        delay(100);
+      }
     }
 
     // Prompt the user to select and confirm with '#'
-    displayText(30, 420, "Press '#' to enter", 2, WHITE);
+    displayText(30, 420, "# - enter | D - Cancel", 2, WHITE);
     delay(100);
   }
 }
@@ -511,7 +540,7 @@ void sendOrderDetails(int orderCount) {
     Serial.println(jsonOrderDetails);
 
     // Send the HTTP POST request
-    client.println("POST /vm-unif/main-content/insert_order.php HTTP/1.1");
+    client.println("POST /uvm/arduino/arduino-scripts/insert_order.php HTTP/1.1");
     client.println("Host: 192.168.1.22");
     client.println("Connection: close");
     client.println("Content-Type: application/json");
@@ -553,7 +582,7 @@ void sendOrderDetails(int orderCount) {
 
       if (doc["status"] == "success") {
         Serial.println("Order successfully placed!");
-        int orderId = doc[0]["order_id"];
+        int orderId = doc["order_id"];
         printReceipt(orderId);
       } else {
         Serial.print("Error placing order: ");
@@ -570,7 +599,7 @@ void sendOrderDetails(int orderCount) {
 void printReceipt(int orderId) {
   // Initialize thermal printer and print the receipt
   Serial.println("Printing receipt...");
-  
+
 
   // Print order details
   Serial.print("Order ID: ");
