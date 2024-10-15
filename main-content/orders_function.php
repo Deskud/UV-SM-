@@ -1,3 +1,4 @@
+
 <?php
 require "../dbconnection.php";
 include '../phpqrcode/qrlib.php';
@@ -287,7 +288,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $conne->commit();
                     echo json_encode(['success' => true]);
                 } catch (Exception $e) {
-                    // Rollback on failure
+                  
                     $conne->rollback();
                     echo json_encode(['error' => 'Failed to remove item: ' . $e->getMessage()]);
                 }

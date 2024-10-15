@@ -1,7 +1,15 @@
 <h3 class="title-form">Dashboard</h3>
 <hr>
+
+<!-- <div id="products-chart">
+
+</div> -->
+
+
+
+<!-- <hr> -->
 <div class="dash-container">
-    <!-- Dito lalabas yung mga update dynbamically -->
+    <!-- Dito lalabas yung mga update dynamically -->
 </div>
 
 <script>
@@ -12,6 +20,7 @@
     // Late ko na din kasi nalaman may ganto pala. Big bruh moment.
 
     dashPoll();
+    // productChart();
 
     function dashPoll() {
         $.ajax({
@@ -22,7 +31,8 @@
             success: function(response) {
                 $('.dash-container').empty();
 
-                for (let cell = 1; cell <= 24; cell++) {
+                //How many cell to display
+                for (let cell = 1; cell <= 12; cell++) {
                     let cellData = response[cell] || {
                         product_name: 'No Data',
                         size_name: 'No Data',
@@ -51,4 +61,49 @@
         });
     }
     setInterval(dashPoll, 3000);
+
+    // function productChart() {
+
+    //     $.ajax({
+    //         url: './server/products_chart.php',
+    //         type: 'GET',
+    //         dataType: 'json',
+    //         success: function(response) {
+    //             var dataPoints = [];
+
+    //             response.forEach(function(product) {
+    //                 dataPoints.push({
+    //                     label: product.gender,
+    //                     y: product.price
+    //                 });
+    //             });
+
+    //             var options = {
+    //                 animationEnabled: true,
+    //                 title: {
+    //                     text: "Product Stocks"
+    //                 },
+    //                 axisY: {
+    //                     title: "Stock Quantity"
+    //                 },
+    //                 axisX: {
+    //                     title: "Products"
+    //                 },
+    //                 data: [{
+    //                     type: "column",
+    //                     yValueFormatString: "#,##0.0#",
+    //                     dataPoints: dataPoints
+    //                 }]
+
+
+    //             };
+
+    //             $("#products-chart").CanvasJSChart(options);
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.error('Error fetching product data: ' + error);
+    //         }
+    //     });
+    // }
+    // setInterval(productChart, 10000);
 </script>

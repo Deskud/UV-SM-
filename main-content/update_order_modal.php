@@ -6,10 +6,11 @@ $order_id = $_GET['order_id'];
 $response = array("success" => false, "items" => array());
 
 if (isset($order_id)) {
-    // Query to get the updated items for the order
-    $query = "SELECT item_id, quantity FROM items WHERE order_id = '$order_id'";
+    $query = "SELECT product_name, quantity 
+    FROM items i
+    JOIN products p ON i.product_id = p.product_id WHERE order_id = '$order_id'";
     $result = mysqli_query($conne, $query);
-    
+
     while ($row = mysqli_fetch_assoc($result)) {
         $response['items'][] = $row;
     }
@@ -20,4 +21,3 @@ if (isset($order_id)) {
 }
 
 echo json_encode($response);
-?>

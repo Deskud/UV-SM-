@@ -2,7 +2,137 @@
 require "../dbconnection.php"; // Include database connection
 include '../session_check.php';
 
+// Check connection
+if ($conne->connect_error) {
+    die("Connection failed: " . $conne->connect_error);
+}
+
+// Fetch pending orders
+
+$orders = [];
+$result = $conne->query("SELECT * FROM orders WHERE status = 'pending' OR status = 'processing'");
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $orders[] = $row;
+    }
+}
+// Fetch all items for pending orders
+$orderIds = array_column($orders, 'order_id');
+$groupedItems = [];
+if (!empty($orderIds)) {
+    $itemsQuery = "
+    SELECT i.*, p.product_name 
+    FROM items i
+    JOIN products p ON i.product_id = p.product_id
+    WHERE i.order_id IN (" . implode(',', $orderIds) . ")";
+    $itemsResult = $conne->query($itemsQuery);
+
+    // Group items by order_id
+    while ($item = $itemsResult->fetch_assoc()) {
+        $groupedItems[$item['order_id']][] = $item;
+    }
+}
 ?>
+
+<?php foreach ($orders as $order): ?>
+
+    <div id="orderModal<?php echo $order['order_id']; ?>" class="modal">
+        <div class="modal-order-content">
+            <span class="close-modal" onclick="closeModal(<?php echo $order['order_id']; ?>)">
+                <i id="close-icon" class="fa-solid fa-xmark"></i>
+            </span>
+            <div class="order-details">
+                <h2 style="color: black;">Order Details ID: <?php echo $order['order_id']; ?></h2>
+                <h3>Order Date: <?php echo $order['order_date']; ?></h3>
+                <h3>Student Number: <input type="text" name="student-id"></h3>
+                <h3>Items:</h3>
+                <ul>
+                    <?php
+                    if (isset($groupedItems[$order['order_id']])) {
+                        foreach ($groupedItems[$order['order_id']] as $item) {
+                            echo "<h6 class='order-items'>{$item['product_name']} - Quantity:{$item['quantity']} </h6>";
+                        }
+                    } else {
+                        echo "<h4>No items found for this order.</h4>";
+                    }
+                    ?>
+                </ul>
+            </div>
+            <div class="order-modal-btn">
+                <form id="order-form-<?php echo $order['order_id']; ?>" method="POST">
+                    <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+                    <button type="button" class="submit-update-order" onclick="openUpdateModal(<?php echo $order['order_id']; ?>)">Update</button>
+                    <button type="button" class="submit-finish-order" onclick="finishOrder(<?php echo $order['order_id']; ?>)">Finish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- QR Code Modal -->
+    <div id="qrCodeModal<?php echo $order['order_id']; ?>" class="modal">
+        <div class="modal-receipt-content">
+            <?php
+            echo "<h6>------------------------------------------------------------</h6>
+                        <h6>Philippine Christian University - Dasmariñas</h6>
+                <h6>------------------------------------------------------------</h6>
+                <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
+               <h6>------------------------------------------------------------</h6>";
+            echo "<h6>Order ID:{$order['order_id']}</h6>";
+            echo "<h6>Student Number:<span id='qr-student-id-{$order['order_id']}'></span></h6>";
+            if (isset($groupedItems[$order['order_id']])) {
+                foreach ($groupedItems[$order['order_id']] as $item) {
+                    echo "<h6>Item: {$item['product_name']}......x {$item['quantity']}</h6>";
+                }
+            }
+            ?>
+            <h6>------------------------------------------------------------</h6>
+            <div id="qr-code-display<?php echo $order['order_id']; ?>">
+                <!-- QR code will be displayed here -->
+            </div>
+            <button id="print" class="print" onclick="printQRCode(<?php echo $order['order_id']; ?>)">Print QR Code</button>
+        </div>
+    </div>
+
+    <!--New  Update Modal -->
+    <div id="updateModal<?php echo $order['order_id']; ?>" class="modal">
+        <div class="modal-order-content">
+            <span class="close-modal" onclick="closeUpdateModal(<?php echo $order['order_id']; ?>)">
+                <i id="return-icon" class="fa-solid fa-arrow-left"></i>
+            </span>
+            <h3 class="title-form">Update Order</h3>
+            <h5 style="text-align: center;">Update Quantity for Order ID: <?php echo $order['order_id']; ?></h5>
+
+            <form class="update-items" id="update-quantity-form-<?php echo $order['order_id']; ?>" method="POST">
+                <div class="update-details">
+                    <ul>
+                        <?php
+                        if (isset($groupedItems[$order['order_id']])) {
+                            foreach ($groupedItems[$order['order_id']] as $item) {
+                                echo "
+                        <li id='item-id-" . $item['item_id'] . "'>
+                            <h6 style='text-align: center;'>
+                                " . $item['product_name'] . " x 
+                                <input type='number' class='quantity-input' 
+                                       data-item-id='" . $item['item_id'] . "' 
+                                       value='" . $item['quantity'] . "' min='0'>
+                                <button type='button' class='remove-item' 
+                                        data-item-id='" . $item['item_id'] . "' 
+                                        data-order-id='" . $order['order_id'] . "'> X </button>
+                            </h6>
+                        </li>";
+                            }
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <div class="order-upd-container">
+                    <button type="button" class="update-order" onclick="updateOrder(<?php echo $order['order_id']; ?>)">Update Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<!-- FUCKING TABLES AND STUFF -->
 <h3 class="title-form">Orders</h3>
 <hr>
 <div>
@@ -15,7 +145,10 @@ include '../session_check.php';
     <table id="search-order-table" class="search-result-table"></table>
     <!-- Dito mag di-display yung table sa sinearch na order. -->
 
-    <div id="order-table-container"></div>
+    <div id="order-table-container">
+
+    </div>
+
     <!-- Dito mag di-display order table -->
 
 
@@ -29,11 +162,12 @@ include '../session_check.php';
         </div>
     </div>
 
-
+    <!-- SCRIPT START -->
     <script type="text/javascript" src="modal.js"></script>
     <script>
         // mag lo-load dapat yung mga data sa table ng orders
         loadOrders();
+
 
         // ito pang search lang ng mga orders
         $('#find-pending-orders').keyup(function() {
@@ -61,12 +195,12 @@ include '../session_check.php';
             }
         });
 
-        // Open modal function
+
+        // Open Modal Function
         function openModal(orderId) {
-            // Ensure the button is being selected correctly
             const proceedButton = document.querySelector(`#proceed-btn-${orderId}`);
             if (proceedButton) {
-                proceedButton.disabled = true; // Disable the button
+                proceedButton.disabled = true;
             }
 
             // Open the modal window
@@ -87,6 +221,8 @@ include '../session_check.php';
                 }
             });
         }
+
+
 
         // Close modal function
         function closeModal(orderId) {
@@ -151,16 +287,16 @@ include '../session_check.php';
             $('#updateModal' + orderId + ' .quantity-input').each(function() {
                 var itemId = $(this).data('item-id');
                 var quantity = $(this).val();
-                var productName = $(this).closest('li').find('h6').text().split(' x ')[0]; // Get the product name from the list
+                var productName = $(this).closest('li').find('h6').text().split(' x ')[0];
 
                 if (quantity) {
                     quantities[itemId] = quantity;
-                    productNames[itemId] = productName; // Store product name
+                    productNames[itemId] = productName;
                 }
             });
 
             console.log(quantities);
-            console.log(productNames); // Log product names for debugging
+            console.log(productNames);
 
             $.ajax({
                 url: './main-content/orders_function.php',
@@ -169,7 +305,7 @@ include '../session_check.php';
                     action: 'update',
                     order_id: orderId,
                     quantities: quantities,
-                    product_names: productNames 
+                    product_names: productNames
                 },
                 success: function(response) {
                     console.log(response);
@@ -212,6 +348,8 @@ include '../session_check.php';
                             var qrDisplay = document.getElementById('qr-code-display' + orderId);
                             if (qrDisplay) {
                                 qrDisplay.innerHTML = "<img src='./main-content/" + response.qrcode + "' alt='QR Code' />";
+
+
                             } else {
                                 console.error("QR code display element not found for orderId:", orderId);
                             }
@@ -273,7 +411,7 @@ include '../session_check.php';
         function printQRCode(orderId) {
             var qrCodeImg = document.getElementById('qr-code-display' + orderId).innerHTML;
             print(qrCodeImg);
-            loadOrders();
+            $('#qrCodeModal' + orderId).css('display', 'none');
 
         }
 
@@ -290,7 +428,7 @@ include '../session_check.php';
                     if (response.success) {
                         let itemList = '';
                         $.each(response.items, function(index, item) {
-                            itemList += `<h6>Item ID: ${item.item_id} - Quantity: ${item.quantity}</h6>`;
+                            itemList += `<h6>${item.product_name} - Quantity: ${item.quantity}</h6>`;
                         });
                         // Insert the new item list into the modal
                         $('#orderModal' + orderId + ' ul').html(itemList);
@@ -349,6 +487,25 @@ include '../session_check.php';
             });
         }
 
-        // 3 seconds
         setInterval(pollOrders, 3000);
+        setInterval(loadOrders, 3000);
+
+
+
+
+        // Polling function to load orders and update the table
+        // function pollOrders() {
+        //     $.ajax({
+        //         url: './server/orders_poll.php', // The PHP script to fetch orders
+        //         method: 'GET',
+        //         success: function(data) {
+        //             $('#order-table-container tbody').html(data); // Replace the table body with new rows
+        //         },
+        //         error: function() {
+        //             alert('Failed to load orders.');
+        //         }
+        //     });
+
+        //     setTimeout(pollOrders, 5000);
+        // }
     </script>

@@ -9,7 +9,10 @@ require "dbconnection.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script src="./jquery/jquery-3.7.1.min.js"></script>
+    <script src="./jquery/jquery.canvasjs.min.js"></script>
+
     <link rel="stylesheet" href="Styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,21 +27,26 @@ require "dbconnection.php";
 
         <img style="margin-right: 20px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-5px;">Uniform Stock Monitoring System</h1>
-        <!-- <div class="notification">
-            <i class="fa-solid fa-bell"></i>
-        </div> -->
+        <div class="notification">
+
+        </div>
         <div class="sign-out">
+            <i class="fa-solid fa-bell"></i>
+
             <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
+
         </div>
     </div>
 
     </div>
     <div id="Sidebar-container">
+
         <ul class="Sidebar-links">
             <ul>
                 <div class="user-name">
                     <h3><?php echo $_SESSION['username']; ?></h3>
                 </div>
+
                 <hr>
                 <?php if ($_SESSION['access_id'] === 1): ?>
                     <li>
@@ -109,6 +117,7 @@ require "dbconnection.php";
     </div>
 
     <script src="Script.js"></script>
+
     <script src="https://kit.fontawesome.com/883b8ee9d9.js" crossorigin="anonymous"></script>
 </body>
 
