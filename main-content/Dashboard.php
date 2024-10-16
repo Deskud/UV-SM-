@@ -12,10 +12,10 @@
     <!-- Dito lalabas yung mga update dynamically -->
 </div>
 
+
+
 <!-- Para sa charts -->
 <script src="./jquery/jquery.canvasjs.min.js"></script>
-
-
 <script>
     // ito na yung ajax polling 
     // every 5 seconds nag re-request ang server.

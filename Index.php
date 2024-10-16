@@ -10,9 +10,21 @@ require "dbconnection.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
     <script src="./jquery/jquery-3.7.1.min.js"></script>
 
-    <link rel="stylesheet" href="Styles.css">
+
+    <link rel="stylesheet" href="./asset/styles.css">
+
+    <!-- Font awesome -->
+    <link href="./asset/css/fontawesome.css" rel="stylesheet" />
+    <link href="./asset/css/brands.css" rel="stylesheet" />
+    <link href="./asset/css/solid.css" rel="stylesheet" />
+
+
+
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@706&family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
@@ -26,12 +38,7 @@ require "dbconnection.php";
 
         <img style="margin-right: 20px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-5px;">Uniform Stock Monitoring System</h1>
-        <div class="notification">
-
-        </div>
         <div class="sign-out">
-            <i class="fa-solid fa-bell"></i>
-
             <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
 
         </div>
@@ -39,13 +46,11 @@ require "dbconnection.php";
 
     </div>
     <div id="Sidebar-container">
-
         <ul class="Sidebar-links">
             <ul>
                 <div class="user-name">
                     <h3><?php echo $_SESSION['username']; ?></h3>
                 </div>
-
                 <hr>
                 <?php if ($_SESSION['access_id'] === 1): ?>
                     <li>
@@ -108,6 +113,14 @@ require "dbconnection.php";
             </ul>
         </ul>
         <hr>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fa-solid fa-bell"></i>
+            </button>
+            <div class="dropdown-content">
+                <!-- Dito dapat lalabas mga notif -->
+                <a href="#">EPIC</a>
+            </div>
+        </div>
     </div>
     <div id="Main-container">
         <?php include "./main-content/Dashboard.php"; ?>
@@ -116,7 +129,6 @@ require "dbconnection.php";
     </div>
 
     <script src="Script.js"></script>
-    <script src="https://kit.fontawesome.com/883b8ee9d9.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

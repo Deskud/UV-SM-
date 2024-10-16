@@ -31,10 +31,8 @@ if (!empty($orderIds)) {
     while ($item = $itemsResult->fetch_assoc()) {
         $groupedItems[$item['order_id']][] = $item;
     }
-}
-else{
-echo"No orders.";
-
+} else {
+    echo "No orders.";
 }
 ?>
 
@@ -65,8 +63,6 @@ echo"No orders.";
 
     </tbody>
 </table>
-
-
 
 
 <!-- MODALS END -->

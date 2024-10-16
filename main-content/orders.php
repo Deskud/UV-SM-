@@ -34,8 +34,6 @@ if (!empty($orderIds)) {
 }
 ?>
 
-
-
 <?php foreach ($orders as $order): ?>
 
     <div id="orderModal<?php echo $order['order_id']; ?>" class="modal">
@@ -46,7 +44,7 @@ if (!empty($orderIds)) {
             <div class="order-details">
                 <h2 style="color: black;">Order Details ID: <?php echo $order['order_id']; ?></h2>
                 <h3>Order Date: <?php echo $order['order_date']; ?></h3>
-                <h3>Student Number: <input type="text" name="student-id"></h3>
+                <h3>Student Number: <input type="text" name="student-id" required></h3>
                 <h3>Items:</h3>
                 <ul>
                     <?php
@@ -170,7 +168,10 @@ if (!empty($orderIds)) {
     <script type="text/javascript" src="modal.js"></script>
     <script>
         // mag lo-load dapat yung mga data sa table ng orders
-        loadOrders();
+        $(document).ready(function(){
+            loadOrders();
+        })
+    
 
 
         // ito pang search lang ng mga orders
@@ -458,59 +459,5 @@ if (!empty($orderIds)) {
                 }
             });
         }
-
-        function pollOrders() {
-            $.ajax({
-                url: './server/orders_poll.php',
-                type: 'GET',
-                dataType: 'json',
-                success: function(orders) {
-                    let shouldReload = false;
-
-                    orders.forEach(order => {
-                        const row = document.getElementById(`order-row-${order.order_id}`);
-                        if (row) {
-                            row.cells[2].innerText = order.status; // Update status
-
-                            // If yung status ay completed tatawagin ang loadOrders function 
-                            //para ma reload yung table para sa bagong update
-                            // if (order.status === 'completed') {
-                            //     shouldReload = true;
-                            // }
-                        }
-                    });
-
-                    // If any order has a status of "Completed," reload the orders table
-                    // if (shouldReload) {
-                    //     loadOrders();
-                    // }
-                },
-                error: function() {
-                    console.error('Error fetching orders.');
-                }
-            });
-        }
-
-        setInterval(pollOrders, 3000);
-        
-        setInterval(loadOrders, 10000);
-
-
-
-
-        // Polling function to load orders and update the table
-        // function pollOrders() {
-        //     $.ajax({
-        //         url: './server/orders_poll.php', // The PHP script to fetch orders
-        //         method: 'GET',
-        //         success: function(data) {
-        //             $('#order-table-container tbody').html(data); // Replace the table body with new rows
-        //         },
-        //         error: function() {
-        //             alert('Failed to load orders.');
-        //         }
-        //     });
-
-        //     setTimeout(pollOrders, 5000);
-        // }
+        setInterval(loadOrders, 5000);
     </script>
