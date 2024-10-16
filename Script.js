@@ -20,7 +20,6 @@ $(document).ready(function() {
         }
     }
 
-    // Click event for sidebar links
     $('.Sidebar-links a').on('click', function(e) {
         e.preventDefault();  // Prevent default link behavior
 
@@ -34,7 +33,7 @@ $(document).ready(function() {
         let page = params.get('page') || 'Dashboard'; // Default to 'Dashboard'
 
         let target = './main-content/' + page + '.php';
-        setActivePage(target, false);  // Load the content without updating URL (since it matches already)
+        setActivePage(target, false);  // 
     }
 
     // Handle back/forward browser buttons (popstate event)
@@ -42,7 +41,6 @@ $(document).ready(function() {
         loadContentFromURL();  // Reload content based on current URL
     };
 
-    // Check if a page is saved in localStorage or load from URL (initial page load)
     const savedPage = localStorage.getItem('activePage');
     if (savedPage) {
         setActivePage(savedPage, false); // Load the saved page without updating the URL
@@ -53,21 +51,5 @@ $(document).ready(function() {
 });
 
 // Reload table para sa products
-function loadTable() {
-    console.log("Why are you in the console? A bit sussy I ain't gonna lie brudder.");
 
-    $.ajax({
-        url: './main-content/fetch_products.php',
-        type: 'GET',
-        data: {
-            _: new Date().getTime() // Cache buster
-        },
-        success: function(data) {
-            $('#products-table').html(data); // Update table content
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $('#products-table').html('<tr><td colspan="10">Error loading table data</td></tr>'); // Error message
-        }
-    });
-}
 

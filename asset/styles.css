@@ -172,31 +172,30 @@ th {
 /* Sign out end */
 
 /* Login start */
+
 #Pculogo-login {
-    width: 150px;
-    height: 150px;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+    width: 50px;
+    height: 50px;
+    /* margin-bottom: auto; */
+    margin-left: 20px;
+    display: inline-block;
+    margin-bottom: -10px;
 }
 
 .Login-title {
-    display: block;
-    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: -5px;
+
 }
 
 #Login-body {
-
-
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;
     transition: 30s;
     height: 0;
-
-
     animation-name: bgSlides;
     animation-direction: alternate-reverse;
     animation-duration: 40s;
@@ -234,8 +233,26 @@ th {
 }
 
 .Login-container {
+    margin-top: 30vh;
+}
 
-    margin-top: -5vh;
+.login-top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background: rgb(0, 78, 164);
+    background: linear-gradient(90deg, rgba(0, 78, 164, 1) 1%, rgb(27, 133, 246) 50%, rgba(0, 78, 164, 1) 100%);
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 99vw;
+    max-height: 60px;
+    min-width: 84vw;
+    min-height: 25px;
+    white-space: nowrap;
+    padding: 5px;
+    padding: 10px;
+    margin-left: 0vh;
 }
 
 .Login-form {
@@ -243,7 +260,7 @@ th {
     height: 300px;
     border: solid 1px rgb(20, 20, 20);
     border-radius: 20px;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -256,7 +273,6 @@ th {
     width: 250px;
     margin: 20px;
 
-
 }
 
 .Login-submit input {
@@ -264,9 +280,9 @@ th {
     text-align: center;
     height: 40px;
     width: 80px;
-    padding: 10px;
+    padding: 5px;
     border-radius: 8px;
-    border: 4px solid #011e3e;
+    border: 4px solid #044992;
     background-color: #0454ac;
     color: white;
 }
@@ -367,6 +383,51 @@ th {
     /* background: radial-gradient(circle, rgba(167,170,188,1) 22%, rgba(67,70,86,1) 100%); */
 }
 
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    /* Important for vertical align on mobile phones */
+    margin: 0;
+    /* Important for vertical align on mobile phones */
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 #Topnavigator-container {
     position: fixed;
     top: 0;
@@ -375,8 +436,8 @@ th {
     background: rgb(0, 78, 164);
     background: linear-gradient(90deg, rgba(0, 78, 164, 1) 1%, rgb(27, 133, 246) 50%, rgba(0, 78, 164, 1) 100%);
     display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
+    /* flex-direction: row;
+    /* flex-shrink: 0; */
     width: 100%;
     height: 50px;
     max-width: 83vw;
@@ -408,7 +469,6 @@ th {
     top: 0;
     left: 0;
     padding: 5px;
-    /* z-index: -1; */
     align-items: center;
 }
 
@@ -446,6 +506,12 @@ th {
 
 }
 
+.notification {
+    display: inline-block;
+    cursor: pointer;
+
+
+}
 
 
 /* Container of tables and styles */
@@ -516,46 +582,51 @@ th {
 /* Index End */
 
 
-
-
-
 /* Dashboard START */
 
 .dash-container {
-    padding: 20px;
-    margin-top: 30px;
-    margin-left: 120px;
+    margin-top: 15px;
+    text-align: center;
+    /* margin: -14px; */
+
+
 }
 
 .dash-container h2 {
 
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 
 }
 
 .unit-containers {
     text-align: center;
-    justify-content: baseline;
     display: inline-block;
-    width: 300px;
-    height: 320px;
+    width: 180px;
+    height: 120px;
     background: rgb(255, 255, 255);
-    /* background: radial-gradient(circle, rgba(255, 255, 255, 1) 38%, rgba(209, 209, 209, 1) 100%, rgba(252, 252, 252, 1) 100%); */
-    margin-top: 15px;
-    margin-left: 35px;
+
+}
+
+.unit-number {
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    width: 100%;
+    background-color: #0454ac;
     border-radius: 5px;
-    border: solid 2px rgb(7, 101, 201);
-    padding: 5px;
-    margin-bottom: 5px;
 }
 
-.cell-icon {
-    width: 30%;
-    height: 30%;
-    padding-top: 25px;
-    align-items: center;
-}
 
+#products-chart {
+    /* display: inline-block; */
+    /* margin-top: 15px;
+    margin-left: 10%;
+    margin-right: 10%; */
+    /* text-align: center; */
+    margin-top: 15px;
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    width: 95%;
+    height: 370px;
+
+}
 
 
 /* Dashhboard END */
@@ -637,7 +708,8 @@ th {
 /* Add Product */
 
 .title-form {
-    text-align: center;
+    margin-left: 30px;
+    align-items: center;
     font-size: 30px;
     color: #0454ac;
 }
@@ -669,9 +741,10 @@ th {
 }
 
 
-.gender-container{
+.gender-container {
     text-align: center;
 }
+
 .select-uniform-name,
 .select-gender {
     width: 50%;
@@ -951,14 +1024,35 @@ th {
 
 
 /* hide button if mag p-print na ng receipt */
-@media print{
+@media print {
 
-    #print{
-        display: none;
+   
+    .modal {
+        visibility: visible;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        width: 58mm;
+        height: 58mm;
+
     }
+
+    #print {
+        visibility: hidden;
+    }
+    body{
+        visibility: hidden;
+        width: 58mm;
+        height: 58mm;
+    }
+
+
+
 }
 
-#qr-code-display{
+#qr-code-display {
     align-items: center;
 }
 

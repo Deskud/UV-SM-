@@ -25,11 +25,11 @@ if ($qrcode > 0) {
 
     if ($transaction) {
         // Fetch items for the found order
-        $stmtItems = $pdo->prepare("SELECT i.product_id, p.product_name, p.cell_num, i.quantity 
+        $stmtItems = $pdo->prepare("SELECT i.product_id, p.product_name, p.unit_num, i.quantity 
                                      FROM items i 
                                      JOIN products p ON i.product_id = p.product_id 
                                      WHERE i.order_id = :order_id
-                                     AND i.is_fully_fulfilled = 0");
+                                     AND i.status = 'unclaimed' OR i.status = 'partially claimed'");
         $stmtItems->execute(['order_id' => $transaction['order_id']]);
         $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
 

@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($product_sizes)) {
         foreach ($product_sizes as $size) {
-            // Insert a row for each selected size and set cell_num to NULL
-            $insert_new_product = "INSERT INTO products (category_id, product_name, size_id, gender, product_quantity, price, cell_num) 
+            // Insert a row for each selected size and set unit_num to NULL
+            $insert_new_product = "INSERT INTO products (category_id, product_name, size_id, gender, product_quantity, price, unit_num) 
                                    VALUES ('$product_category','$product_name', '$size', '$product_gender', '$product_quantity', '$product_price', NULL)";
 
             $add_new_product = mysqli_query($conne, $insert_new_product);
@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h3 class="title-form-product">Add Product</h3>
         <form action="" method="POST" enctype="multipart/form-data" id="input-form">
             <input type="hidden" name="product_id" id="product_id" value="">
+            <h3 style="color: #0454ac; text-align:center;">Uniform Type</h3>
             <select class="select-uniform-name" name="category" required>
-                <h3 style="color: #0454ac;">Uniform Type</h3>
                 <option value="" disabled selected>...</option>
                 <option value="1">Regular Uniform</option>
                 <option value="2">P.E. Uniform</option>
@@ -122,8 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class=" products-table-container">
 
-
-
     <!-- Button for add product modal window -->
     <div class="open-product-modal">
         <!-- Search bar -->
@@ -140,22 +138,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Table para ma display yung changes sa table. -->
     <table class="products-table" id="products-table">
-
-
-
+        <!-- Dito mag di-display products -->
     </table>
     <!-- Previous page || Next page -->
 </div>
 <!-- Table Display End -->
-
-<!-- 
-    AJAX SCRIPTS
-
-    EVENT DELEGATION WOW! COOL CONCEPT NOICE
-     https://www.youtube.com/watch?v=aZ3JWv0ofuA
-
-             gr8 video        
--->
+<!-- ------------------------------------------------------------------------------------------------------- -->
 <!-- Para sa modal windows jscript -->
 <script type="text/javascript" src="modal.js"></script>
 <script>
@@ -326,4 +314,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         });
     });
+
+    function loadTable() {
+        console.log("Why are you in the console? A bit sussy I ain't gonna lie brudder.");
+
+        $.ajax({
+            url: './main-content/fetch_products.php',
+            type: 'GET',
+            data: {
+                _: new Date().getTime()
+            },
+            success: function(data) {
+                $('#products-table').html(data); // Update table content
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#products-table').html('<tr><td colspan="10">Error loading table data</td></tr>'); // Error message
+            }
+
+
+        });
+    }
 </script>

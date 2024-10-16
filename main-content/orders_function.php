@@ -1,3 +1,4 @@
+
 <?php
 require "../dbconnection.php";
 include '../phpqrcode/qrlib.php';
@@ -54,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $modifiedBy = $_SESSION['user_id'];
             $modificationTimestamp = date('Y-m-d H:i:s');
 
-            // Begin transaction for data integrity
+            
             $conne->begin_transaction();
 
             try {
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $itemId = intval($itemId);
                     $newQuantity = intval($newQuantity);
 
-                    // Fetch previous quantity and price for the item
+                    //Kinukuha previous quantity
                     $stmt = $conne->prepare("SELECT quantity, product_id FROM items WHERE item_id = ? AND order_id = ?");
                     $stmt->bind_param('ii', $itemId, $orderId);
                     $stmt->execute();
@@ -70,58 +71,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->fetch();
                     $stmt->close();
 
-                    // Get the price from the products table
-                    $stmt = $conne->prepare("SELECT price FROM products WHERE product_id = ?");
-                    $stmt->bind_param('i', $productId);
-                    $stmt->execute();
-                    $stmt->bind_result($productPrice);
-                    $stmt->fetch();
-                    $stmt->close();
+                    // Checks kung modified yung item
+                    if ($prevQuantity != $newQuantity) {
+                        // Get the price from the products table
+                        $stmt = $conne->prepare("SELECT price FROM products WHERE product_id = ?");
+                        $stmt->bind_param('i', $productId);
+                        $stmt->execute();
+                        $stmt->bind_result($productPrice);
+                        $stmt->fetch();
+                        $stmt->close();
 
-                    // Calculate previous and new price based on quantity
-                    $prevPrice = $prevQuantity * $productPrice;
-                    $newPrice = $newQuantity * $productPrice;
+                        // Calculate previous and new price based on quantity
+                        $prevPrice = $prevQuantity * $productPrice;
+                        $newPrice = $newQuantity * $productPrice;
 
-                    // Adjust total quantity and amount by the difference between new and old quantities
-                    $quantityDifference = $newQuantity - $prevQuantity;
-                    $newTotalQuantity += $quantityDifference; // Adjust by difference
-                    $newTotalAmount += ($newPrice - $prevPrice); // Adjust by price difference
+                        // Adjust total quantity and amount by the difference between new and old quantities
+                        $quantityDifference = $newQuantity - $prevQuantity;
+                        $newTotalQuantity += $quantityDifference; // Adjust by difference
+                        $newTotalAmount += ($newPrice - $prevPrice); // Adjust by price difference
 
-                    // Insert into item_modifications table
-                    $stmt = $conne->prepare("
-                        INSERT INTO item_modifications 
-                        (modification_id, item_id, order_id, prev_quantity, new_quantity, prev_price, new_price, modification_reason, modified_by, modification_timestamp)
-                        VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param('iiiiiisss', $itemId, $orderId, $prevQuantity, $newQuantity, $prevPrice, $newPrice, $modificationReason, $modifiedBy, $modificationTimestamp);
-                    $stmt->execute();
-                    $stmt->close();
-
-                    // Update or remove items in the items table based on quantity
-                    if ($newQuantity > 0) {
-                        // Update item with new quantity
-                        $stmt = $conne->prepare("UPDATE items SET quantity = ? WHERE item_id = ? AND order_id = ?");
-                        $stmt->bind_param('iii', $newQuantity, $itemId, $orderId);
+                        // Insert into item_modifications table (only for modified items)
+                        $stmt = $conne->prepare("
+                INSERT INTO item_modifications 
+                (modification_id, item_id, order_id, prev_quantity, new_quantity, prev_price, new_price, modification_reason, modified_by, modification_timestamp)
+                VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        $stmt->bind_param('iiiiiisss', $itemId, $orderId, $prevQuantity, $newQuantity, $prevPrice, $newPrice, $modificationReason, $modifiedBy, $modificationTimestamp);
                         $stmt->execute();
                         $stmt->close();
-                    } else {
-                        // Remove the item if the quantity is 0
-                        $stmt = $conne->prepare("DELETE FROM items WHERE item_id = ? AND order_id = ?");
-                        $stmt->bind_param('ii', $itemId, $orderId);
-                        $stmt->execute(); // Run the delete query
-                        $stmt->close(); // Close after delete
 
-
+                        // Update or remove items in the items table based on quantity
+                        if ($newQuantity > 0) {
+                            // Update item with new quantity
+                            $stmt = $conne->prepare("UPDATE items SET quantity = ? WHERE item_id = ? AND order_id = ?");
+                            $stmt->bind_param('iii', $newQuantity, $itemId, $orderId);
+                            $stmt->execute();
+                            $stmt->close();
+                        } else {
+                            // Remove the item if the quantity is 0
+                            $stmt = $conne->prepare("DELETE FROM items WHERE item_id = ? AND order_id = ?");
+                            $stmt->bind_param('ii', $itemId, $orderId);
+                            $stmt->execute(); // Run the delete query
+                            $stmt->close(); // Close after delete
+                        }
                     }
                 }
 
-                // Insert into order_modifications table to reflect overall order changes
-                $stmt = $conne->prepare("
-                    INSERT INTO order_modifications 
-                    (modification_id, order_id, prev_total_quantity, new_total_quantity, prev_total_amount, new_total_amount, modification_reason, modified_by, modification_timestamp)
-                    VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param('iiiiisss', $orderId, $prevTotalQuantity, $newTotalQuantity, $prevTotalAmount, $newTotalAmount, $modificationReason, $modifiedBy, $modificationTimestamp);
-                $stmt->execute();
-                $stmt->close();
+                // Only insert into order_modifications if there is a change in total quantity or amount
+                if ($prevTotalQuantity != $newTotalQuantity || $prevTotalAmount != $newTotalAmount) {
+                    // Insert into order_modifications table to reflect overall order changes
+                    $stmt = $conne->prepare("
+            INSERT INTO order_modifications 
+            (modification_id, order_id, prev_total_quantity, new_total_quantity, prev_total_amount, new_total_amount, modification_reason, modified_by, modification_timestamp)
+            VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param('iiiiisss', $orderId, $prevTotalQuantity, $newTotalQuantity, $prevTotalAmount, $newTotalAmount, $modificationReason, $modifiedBy, $modificationTimestamp);
+                    $stmt->execute();
+                    $stmt->close();
+                }
 
                 // Commit the transaction
                 $conne->commit();
@@ -133,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $conne->rollback();
                 echo json_encode(['error' => 'Failed to update order: ' . $e->getMessage()]);
             }
+
             break;
 
 
@@ -282,7 +288,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $conne->commit();
                     echo json_encode(['success' => true]);
                 } catch (Exception $e) {
-                    // Rollback on failure
+                  
                     $conne->rollback();
                     echo json_encode(['error' => 'Failed to remove item: ' . $e->getMessage()]);
                 }

@@ -20,21 +20,20 @@ if (isset($_GET['order_id']) && isset($_GET['product_id']) && isset($_GET['quant
                 i.quantity_dispensed = i.quantity_dispensed + ?,
                 t.quantity_dispensed = t.quantity_dispensed + ?,
 
-                -- Check if quantity_dispensed in items matches the required quantity, and update is_fully_fulfilled
-                i.is_fully_fulfilled = CASE 
-                    WHEN i.quantity_dispensed + ? = i.quantity THEN 1
-                    ELSE 0
+                -- Check if quantity_dispensed in items matches the required quantity, and update status
+                i.status = CASE 
+                    WHEN i.quantity_dispensed + ? = i.quantity THEN 'fully claimed'    -- Fully claimed
+                    WHEN i.quantity_dispensed + ? < i.quantity AND i.quantity_dispensed > 0 THEN 'partially claimed'    -- Partially claimed
+                    ELSE 'unclaimed'    -- Unclaimed
                 END,
 
-                -- Check if quantity_dispensed in transactions matches the required quantity, and update is_fully_fulfilled
-                t.is_fully_fulfilled = CASE 
-                    WHEN t.quantity_dispensed + ? = t.total_quantity THEN 1
-                    ELSE 0
-                END,
+                -- Check if quantity_dispensed in transactions matches the required quantity, and update status
                 t.status = CASE 
-                    WHEN t.is_fully_fulfilled = 1 THEN 'claimed'
-                    ELSE 'unclaimed'
+                    WHEN t.quantity_dispensed + ? = t.total_quantity THEN 'fully claimed'    -- Fully claimed
+                    WHEN t.quantity_dispensed + ? < t.total_quantity AND t.quantity_dispensed > 0 THEN 'partially claimed'    -- Partially claimed
+                    ELSE 'unclaimed'    -- Unclaimed
                 END
+
             WHERE p.product_id = ?
             AND i.product_id = ?
             AND i.order_id = ?
@@ -42,7 +41,7 @@ if (isset($_GET['order_id']) && isset($_GET['product_id']) && isset($_GET['quant
 
     // Prepare and bind statement
     $stmt = $conne->prepare($sql);
-    $stmt->bind_param("iiiiiiiiii", $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $product_id, $product_id, $order_id, $order_id);
+    $stmt->bind_param("iiiiiiiiiiii", $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $quantity, $product_id, $product_id, $order_id, $order_id);
 
     // Execute the statement
     if ($stmt->execute()) {

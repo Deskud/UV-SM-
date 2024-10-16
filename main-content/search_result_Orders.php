@@ -22,7 +22,6 @@ if (isset($_POST['orderinput'])) {
                 <th>Order Date</th>
                 <th>Status</th>
                 <th>Updated</th>
-                <th>Created At</th>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -31,8 +30,6 @@ if (isset($_POST['orderinput'])) {
                         <td><?php echo htmlspecialchars ($row['order_date']); ?></td>
                         <td><?php echo htmlspecialchars( $row['status']); ?></td>
                         <td><?php echo htmlspecialchars($row['updated_at']); ?></td>
-                        <td><?php echo htmlspecialchars($row['created_at']); ?></td>
-
                     </tr>
                 <?php } ?>
             </tbody>
