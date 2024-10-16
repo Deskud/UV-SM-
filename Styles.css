@@ -558,7 +558,7 @@ th {
     text-align: center;
     display: inline-block;
     width: 180px;
-    height: 200px;
+    height: 120px;
     background: rgb(255, 255, 255);
 
 }
@@ -570,13 +570,6 @@ th {
     border-radius: 5px;
 } 
 
-.cell-icon {
-    width: 30%;
-    height: 30%;
-    padding: 1px;
-    align-items: center;
-}
-
 
 #products-chart {
     /* display: inline-block; */
@@ -584,6 +577,7 @@ th {
     margin-left: 10%;
     margin-right: 10%; */
     /* text-align: center; */
+    margin-top: 15px;
     font-family: "Mulish", Arial, Helvetica, sans-serif;
     width: 95%;
     height: 370px;
