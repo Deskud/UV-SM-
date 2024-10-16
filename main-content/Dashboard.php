@@ -2,8 +2,8 @@
 <hr>
 
 <!-- Chart -->
-<div id="products-chart">
-</div>
+<div id="products-chart"></div>
+
 
 
 
@@ -19,8 +19,7 @@
     // I guess recommendation sa future ay gumamit ng websockets kaysa dito.
     // Late ko na din kasi nalaman may ganto pala. Big bruh moment.
 
-    dashPoll();
-    productChart();
+
 
     function dashPoll() {
         $.ajax({
@@ -36,7 +35,6 @@
                     let cellData = response[cell] || {
                         product_name: 'No Data',
                         size_name: 'No Data',
-                        quantity: 0
                     };
 
                     let dashContent = `
@@ -49,7 +47,6 @@
                             </svg>
                             <p>${cellData.product_name}</p>
                             <p>Size: ${cellData.size_name}</p>
-                            <p>Quantity: ${cellData.quantity}</p>
                         </div>
                            `;
                     $('.dash-container').append(dashContent);
@@ -60,10 +57,8 @@
             }
         });
     }
-    setInterval(dashPoll, 3000);
-
+    // Stocks chart
     function productChart() {
-
         $.ajax({
             url: './server/products_chart.php',
             type: 'GET',
@@ -73,37 +68,42 @@
 
                 response.forEach(function(product) {
                     dataPoints.push({
-                        label: product.gender,
-                        y: product.product_quantity
+                        label: "Unit " + product.unit_num,
+
+                        // Coverts the data to number. 
+                        //JSON kasi yung data and na interprate na string yung data kahit int ang data type niya sa db
+                        y: Number(product.product_quantity)
                     });
                 });
-
-                var options = {
-                    animationEnabled: true,
+                var chart = new CanvasJS.Chart("products-chart", {
+                    animationEnabled: false,
                     title: {
                         text: "Product Stocks"
                     },
                     axisY: {
-                        title: "Stock Quantity"
+                        title: "Stock Quantity",
                     },
                     axisX: {
-                        title: "Products"
+                        title: "Unit Numbers",
                     },
                     data: [{
                         type: "column",
-                        yValueFormatString: "#,##0.0#",
+
                         dataPoints: dataPoints
                     }]
+                });
 
-
-                };
-
-                $("#products-chart").CanvasJSChart(options);
+                // Render the chart
+                chart.render();
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching product data: ' + error);
             }
         });
     }
+
+    productChart();
+    dashPoll();
+    setInterval(dashPoll, 10000);
     setInterval(productChart, 10000);
 </script>

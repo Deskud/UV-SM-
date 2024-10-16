@@ -15,7 +15,6 @@ $cellQuantities = [];
 while ($row = $result->fetch_assoc()) {
     $cellNumber = $row['unit_num'];
     $cellQuantities[$cellNumber] = [
-        'quantity' => $row['product_quantity'],
         'product_name' => $row['product_name'],
         'category_name' => $row['category_name'],
         'size_name' => $row['size_name']

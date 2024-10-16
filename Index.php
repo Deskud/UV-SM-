@@ -11,7 +11,8 @@ require "dbconnection.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="./jquery/jquery-3.7.1.min.js"></script>
-    <script src="./jquery/jquery.canvasjs.min.js"></script>
+    <script src="./jquery/jquery.canvasjs.stock.min.js"></script>
+
 
     <link rel="stylesheet" href="Styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,7 +118,6 @@ require "dbconnection.php";
     </div>
 
     <script src="Script.js"></script>
-
     <script src="https://kit.fontawesome.com/883b8ee9d9.js" crossorigin="anonymous"></script>
 </body>
 
