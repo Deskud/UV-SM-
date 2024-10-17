@@ -57,6 +57,7 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
         </div>
     </tr>
 <?php } ?>
+
 <script>
     var usedCells = [];
 

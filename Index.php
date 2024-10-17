@@ -39,6 +39,14 @@ require "dbconnection.php";
         <img style="margin-right: 20px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-5px;">Uniform Stock Monitoring System</h1>
         <div class="sign-out">
+
+            <!-- <div class="dropdown">
+                <button class="dropbtn"><i class="fa-solid fa-bell"></i>
+                </button>
+                <div class="dropdown-content">
+                </div>
+            </div> -->
+
             <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
 
         </div>
@@ -113,14 +121,6 @@ require "dbconnection.php";
             </ul>
         </ul>
         <hr>
-        <div class="dropdown">
-            <button class="dropbtn"><i class="fa-solid fa-bell"></i>
-            </button>
-            <div class="dropdown-content">
-                <!-- Dito dapat lalabas mga notif -->
-                <a href="#">EPIC</a>
-            </div>
-        </div>
     </div>
     <div id="Main-container">
         <?php include "./main-content/Dashboard.php"; ?>
@@ -132,3 +132,49 @@ require "dbconnection.php";
 </body>
 
 </html>
+<script>
+    // Notifications for actions
+    // function notifTrigger() {
+    //     $.ajax({
+    //         url: './server/notifications.php', // Endpoint to check for new records
+    //         method: 'GET',
+    //         dataType: 'json',
+    //         success: function(data) {
+    //             // Check for new transactions
+    //             if (data.newTransaction) {
+    //                 showNotification(data.transactionMessage);
+    //             }
+
+    //             // Check for new items
+    //             if (data.newItem) {
+    //                 showNotification(data.itemMessage);
+    //             }
+
+    //             // Check for new orders
+    //             if (data.newOrder) {
+    //                 showNotification(data.orderMessage);
+    //             }
+
+    //             // Check for new products
+    //             if (data.newProduct) {
+    //                 showNotification(data.productMessage);
+    //             }
+    //         },
+    //         error: function(jqXHR, textStatus, errorThrown) {
+    //             console.error("Error fetching notifications:", textStatus, errorThrown);
+    //         }
+    //     });
+    // }
+
+    // function showNotification(message) {
+    //     var notification = $('<a class = "dropdown-content">' + message + '</a>');
+    //     $('.dropdown').append(notification);
+    //     setTimeout(function() {
+    //         notification.fadeOut(300, function() {
+    //             $(this).remove();
+    //         });
+    //     }, 30000); 
+    // }
+
+    // setInterval(notifTrigger, 5000); 
+</script>

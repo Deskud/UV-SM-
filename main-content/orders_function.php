@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $filePath = '../qrcodes/order_' . $orderId . '.png';
             QRcode::png($qrData, $filePath);
 
-            // Update order status to 'processed'
+            
             $stmt = $conne->prepare("UPDATE orders SET status = 'completed' WHERE order_id = ?");
             $stmt->bind_param('i', $orderId);
 
