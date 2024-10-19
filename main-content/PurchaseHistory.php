@@ -29,33 +29,29 @@ $display_purchase_history = mysqli_query($conne, $query);
         </thead>
         <tbody>
             <?php while ($row = mysqli_fetch_assoc($display_purchase_history)) { ?>
-            <tr>
-                <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
-                <td><?php echo htmlspecialchars($row['order_id']); ?></td>
-                <td><?php echo htmlspecialchars($row['total_quantity']); ?></td>
-                <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
-                <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
-                <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
-                <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
-                <td><?php echo htmlspecialchars($row['status']); ?></td>
-            </tr>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['order_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['total_quantity']); ?></td>
+                    <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
+                    <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
+                    <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
+                    <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
+                    <td><?php echo htmlspecialchars($row['status']); ?></td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script>
-
-
+    
     function purchasePoll() {
         $.ajax({
-            url: './server/purchasehistory_poll.php', // A new file to fetch updated transactions
+            url: './server/purchasehistory_poll.php',
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-                // Clear the table's tbody before appending updated data
                 $('#transactions-table tbody').empty();
 
                 // Append new rows with updated transaction data

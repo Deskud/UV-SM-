@@ -110,6 +110,7 @@ table {
     align-content: center;
     position: relative;
     overflow-x: auto;
+    text-align: center;
 
 }
 
@@ -931,12 +932,12 @@ th {
 #reloadTable {
     width: 40px;
     height: 40px;
-    margin-left: 8vw;
+    margin-left: 68vw;
     border: rgba(255, 255, 255, 0.609) solid;
     border-radius: 10px;
     background-color: #00810b;
-
     cursor: pointer;
+    display: inline-block;
 }
 
 #reloadTable:hover {
@@ -966,12 +967,17 @@ th {
     text-align: center;
 }
 
-.prc-btn-container,
 .order-btn-container,
 .order-upd-container {
     text-align: center;
 
 }
+.prc-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .submit-finish-order,
 .submit-update-order,
@@ -1034,15 +1040,12 @@ th {
 /* hide button if mag p-print na ng receipt */
 @media print {
 
-
-
+    #qrCodeModal, #qrCodeModal *{
+        visibility: visible;
+    }
     #print {
         visibility: hidden;
     }
-
-
-
-
 }
 
 #qr-code-display {

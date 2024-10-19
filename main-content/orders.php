@@ -127,15 +127,18 @@ include '../session_check.php';
 
         function proceedButtonVisibility(orderId, status) {
             const proceedButton = document.querySelector(`#proceed-btn-${orderId}`);
-            if (!proceedButton) return; // Exit if button doesn't exist
+            const buttonContainer = proceedButton.closest('.prc-btn-container');
+            if (!proceedButton || !buttonContainer) return;
 
-            // Check the status and update the button's display
             if (status === 'pending') {
-                proceedButton.style.display = 'block'; // Show button
-                proceedButton.disabled = false; // Enable button
+                proceedButton.style.display = 'block';
+                proceedButton.disabled = false; // 
             } else if (status === 'processing' || status === 'complete') {
-                proceedButton.style.display = 'none'; // Hide button
+                proceedButton.style.display = 'none';
             }
+
+            // Force a reflow (just in case) to ensure the button remains centered
+            buttonContainer.style.justifyContent = 'center';
         }
 
 
@@ -199,6 +202,7 @@ include '../session_check.php';
                 success: function(response) {
                     console.log(response);
                     loadOrderDetails(orderId);
+                    loadQrDetails(orderId);
                     $('#updateModal' + orderId).css('display', 'none');
                 },
                 error: function(xhr, status, error) {
@@ -212,8 +216,14 @@ include '../session_check.php';
 
         // Finish order function
         function finishOrder(orderId) {
-            console.log("Order Id:", orderId); // Debugging
+            console.log("Order Id:", orderId);
+            var studentId = $('input[name="student-id"]').val();
 
+            // Checks if the inputu has data if none will not proceed to finishing the order
+            if (!studentId || studentId.trim() === '') {
+                alert('Please enter a valid student number before proceeding.');
+                return;
+            }
             $('#confirmation-modal').css('display', 'block');
 
             $(document).on('click', '#confirm-print', function() {
@@ -227,10 +237,10 @@ include '../session_check.php';
                     },
                     dataType: 'json',
                     success: function(response) {
-                        console.log("AJAX request successful. Response:", response); // Debugging
+                        console.log("AJAX request successful. Response:", response);
 
                         if (response.qrcode) {
-                            console.log("QR Code generated successfully for orderId:", orderId); // Debugging
+                            console.log("QR Code generated successfully for orderId:", orderId);
                             openQRModal(orderId);
 
                             // Ensure element exists before trying to insert HTML
@@ -243,13 +253,13 @@ include '../session_check.php';
                                 console.error("QR code display element not found for orderId:", orderId);
                             }
                         } else {
-                            console.error("Error in response: ", response.error); // Debugging
+                            console.error("Error in response: ", response.error);
                             alert(response.error || 'Failed to generate QR code');
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX request failed. Status:", textStatus, "Error:", errorThrown);
-                        console.log("Response Text:", jqXHR.responseText); // Log response from the server
+                        console.log("Response Text:", jqXHR.responseText);
                         alert('Error processing the request.');
                     }
                 });
@@ -274,6 +284,8 @@ include '../session_check.php';
                             $('#item-id-' + itemId).remove(); // Adjusted to match the correct ID format
 
                             loadOrderDetails(orderId);
+                            loadQrDetails(orderId);
+
                         } else {
                             // Display error message
                             alert('Error: ' + response.error);
@@ -334,6 +346,35 @@ include '../session_check.php';
                 }
             });
         }
+
+        function loadQrDetails(orderId) {
+            $.ajax({
+                url: './main-content/update_qr_modal.php',
+                type: 'GET',
+                data: {
+                    order_id: orderId
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        // Update the student ID
+                        $('#qr-student-id-' + orderId).text(response.student_id);
+
+                        // Clear and update the item list in the modal
+                        if (response.items.length > 0) {
+                            response.items.forEach(function(item) {
+                                var itemHtml = `<h6>Item: ${item.product_name}......x ${item.quantity}</h6>`;
+
+                            });
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error loading QR details:', error);
+                }
+            });
+        }
+
 
         function loadOrders() {
             $.ajax({
