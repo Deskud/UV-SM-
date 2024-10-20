@@ -43,7 +43,9 @@ if (!empty($orderIds)) {
             <div class="order-details">
                 <h2 style="color: black;">Order Details ID: <?php echo $order['order_id']; ?></h2>
                 <h3>Order Date: <?php echo $order['order_date']; ?></h3>
-                <h3>Student Number: <input type="text" name="student-id" required></h3>
+                <h3>Student Number:
+                    <input type="text" id="student-id-<?php echo $order['order_id']; ?>" name="student-id" required>
+                </h3>
                 <h3>Items:</h3>
                 <ul>
                     <?php
@@ -71,17 +73,24 @@ if (!empty($orderIds)) {
         <div class="modal-receipt-content">
             <?php
             echo "<h6>------------------------------------------------------------</h6>
-            <h6>Philippine Christian University - Dasmariñas</h6>
-    <h6>------------------------------------------------------------</h6>
-    <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
-   <h6>------------------------------------------------------------</h6>";
+                        <h6>Philippine Christian University - Dasmariñas</h6>
+                <h6>------------------------------------------------------------</h6>
+                    <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
+                <h6>------------------------------------------------------------</h6>";
+
+
             echo "<h6>Order ID:{$order['order_id']}</h6>";
             echo "<h6>Student Number:<span id='qr-student-id-{$order['order_id']}'></span></h6>";
+
+            echo "<div id='itemContainer{$order['order_id']}'>";
+
             if (isset($groupedItems[$order['order_id']])) {
                 foreach ($groupedItems[$order['order_id']] as $item) {
                     echo "<h6>Item: {$item['product_name']}......x {$item['quantity']}</h6>";
                 }
             }
+
+            echo "</div>"; // Close item container
             ?>
             <h6>------------------------------------------------------------</h6>
             <div id="qr-code-display<?php echo $order['order_id']; ?>">

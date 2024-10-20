@@ -1,508 +1,4 @@
-2024-10-02 04:03:52: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-02 10:07:15: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-03 11:17:47: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-07 03:31:28: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-07 03:31:57: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-07 03:32:57: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-07 11:06:07: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-08 05:32:01: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-11 04:38:26: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-12 13:23:26: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-14 04:06:05: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-14 14:35:47: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-15 04:59:20: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-15 04:59:23: <br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
-<br />
-<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\UV-SM-\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-16 05:19:10: <br />
+2024-10-20 03:40:53: <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
 <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
@@ -538,7 +34,7 @@
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
 <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-16 06:09:10: <br />
+2024-10-20 03:51:42: <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
 <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
@@ -574,7 +70,331 @@
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
 <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
-2024-10-16 21:59:16: <br />
+2024-10-20 03:51:54: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 04:20:16: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 14:59:04: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 14:59:27: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 15:23:54: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 15:26:46: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 15:30:05: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 15:35:09: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 15:36:15: <br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
+<br />
+<b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+2024-10-20 15:40:52: <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>71</b><br />
 <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\uvm\phpqrcode\qrsplit.php</b> on line <b>53</b><br />

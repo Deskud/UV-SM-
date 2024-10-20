@@ -153,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $(document).off('click', '.edit-btn').on('click', '.edit-btn', function() {
             var productId = $(this).data('id');
+            console.log('SANDDSADSADSASDADAS');
 
 
             // Fetch product details
@@ -208,7 +209,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $('#input-form')[0].reset();
                     $('#submit-btn').val('Add');
-                    $('#cellSelect').prop('disabled', true);
                     $('#submit-btn').prop('disabled', false);
 
                     $('#add-product-modal').css('display', 'none');

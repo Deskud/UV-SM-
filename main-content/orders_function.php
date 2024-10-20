@@ -296,9 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['error' => 'Item ID or Order ID not provided']);
             }
             break;
-
-
-
+            
         default:
             echo json_encode(['error' => 'Invalid action']);
             break;

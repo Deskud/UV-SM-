@@ -7,6 +7,7 @@ $(document).ready(function () {
     var modalConfirm = $('#confirmation-modal');//Modal confirmation para sa archive/orders
     var modalOrders = $('#proceed-order-modal');//Modal winodw para sa orders
     var modalUpdateorder = $('#update-orders');
+    var modalEdittransactions = $('#transaction-modal');
     var modalReturn = $('#return');
     var closeModal = $('.close-modal'); // Get the <span> element that closes the modal
    
@@ -16,12 +17,18 @@ $(document).ready(function () {
         modalProduct.css('display', 'block');
     });
 
+
     //Pag pinido tyung font awesome icon dapat mag c-close yung modal window (ADD PROD)
     closeModal.on('click', function () {
         modalProduct.css('display', 'none');
         modalOrders.css('display', 'none');
         modalProdInfo.css('display', 'none');
+        modalEdittransactions.css('display', 'none');
     });
+    
+
+
+
 
 
 

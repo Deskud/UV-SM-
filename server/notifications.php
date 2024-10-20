@@ -23,7 +23,7 @@ if (!isset($_SESSION['last_product_check'])) {
 }
 
 // Check if there are new transactions
-$query = "SELECT COUNT(*) as count, MAX(transaction_date) as last_date FROM transactions WHERE transaction_date > NOW() - INTERVAL 1 MINUTE";
+$query = "SELECT COUNT(*) as count, MAX(transaction_date) as last_date FROM transactions WHERE transaction_date > NOW() - INTERVAL 5 MINUTE";
 $result = $conne->query($query);
 $row = $result->fetch_assoc();
 if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_transaction_check']) {
@@ -35,7 +35,7 @@ if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_transaction_check'
 }
 
 // Check if there are new items
-$query = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM items WHERE updated_at > NOW() - INTERVAL 1 MINUTE";
+$query = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM items WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
 $result = $conne->query($query);
 $row = $result->fetch_assoc();
 if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_item_check']) {
@@ -47,7 +47,7 @@ if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_item_check']) {
 }
 
 // Check if there are new orders
-$query = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM orders WHERE updated_at > NOW() - INTERVAL 1 MINUTE";
+$query = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM orders WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
 $result = $conne->query($query);
 $row = $result->fetch_assoc();
 if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_order_check']) {
@@ -59,7 +59,7 @@ if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_order_check']) {
 }
 
 // Check if there are new products
-$query = "SELECT COUNT(*) as count, MAX(date_added) as last_date FROM products WHERE date_added > NOW() - INTERVAL 1 MINUTE";
+$query = "SELECT COUNT(*) as count, MAX(date_added) as last_date FROM products WHERE date_added > NOW() - INTERVAL 5 MINUTE";
 $result = $conne->query($query);
 $row = $result->fetch_assoc();
 if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_product_check']) {

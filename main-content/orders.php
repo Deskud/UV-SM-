@@ -202,8 +202,8 @@ include '../session_check.php';
                 success: function(response) {
                     console.log(response);
                     loadOrderDetails(orderId);
-                    loadQrDetails(orderId);
                     $('#updateModal' + orderId).css('display', 'none');
+                    loadQrDetails(orderId);
                 },
                 error: function(xhr, status, error) {
                     alert('Error: ' + error);
@@ -211,29 +211,30 @@ include '../session_check.php';
             });
         }
 
-
-
-
-        // Finish order function
         function finishOrder(orderId) {
             console.log("Order Id:", orderId);
-            var studentId = $('input[name="student-id"]').val();
+            var studentNo = $('input[name="student-id"]').val();
 
-            // Checks if the inputu has data if none will not proceed to finishing the order
-            if (!studentId || studentId.trim() === '') {
+            // Check if the input has data; if none, it will not proceed to finishing the order
+            if (!studentNo || studentNo.trim() === '') {
                 alert('Please enter a valid student number before proceeding.');
                 return;
             }
+
             $('#confirmation-modal').css('display', 'block');
 
-            $(document).on('click', '#confirm-print', function() {
+            $('#confirm-print').off('click');
+
+            $('#confirm-print').on('click', function() {
                 $('#confirmation-modal').css('display', 'none');
+
                 $.ajax({
                     url: './main-content/orders_function.php',
                     method: 'POST',
                     data: {
                         action: 'finish',
-                        order_id: orderId
+                        order_id: orderId,
+                        student_no: studentNo 
                     },
                     dataType: 'json',
                     success: function(response) {
@@ -247,11 +248,10 @@ include '../session_check.php';
                             var qrDisplay = document.getElementById('qr-code-display' + orderId);
                             if (qrDisplay) {
                                 qrDisplay.innerHTML = "<img src='./main-content/" + response.qrcode + "' alt='QR Code' />";
-
-
-                            } else {
-                                console.error("QR code display element not found for orderId:", orderId);
                             }
+
+                            // Display student number in the receipt modal
+                            $('#qr-student-id-' + orderId).text(studentNo);
                         } else {
                             console.error("Error in response: ", response.error);
                             alert(response.error || 'Failed to generate QR code');
@@ -259,12 +259,13 @@ include '../session_check.php';
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX request failed. Status:", textStatus, "Error:", errorThrown);
-                        console.log("Response Text:", jqXHR.responseText);
                         alert('Error processing the request.');
                     }
                 });
             });
         }
+
+
 
         $(document).ready(function() {
             function removeItem(itemId, orderId, itemElement) {
@@ -282,7 +283,6 @@ include '../session_check.php';
                             itemElement.remove();
 
                             $('#item-id-' + itemId).remove(); // Adjusted to match the correct ID format
-
                             loadOrderDetails(orderId);
                             loadQrDetails(orderId);
 
@@ -308,6 +308,8 @@ include '../session_check.php';
 
 
 
+
+
         // Print QR code function
         function printQRCode(orderId) {
             var qrCodeImg = document.getElementById('qr-code-display' + orderId).innerHTML;
@@ -321,6 +323,7 @@ include '../session_check.php';
 
         // ------------------------------------------------
         // Loading datas
+
         function loadOrderDetails(orderId) {
             $.ajax({
                 url: './main-content/update_order_modal.php',
@@ -349,7 +352,7 @@ include '../session_check.php';
 
         function loadQrDetails(orderId) {
             $.ajax({
-                url: './main-content/update_qr_modal.php',
+                url: './main-content/update_qrmodal.php',
                 type: 'GET',
                 data: {
                     order_id: orderId
@@ -357,23 +360,30 @@ include '../session_check.php';
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
-                        // Update the student ID
-                        $('#qr-student-id-' + orderId).text(response.student_id);
+                        // Target the specific item container for the order
+                        var itemContainer = $('#itemContainer' + orderId);
+                        itemContainer.empty(); // Clear existing items
 
-                        // Clear and update the item list in the modal
+                        // Append new items dynamically
                         if (response.items.length > 0) {
                             response.items.forEach(function(item) {
                                 var itemHtml = `<h6>Item: ${item.product_name}......x ${item.quantity}</h6>`;
-
+                                itemContainer.append(itemHtml);
                             });
+                        } else {
+                            itemContainer.append('<h6>No items found for this order.</h6>');
                         }
+                    } else {
+                        alert('Failed to load order items.');
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error loading QR details:', error);
+                    console.error('Error loading order items:', error);
                 }
             });
         }
+
+
 
 
         function loadOrders() {

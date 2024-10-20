@@ -21,10 +21,6 @@ require "dbconnection.php";
     <link href="./asset/css/brands.css" rel="stylesheet" />
     <link href="./asset/css/solid.css" rel="stylesheet" />
 
-
-
-
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@706&family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
@@ -32,25 +28,24 @@ require "dbconnection.php";
     <title>Dashboard</title>
 </head>
 
+
 <body id="Main-body">
+    <div class="notifications-container">
+        <!-- dito lalabas pop up -->
+    </div>
+
+
 
     <div id="Topnavigator-container">
-
         <img style="margin-right: 20px;" src="./Images/PCU Logo.png">
         <h1 style="padding:10px;margin:-5px;">Uniform Stock Monitoring System</h1>
         <div class="sign-out">
-
-            <!-- <div class="dropdown">
-                <button class="dropbtn"><i class="fa-solid fa-bell"></i>
-                </button>
-                <div class="dropdown-content">
-                </div>
-            </div> -->
 
             <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
 
         </div>
     </div>
+
 
     </div>
     <div id="Sidebar-container">
@@ -134,47 +129,50 @@ require "dbconnection.php";
 </html>
 <script>
     // Notifications for actions
-    // function notifTrigger() {
-    //     $.ajax({
-    //         url: './server/notifications.php', // Endpoint to check for new records
-    //         method: 'GET',
-    //         dataType: 'json',
-    //         success: function(data) {
-    //             // Check for new transactions
-    //             if (data.newTransaction) {
-    //                 showNotification(data.transactionMessage);
-    //             }
+    function notifTrigger() {
+        $.ajax({
+            url: './server/notifications.php', // Endpoint to check for new records
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Check for new transactions
+                if (data.newTransaction) {
+                    showNotification(data.transactionMessage);
+                }
 
-    //             // Check for new items
-    //             if (data.newItem) {
-    //                 showNotification(data.itemMessage);
-    //             }
+                // Check for new items
+                if (data.newItem) {
+                    showNotification(data.itemMessage);
+                }
 
-    //             // Check for new orders
-    //             if (data.newOrder) {
-    //                 showNotification(data.orderMessage);
-    //             }
+                // Check for new orders
+                if (data.newOrder) {
+                    showNotification(data.orderMessage);
+                }
 
-    //             // Check for new products
-    //             if (data.newProduct) {
-    //                 showNotification(data.productMessage);
-    //             }
-    //         },
-    //         error: function(jqXHR, textStatus, errorThrown) {
-    //             console.error("Error fetching notifications:", textStatus, errorThrown);
-    //         }
-    //     });
-    // }
+                // Check for new products
+                if (data.newProduct) {
+                    showNotification(data.productMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error("Error fetching notifications:", textStatus, errorThrown);
+            }
+        });
+    }
 
-    // function showNotification(message) {
-    //     var notification = $('<a class = "dropdown-content">' + message + '</a>');
-    //     $('.dropdown').append(notification);
-    //     setTimeout(function() {
-    //         notification.fadeOut(300, function() {
-    //             $(this).remove();
-    //         });
-    //     }, 30000); 
-    // }
+    function showNotification(message) {
+        var notification = $('<div class="notification-popup">' + message + '</div>');
+        $('.notifications-container').append(notification);
 
-    // setInterval(notifTrigger, 5000); 
+        notification.fadeIn(300);
+
+        setTimeout(function() {
+            notification.fadeOut(300, function() {
+                $(this).remove();
+            });
+        }, 3000);
+    }
+
+    setInterval(notifTrigger, 5000);
 </script>
