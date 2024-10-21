@@ -44,7 +44,7 @@ if (!empty($orderIds)) {
                 <h2 style="color: black;">Order Details ID: <?php echo $order['order_id']; ?></h2>
                 <h3>Order Date: <?php echo $order['order_date']; ?></h3>
                 <h3>Student Number:
-                    <input type="text" id="student-id-<?php echo $order['order_id']; ?>" name="student-id" required>
+                    <input type="text" id="student-id-<?php echo $order['order_id']; ?>" name="student-id" placeholder="example: 2024123456...">
                 </h3>
                 <h3>Items:</h3>
                 <ul>
@@ -69,6 +69,8 @@ if (!empty($orderIds)) {
         </div>
     </div>
     <!-- QR Code Modal -->
+
+    <!-- WILL REMOVE SOON -->
     <div id="qrCodeModal<?php echo $order['order_id']; ?>" class="modal">
         <div class="modal-receipt-content">
             <?php
@@ -99,6 +101,10 @@ if (!empty($orderIds)) {
             <button id="print" class="print" onclick="printQRCode(<?php echo $order['order_id']; ?>)">Print QR Code</button>
         </div>
     </div>
+
+
+
+
 
     <!--New  Update Modal -->
     <div id="updateModal<?php echo $order['order_id']; ?>" class="modal">

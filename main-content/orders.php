@@ -211,9 +211,64 @@ include '../session_check.php';
             });
         }
 
+        // function finishOrder(orderId) {
+        //     console.log("Order Id:", orderId);
+        //     var studentNo = $('input[name="student-id"]').val();
+
+        //     // Check if the input has data; if none, it will not proceed to finishing the order
+        //     if (!studentNo || studentNo.trim() === '') {
+        //         alert('Please enter a valid student number before proceeding.');
+        //         return;
+        //     }
+
+        //     $('#confirmation-modal').css('display', 'block');
+
+        //     $('#confirm-print').off('click');
+
+        //     $('#confirm-print').on('click', function() {
+        //         $('#confirmation-modal').css('display', 'none');
+
+        //         $.ajax({
+        //             url: './main-content/orders_function.php',
+        //             method: 'POST',
+        //             data: {
+        //                 action: 'finish',
+        //                 order_id: orderId,
+        //                 student_no: studentNo 
+        //             },
+        //             dataType: 'json',
+        //             success: function(response) {
+        //                 console.log("AJAX request successful. Response:", response);
+
+        //                 if (response.qrcode) {
+        //                     console.log("QR Code generated successfully for orderId:", orderId);
+        //                     openQRModal(orderId);
+
+        //                     // Ensure element exists before trying to insert HTML
+        //                     var qrDisplay = document.getElementById('qr-code-display' + orderId);
+        //                     if (qrDisplay) {
+        //                         qrDisplay.innerHTML = "<img src='./main-content/" + response.qrcode + "' alt='QR Code' />";
+        //                     }
+
+        //                     // Display student number in the receipt modal
+        //                     $('#qr-student-id-' + orderId).text(studentNo);
+        //                 } else {
+        //                     console.error("Error in response: ", response.error);
+        //                     alert(response.error || 'Failed to generate QR code');
+        //                 }
+        //             },
+        //             error: function(jqXHR, textStatus, errorThrown) {
+        //                 console.error("AJAX request failed. Status:", textStatus, "Error:", errorThrown);
+        //                 alert('Error processing the request.');
+        //             }
+        //         });
+        //     });
+        // }
+
         function finishOrder(orderId) {
             console.log("Order Id:", orderId);
-            var studentNo = $('input[name="student-id"]').val();
+
+            var studentNo = $('#student-id-' + orderId).val(); // Update this line to get the student number for the specific order
 
             // Check if the input has data; if none, it will not proceed to finishing the order
             if (!studentNo || studentNo.trim() === '') {
@@ -234,7 +289,7 @@ include '../session_check.php';
                     data: {
                         action: 'finish',
                         order_id: orderId,
-                        student_no: studentNo 
+                        student_no: studentNo // Pass the student number to the server
                     },
                     dataType: 'json',
                     success: function(response) {
@@ -242,7 +297,9 @@ include '../session_check.php';
 
                         if (response.qrcode) {
                             console.log("QR Code generated successfully for orderId:", orderId);
-                            openQRModal(orderId);
+
+                            // Display student number in the receipt modal
+                            $('#qr-student-id-' + orderId).text(studentNo);
 
                             // Ensure element exists before trying to insert HTML
                             var qrDisplay = document.getElementById('qr-code-display' + orderId);
@@ -250,8 +307,8 @@ include '../session_check.php';
                                 qrDisplay.innerHTML = "<img src='./main-content/" + response.qrcode + "' alt='QR Code' />";
                             }
 
-                            // Display student number in the receipt modal
-                            $('#qr-student-id-' + orderId).text(studentNo);
+                            // Open the receipt in a new window and trigger print
+                            openReceiptWindow(orderId, studentNo, response.qrcode);
                         } else {
                             console.error("Error in response: ", response.error);
                             alert(response.error || 'Failed to generate QR code');
@@ -266,8 +323,55 @@ include '../session_check.php';
         }
 
 
+        // Function to open a new window and load receipt content
+        function openReceiptWindow(orderId, studentNo, qrCodeUrl) {
+            // Get the content of the modal
+            var modalContent = `
+        <div>
+            <h4>Philippine Christian University - Dasmariñas</h6>
+            <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
+            <h6>-------</h6>
+            <h6>Order ID: ${orderId}</h6>
+            <h6>Student Number: ${studentNo}</h6>
+            <div id="itemContainer">
+                ${$('#itemContainer' + orderId).html()}
+            </div>
+           <h6>-------</h6>
+            <div id="qr-code-display" style:"text-align:center;">
+                <img src='./main-content/${qrCodeUrl}' alt='QR Code' />
+            </div>
+        </div>
+    `;
+            // Opens new window and triggers print window.
+            var printWindow = window.open('', '_blank', 'width=600,height=400');
+            printWindow.document.write(`
+        <html>
+        <head>
+            <title>Order Receipt</title>
+            <style>
+                h6 { font-family: Arial, sans-serif; margin: 0; text-align:center; padding: 2px;}
+                h4 {font-family: Times New Roman, sans-serif; margin:0; text-align:center; padding: 2px;}
+                
+                img { max-width: 100px; margin-left:20px; margin-right:20px; }
+            </style>
+        </head>
+        <body>
+            ${modalContent}
+        </body>
+        </html>
+    `);
+
+            // Wait for the new window to finish loading, then trigger print
+            printWindow.document.close(); // Close the document writing stream
+            printWindow.onload = function() {
+                printWindow.focus(); // Make sure the window has focus
+                printWindow.print(); // Trigger the print dialog
+                loadOrders();
+            };
+        }
 
         $(document).ready(function() {
+
             function removeItem(itemId, orderId, itemElement) {
                 $.ajax({
                     url: './main-content/orders_function.php',
@@ -283,8 +387,8 @@ include '../session_check.php';
                             itemElement.remove();
 
                             $('#item-id-' + itemId).remove(); // Adjusted to match the correct ID format
-                            loadOrderDetails(orderId);
-                            loadQrDetails(orderId);
+                            loadOrderDetails(orderId); // Refresh order details
+                            loadQrDetails(orderId); // Refresh QR details if applicable
 
                         } else {
                             // Display error message
@@ -297,6 +401,10 @@ include '../session_check.php';
                 });
             }
 
+            // Unbind the previous click handler to prevent duplicate events
+            $(document).off('click', '.remove-item');
+
+            // Attach the click event to dynamically handle the remove button
             $(document).on('click', '.remove-item', function(event) {
                 var itemId = $(this).data('item-id');
                 var orderId = $(this).data('order-id');
@@ -308,18 +416,14 @@ include '../session_check.php';
 
 
 
-
-
         // Print QR code function
-        function printQRCode(orderId) {
-            var qrCodeImg = document.getElementById('qr-code-display' + orderId).innerHTML;
-            window.print();
-            // print(qrCodeImg);
-            loadOrders();
+        // function printQRCode(orderId) {
+        //     var qrCodeImg = document.getElementById('qr-code-display' + orderId).innerHTML;
+        //     window.print();
+        //     // print(qrCodeImg);
+        //     loadOrders();
 
-        }
-
-
+        // }
 
         // ------------------------------------------------
         // Loading datas
@@ -350,6 +454,7 @@ include '../session_check.php';
             });
         }
 
+        // Load yung laman sa qr para dynamically mag update kapag nag re-remove o nag dag-gad
         function loadQrDetails(orderId) {
             $.ajax({
                 url: './main-content/update_qrmodal.php',
@@ -360,11 +465,9 @@ include '../session_check.php';
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
-                        // Target the specific item container for the order
                         var itemContainer = $('#itemContainer' + orderId);
                         itemContainer.empty(); // Clear existing items
 
-                        // Append new items dynamically
                         if (response.items.length > 0) {
                             response.items.forEach(function(item) {
                                 var itemHtml = `<h6>Item: ${item.product_name}......x ${item.quantity}</h6>`;
@@ -421,13 +524,4 @@ include '../session_check.php';
             });
         }
         setInterval(pollOrderStatus, 3000);
-
-
-        // --NOTIFICATIONS--
-        // --------------------------------------------------------------------------------------
-        // $('#confirm-print').on('click', function() {
-        //     console.log('Check for notifications on confirm-print');
-        //     notifTrigger();
-        // });
-        // --------------------------------------------------------------------------------------
     </script>

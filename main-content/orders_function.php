@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $modifiedBy = $_SESSION['user_id'];
             $modificationTimestamp = date('Y-m-d H:i:s');
 
-            
+
             $conne->begin_transaction();
 
             try {
@@ -143,8 +143,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-        case 'finish':
+            // case 'finish':
 
+            // $itemsQuery = "
+            // SELECT i.item_id, i.quantity, p.price 
+            // FROM items i 
+            // JOIN products p ON i.product_id = p.product_id 
+            // WHERE i.order_id = ?";
+
+            // $stmt = $conne->prepare($itemsQuery);
+            // $stmt->bind_param('i', $orderId);
+            // $stmt->execute();
+            // $result = $stmt->get_result();
+
+            // $totalItems = 0;
+            // $totalAmount = 0.0; // Initialize total amount
+            // $itemDetails = [];
+
+            //     while ($row = $result->fetch_assoc()) {
+            //         $itemId = $row['item_id'];
+            //         $quantity = $row['quantity'];
+            //         $price = $row['price']; // Price from the products table
+            //         $totalItems += $quantity; // Sum up the total quantity
+            //         $itemAmount = $price * $quantity; // Calculate item total amount
+            //         $totalAmount += $itemAmount; // Add to total amount
+
+            //         // Add item details for QR code
+            //         $itemDetails[] = "Item ID: $itemId, Quantity: $quantity, Price: $price, Item Total: $itemAmount";
+            //     }
+
+            //     $stmt->close();
+
+            //     // Finish order and generate QR code
+            //     $qrData = generateRandCode();
+            //     $filePath = '../qrcodes/order_' . $orderId . '.png';
+            //     QRcode::png($qrData, $filePath);
+
+
+            //     $stmt = $conne->prepare("UPDATE orders SET status = 'completed' WHERE order_id = ?");
+            //     $stmt->bind_param('i', $orderId);
+
+            //     if ($stmt->execute()) {
+            //         // Insert data into the transactions table
+            //         $userId = $_SESSION['user_id'];
+            //         $status = 'unclaimed'; // Initial status
+            //         $transactionDate = date('Y-m-d H:i:s');
+
+            //         // Prepare the insert query for the transaction
+            //         $insertQuery = "
+            //         INSERT INTO transactions (order_id, user_id, total_quantity, total_amount, transaction_date, qr_code, status) 
+            //         VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            //         $stmtTrans = $conne->prepare($insertQuery);
+            //         $stmtTrans->bind_param('iiidsss', $orderId, $userId, $totalItems, $totalAmount, $transactionDate, $qrData, $status);
+
+            //         if ($stmtTrans->execute()) {
+            //             echo json_encode(['success' => 'Order completed', 'qrcode' => $filePath, 'message' => 'New transaction added!']);
+            //         } else {
+            //             echo json_encode(['error' => 'Failed to insert transaction data']);
+            //         }
+
+            //         $stmtTrans->close();
+            //     } else {
+            //         echo json_encode(['error' => 'Failed to finish order']);
+            //     }
+
+            //     $stmt->close();
+            //     break;
+            // -------------------------------------------------------------
+        case 'finish':
+            // Assume you already have $orderId set from the POST request
+            $studentNo = $_POST['student_no']; // Capture the student number from the request
             $itemsQuery = "
             SELECT i.item_id, i.quantity, p.price 
             FROM items i 
@@ -160,26 +229,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $totalAmount = 0.0; // Initialize total amount
             $itemDetails = [];
 
-            while ($row = $result->fetch_assoc()) {
-                $itemId = $row['item_id'];
-                $quantity = $row['quantity'];
-                $price = $row['price']; // Price from the products table
-                $totalItems += $quantity; // Sum up the total quantity
-                $itemAmount = $price * $quantity; // Calculate item total amount
-                $totalAmount += $itemAmount; // Add to total amount
+            $studentId = null;
 
-                // Add item details for QR code
-                $itemDetails[] = "Item ID: $itemId, Quantity: $quantity, Price: $price, Item Total: $itemAmount";
-            }
-
+            // Check if the student number already exists
+            $query = "SELECT student_id FROM students WHERE student_no = ?";
+            $stmt = $conne->prepare($query);
+            $stmt->bind_param('s', $studentNo);
+            $stmt->execute();
+            $stmt->bind_result($studentId);
+            $stmt->fetch();
             $stmt->close();
 
-            // Finish order and generate QR code
+            // If student number does not exist, insert it
+            if (!$studentId) {
+                $query = "INSERT INTO students (student_no) VALUES (?)";
+                $stmt = $conne->prepare($query);
+                $stmt->bind_param('s', $studentNo);
+                if ($stmt->execute()) {
+                    $studentId = $stmt->insert_id; // Get the newly inserted student_id
+                }
+                $stmt->close();
+            }
+
             $qrData = generateRandCode();
             $filePath = '../qrcodes/order_' . $orderId . '.png';
             QRcode::png($qrData, $filePath);
 
-            
             $stmt = $conne->prepare("UPDATE orders SET status = 'completed' WHERE order_id = ?");
             $stmt->bind_param('i', $orderId);
 
@@ -191,11 +266,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Prepare the insert query for the transaction
                 $insertQuery = "
-                INSERT INTO transactions (order_id, user_id, total_quantity, total_amount, transaction_date, qr_code, status) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+                INSERT INTO transactions (order_id, user_id, total_quantity, total_amount, transaction_date, qr_code, status, student_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; // Add student_id to the insert query
 
                 $stmtTrans = $conne->prepare($insertQuery);
-                $stmtTrans->bind_param('iiidsss', $orderId, $userId, $totalItems, $totalAmount, $transactionDate, $qrData, $status);
+                $stmtTrans->bind_param('iiidsisi', $orderId, $userId, $totalItems, $totalAmount, $transactionDate, $qrData, $status, $studentId); // Bind student_id
 
                 if ($stmtTrans->execute()) {
                     echo json_encode(['success' => 'Order completed', 'qrcode' => $filePath, 'message' => 'New transaction added!']);
@@ -288,7 +363,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $conne->commit();
                     echo json_encode(['success' => true]);
                 } catch (Exception $e) {
-                  
+
                     $conne->rollback();
                     echo json_encode(['error' => 'Failed to remove item: ' . $e->getMessage()]);
                 }
@@ -296,7 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['error' => 'Item ID or Order ID not provided']);
             }
             break;
-            
+
         default:
             echo json_encode(['error' => 'Invalid action']);
             break;

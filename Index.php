@@ -20,6 +20,8 @@ require "dbconnection.php";
     <link href="./asset/css/fontawesome.css" rel="stylesheet" />
     <link href="./asset/css/brands.css" rel="stylesheet" />
     <link href="./asset/css/solid.css" rel="stylesheet" />
+    <link href="./asset/css/regular.css" rel="stylesheet" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

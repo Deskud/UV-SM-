@@ -2,7 +2,13 @@
 require "../dbconnection.php";
 include '../session_check.php';
 
-$query = "SELECT * FROM transactions";
+$query = " SELECT 
+        t.*, 
+        s.student_no 
+    FROM 
+        transactions t
+    LEFT JOIN 
+        students s ON t.student_id = s.student_id";
 $display_purchase_history = mysqli_query($conne, $query);
 
 ?>
@@ -31,7 +37,7 @@ $display_purchase_history = mysqli_query($conne, $query);
                 <td><?php echo htmlspecialchars($row['total_quantity']); ?></td>
                 <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
                 <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
-                <td><?php echo htmlspecialchars($row['student_id']); ?></td>
+                <td><?php echo htmlspecialchars($row['student_no']); ?></td>
                 <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
                 <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
                 <td><?php echo htmlspecialchars($row['status']); ?></td>

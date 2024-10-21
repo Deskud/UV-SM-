@@ -34,7 +34,7 @@ while ($row = mysqli_fetch_assoc($used_cells_result)) {
             <select class="cell-num-select" data-product-id="<?php echo htmlspecialchars($row['product_id']); ?>">
                 <option value="" disabled style="color: white;">Select Cell Number</option>
                 <option value="" <?php echo is_null($row['unit_num']) ? 'selected' : ''; ?>>NULL</option>
-                <?php for ($i = 1; $i <= 24; $i++): ?>
+                <?php for ($i = 1; $i <= 12; $i++): ?>
                     <?php if (!in_array($i, $used_cells) || $i == $row['unit_num']): ?>
                         <option value="<?php echo $i; ?>" <?php echo $i == $row['unit_num'] ? 'selected' : ''; ?>>
                             <?php echo $i; ?>
