@@ -2,13 +2,9 @@
 require "../dbconnection.php";
 include '../session_check.php';
 
-$query = " SELECT 
-        t.*, 
-        s.student_no 
-    FROM 
-        transactions t
-    LEFT JOIN 
-        students s ON t.student_id = s.student_id";
+$query = " SELECT  t.*, s.student_no 
+    FROM transactions t
+    LEFT JOIN students s ON t.student_id = s.student_id";
 $display_purchase_history = mysqli_query($conne, $query);
 
 ?>

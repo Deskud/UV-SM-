@@ -1,15 +1,17 @@
-//MODAL FOR ADDING PRODUCTS
+
+// Handles all the modals
 
 
 $(document).ready(function () {
-    var modalProduct = $('#add-product-modal'); // Modal window para sa add product
-    var modalProdInfo = $('#info-modal'); //Para sa info button sa product
-    var modalConfirm = $('#confirmation-modal');//Modal confirmation para sa archive/orders
-    var modalOrders = $('#proceed-order-modal');//Modal winodw para sa orders
-    var modalUpdateorder = $('#update-orders');
-    var modalEdittransactions = $('#transaction-modal');
-    var modalReturn = $('#return');
-    var closeModal = $('.close-modal'); // Get the <span> element that closes the modal
+    let modalProduct = $('#add-product-modal'); // Modal window para sa add product
+    let modalProdInfo = $('#info-modal'); //Para sa info button sa product
+    let modalConfirm = $('#confirmation-modal');//Modal confirmation para sa archive/orders
+    let modalOrders = $('#proceed-order-modal');//Modal winodw para sa orders
+    let modalUpdateorder = $('#update-orders');
+    let modalEdittransactions = $('#transaction-modal');
+    let modalPrinttransactions =$('#print-transaction');
+    let modalReturn = $('#return');
+    let closeModal = $('.close-modal');
    
     //Bubukas modal window pag pinendot yung button (ADD PRODUCT)
     $('#add-product-btn').on('click', function () {
@@ -24,6 +26,7 @@ $(document).ready(function () {
         modalOrders.css('display', 'none');
         modalProdInfo.css('display', 'none');
         modalEdittransactions.css('display', 'none');
+        modalPrinttransactions.css('display', 'none');
     });
     
 
@@ -48,13 +51,10 @@ $(document).ready(function () {
         // if ($(event.target).is(modalOrders)) {
         //     modalOrders.css('display', 'none');
         // }
-        
-
-
     });
     
 
-    // FOR closing ng update at finish order modal pero di mag 
+    // For closing ng update at finish order modal pero di mag 
     // c-close yung main modal window (proceed-order-modal) 
 
     modalReturn.on('click', function () {

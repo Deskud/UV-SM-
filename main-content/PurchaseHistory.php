@@ -6,15 +6,33 @@ include '../session_check.php';
 <h3 class="title-form">Purchase History</h3>
 <hr>
 
-<div class="download-purchase-history">
-    <input type="button" class="download-data" value="Export .csv" onclick="window.location.href='download_data.php'">
 
-</div>
+<button type="button" id='transact-print' class="transact-print">
+    <i class="fa-solid fa-print"></i> Print
+</button>
 
 <div class="transactions-table-container">
-    <!-- dito lalabas tables -->
+    <!-- Displays transaction datas here dynamically -->
 </div>
 
+
+<div id="print-transaction" class="modal">
+    <div class="modal-transaction-print">
+        <span class="close-modal"><i id="close-icon" class="fa-solid fa-xmark"></i></span>
+
+        <h1 class="title-form">Monthly Sales Report</h1>
+        <p>Filter range of date to print:</p>
+        <input type="date" id="start-date" value="" placeholder="Start Date">
+        <input type="date" id="end-date" value="" placeholder="End Date">
+        <button id="filter-btn" class="filter-btn" onclick="printTransaction()">Filter</button>
+
+
+        <!-- <div class="download-purchase-history">
+            <input type="button" class="download-data" value="Download" onclick="window.location.href='download_data.php'">
+        </div> -->
+
+    </div>
+</div>
 
 <div id="transaction-modal" class="modal">
     <div class="modal-transaction-content">
@@ -48,7 +66,7 @@ include '../session_check.php';
                 <input type="number" min="0" oninput="validity.valid||(value='');" class="input-quantity-dispensed" name="quantity-dispensed">
 
                 <div class="transact-submit">
-                <input type="submit" name="Transaction" id="update-transaction" value="Update">
+                    <input type="submit" name="Transaction" id="update-transaction" value="Update">
                 </div>
         </form>
     </div>
@@ -59,7 +77,8 @@ include '../session_check.php';
     $(document).ready(function() {
         loadPurchases();
 
-        $(document).off('click', '.edit-transaction').on('click', '.edit-transaction', function()  {
+        // Edit Transaction
+        $(document).off('click', '.edit-transaction').on('click', '.edit-transaction', function() {
             let transactId = $(this).data('id');
             $('#transaction-modal').css('display', 'block');
 
@@ -87,6 +106,7 @@ include '../session_check.php';
             })
         });
 
+        // For submitting updated data transactions
         $('#edit-transactform').on('submit', function(e) {
             e.preventDefault();
 
@@ -105,9 +125,114 @@ include '../session_check.php';
                 }
             });
         });
+
+        // Opening the printing modal
+        $(document).off('click', '#transact-print').on('click', '#transact-print', function() {
+            $('#print-transaction').css('display', 'block');
+            console.log('working');
+        });
+
     });
 
 
+    // Function for generating monthly sales report based on date range
+    function printTransaction() {
+
+        var startDate = document.getElementById('start-date').value;
+        var endDate = document.getElementById('end-date').value;
+
+
+
+        $.ajax({
+            url: './main-content/fetch_sales_report.php',
+            method: 'POST',
+            data: {
+                start_date: startDate,
+                end_date: endDate
+            },
+            success: function(response) {
+                var data = JSON.parse(response);
+                var transactions = data.transactions;
+                var totalAmount = 0;
+                var totalQuantity = 0;
+                var totalDispensed = 0;
+
+                var printContent = '';
+                transactions.forEach(function(transactions) {
+                    printContent += `
+                    <tr>
+                        <td>${transactions.transaction_id}</td>
+                        <td>${transactions.student_no}</td>
+                        <td>${transactions.total_amount}</td>
+                        <td>${transactions.total_quantity}</td>
+                        <td>${transactions.transaction_date}</td>
+                        <td>${transactions.quantity_dispensed}</td>     
+                        <td>${transactions.qr_code}</td>
+                        <td>${transactions.status}</td>    
+                        <td>${transactions.last_name}</td>
+                    </tr>
+                `;
+
+                //Calculates total amount, total quantity, and total dispensed based on the date range selected. 
+                    totalAmount += parseFloat(transactions.total_amount);
+                    totalQuantity += parseFloat(transactions.total_quantity);
+                    totalDispensed += parseInt(transactions.quantity_dispensed);
+                });
+                //Width and heigh is equivalent to an A4 paper. Meant for printing.
+                let reportWindow = window.open('', '_blank', 'width=2480,height=3508')
+                reportWindow.document.write(
+                    `
+            <html>
+                <link rel="stylesheet" href="./asset/styles.css">
+
+                <head>
+                    <img src="Images/PCU Logo.png" alt="PCU Logo" id="PCUlogo-login-print">
+                    <h1 style="color:black;">Uniform Monthly Sales Report</h1>
+                </head>
+                <body>
+                    
+                    <table>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Student No</th>
+                            <th>Unit Amount</th>
+                            <th>Unit Quantity</th>                
+                            <th>Transaction Date</th>
+                            <th>Quantity Dispensed</th>
+                            <th>QR Code</th>
+                            <th>Status</th>
+                            <th>Prepared By</th>   
+                        </tr>
+                            ${printContent}
+                     
+                    <table>
+                    <h4 style="color:black;">
+                        Total Month Uniform Sales: ${totalAmount}
+                    </h4>
+
+                    <h4 style="color:black;">
+                       Total Unit Sale: ${totalQuantity}
+                    </h4>
+                    <h4 style="color:black;">
+                       Total Dispensed: ${totalDispensed}
+                    </h4>
+
+                </body>
+            </html>
+            `
+                );
+
+                reportWindow.document.close();
+                reportWindow.onload = function() {
+                    reportWindow.focus();
+                    reportWindow.print();
+
+                };
+            }
+        });
+    }
+
+    // Shows purchase data 
     function loadPurchases() {
         $.ajax({
             url: './main-content/fetch_transactions.php',
@@ -120,36 +245,7 @@ include '../session_check.php';
             }
         })
     }
+
+    // Loads purchase data every 5 seconds
     setInterval(loadPurchases, 5000);
-    // function purchasePoll() {
-    //     $.ajax({
-    //         url: './server/purchasehistory_poll.php',
-    //         type: 'GET',
-    //         dataType: 'json',
-    //         success: function(response) {
-    //             $('#transactions-table tbody').empty();
-
-    //             // Append new rows with updated transaction data
-    //             response.forEach(function(row) {
-    //                 $('#transactions-table tbody').append(
-    //                     `<tr>
-    //                         <td>${row.transaction_id}</td>
-    //                         <td>${row.order_id}</td>
-    //                         <td>${row.total_quantity}</td>
-    //                         <td>${row.total_amount}</td>
-    //                         <td>${row.transaction_date}</td>
-    //                         <td>${row.qr_code}</td>
-    //                         <td>${row.quantity_dispensed}</td>
-    //                         <td>${row.status}</td>
-    //                     </tr>`
-    //                 );
-    //             });
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.error("Failed to fetch transactions:", error);
-    //         }
-    //     });
-    // }
-
-    // setInterval(purchasePoll, 3000);
 </script>

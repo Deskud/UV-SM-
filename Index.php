@@ -33,17 +33,17 @@ require "dbconnection.php";
 
 <body id="Main-body">
     <div class="notifications-container">
-        <!-- dito lalabas pop up -->
+        <!-- This is where the pop up modifaction will be append -->
     </div>
 
 
 
     <div id="Topnavigator-container">
         <img style="margin-right: 20px;" src="./Images/PCU Logo.png">
-        <h1 style="padding:10px;margin:-5px;">Uniform Stock Monitoring System</h1>
+        <h1 style="padding:10px;margin:-5px; color: rgb(0, 78, 164);">Uniform Stock Monitoring System</h1>
         <div class="sign-out">
 
-            <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
+            <a href="logout.php"><i style="color:#0454ac;" class="fa-solid fa-right-from-bracket"></i> Sign out</a>
 
         </div>
     </div>

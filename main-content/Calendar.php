@@ -5,7 +5,7 @@ require "../dbconnection.php";
 <h3 class="title-form">Calendar of Transactions</h3>
 <hr>
 <div class="filter-container">
-
+    <!-- Fiters date range and displays the data based on that range -->
     <input type="date" id="start-date" value="" placeholder="Start Date">
     <input type="date" id="end-date" value="" placeholder="End Date">
     <button id="filter-btn" class="filter-btn">Filter</button>
@@ -25,6 +25,7 @@ require "../dbconnection.php";
 <script>
     // Para sa pag generate ng dates
     $(document).ready(function() {
+
         // Check if there's a previously selected date range in localStorage
         let storedStartDate = localStorage.getItem('startDate');
         let storedEndDate = localStorage.getItem('endDate');

@@ -10,10 +10,9 @@ $(document).ready(function() {
         // Load the content into the container
         $('#Main-container').load(target);
 
-        // Save active page in localStorage
+        // Saves the recently clicked page to the local storage
         localStorage.setItem('activePage', target);
 
-        // Update the URL without reloading the page
         if (shouldUpdateURL) {
             var page = target.replace('./main-content/', '').replace('.php', '');
             history.pushState(null, null, '?page=' + page);
@@ -36,7 +35,7 @@ $(document).ready(function() {
         setActivePage(target, false);  // 
     }
 
-    // Handle back/forward browser buttons (popstate event)
+   
     window.onpopstate = function() {
         loadContentFromURL();  // Reload content based on current URL
     };
@@ -50,6 +49,5 @@ $(document).ready(function() {
 
 });
 
-// Reload table para sa products
 
 

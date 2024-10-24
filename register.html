@@ -4,16 +4,16 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="Styles.css">
+        <link rel="stylesheet" href="./asset/styles.css">
         <title>Register</title>
     </head>
-    
-    <body id="Register-body">
 
-        <img style= "width: 150px; height: 150px;" src="./Images/PCU Logo.png">
-        <h1 class="Register-title">Register New User</h1>
+    <body id="Register-body">
+        
+        <img style="width: 150px; height: 150px;" src="./Images/PCU Logo.png">
 
         <div class="Register-container">
+            <h1 class="Register-title">Register New User</h1>
             <form action="register.php" method="post">
                 <div class="Register-content">
                     <label for="last_name">Last Name:</label>
@@ -22,30 +22,30 @@
                 <div class="Register-content"></div>
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" required>
-        <div class="Register-content">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <div class="Register-content">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="Register-content">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="Register-content">
-                <label for="access_id">Role:</label>
-                <select id="access_id" name="access_id" required>
-                    <option value="1">Admin</option>
-                    <option value="2">Cashier</option>
-                </select>
-            </div>
-            <div class="Register-submit">
-                <input type="submit" value="Register" name="register" id="reg-submit">
-            </div>
+                <div class="Register-content">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="Register-content">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="Register-content">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="Register-content">
+                        <label for="access_id">Role:</label>
+                        <select id="access_id" name="access_id" required>
+                            <option value="1">Admin</option>
+                            <option value="2">Cashier</option>
+                        </select>
+                    </div>
+                    <div class="Register-submit">
+                        <input type="submit" value="Register" name="register" id="reg-submit">
+                    </div>
 
-        </div>
-        </form>
+                </div>
+            </form>
     </body>
 
 </html>

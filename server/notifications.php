@@ -34,7 +34,7 @@ if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_transaction_check'
     $response['newTransaction'] = false;
 }
 
-// Check if there are new items
+//Item update
 $query = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM items WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
 $result = $conne->query($query);
 $row = $result->fetch_assoc();
@@ -45,21 +45,8 @@ if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_item_check']) {
 } else {
     $response['newItem'] = false;
 }
-
-// Check if there are new orders
-// $query = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM orders WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
-// $result = $conne->query($query);
-// $row = $result->fetch_assoc();
-// if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_order_check']) {
-//     $_SESSION['last_order_check'] = $row['last_date']; // Update session
-//     $response['newOrder'] = true;
-//     $response['orderMessage'] = 'New order placed!';
-// } else {
-//     $response['newOrder'] = false;
-// }
-
 // Check if new addition
-$queryNewOrders ="SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM orders WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
+$queryNewOrders = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM orders WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
 
 $resultNewOrders = $conne->query($queryNewOrders);
 $rowNewOrders = $resultNewOrders->fetch_assoc();
@@ -88,17 +75,5 @@ if ($rowCompletedOrders['count'] > 0) {
     $response['completedOrder'] = false;
 }
 
-
-// Check if there are new products
-$query = "SELECT COUNT(*) as count, MAX(date_added) as last_date FROM products WHERE date_added > NOW() - INTERVAL 5 MINUTE";
-$result = $conne->query($query);
-$row = $result->fetch_assoc();
-if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_product_check']) {
-    $_SESSION['last_product_check'] = $row['last_date']; // Update session
-    $response['newProduct'] = true;
-    $response['productMessage'] = 'New product added!';
-} else {
-    $response['newProduct'] = false;
-}
 
 echo json_encode($response);
