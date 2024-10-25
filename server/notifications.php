@@ -22,17 +22,6 @@ if (!isset($_SESSION['last_product_check'])) {
     $_SESSION['last_product_check'] = '';
 }
 
-// Check if there are new transactions
-$query = "SELECT COUNT(*) as count, MAX(transaction_date) as last_date FROM transactions WHERE transaction_date > NOW() - INTERVAL 5 MINUTE";
-$result = $conne->query($query);
-$row = $result->fetch_assoc();
-if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_transaction_check']) {
-    $_SESSION['last_transaction_check'] = $row['last_date']; // Update session
-    $response['newTransaction'] = true;
-    $response['transactionMessage'] = 'New transaction added!';
-} else {
-    $response['newTransaction'] = false;
-}
 
 //Item update
 $query = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM items WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
@@ -45,8 +34,12 @@ if ($row['count'] > 0 && $row['last_date'] != $_SESSION['last_item_check']) {
 } else {
     $response['newItem'] = false;
 }
-// Check if new addition
-$queryNewOrders = "SELECT COUNT(*) as count, MAX(updated_at) as last_date FROM orders WHERE updated_at > NOW() - INTERVAL 5 MINUTE";
+
+
+// Check if new order
+// Fixed: before it uses update_date in the query, which spams the notification pop up. 
+// Changed to order_date to check if its actually newly added.
+$queryNewOrders = "SELECT COUNT(*) as count, MAX(order_date) as last_date FROM orders WHERE order_date > NOW() - INTERVAL 5 MINUTE";
 
 $resultNewOrders = $conne->query($queryNewOrders);
 $rowNewOrders = $resultNewOrders->fetch_assoc();
@@ -57,22 +50,6 @@ if ($rowNewOrders['count'] > 0 && $rowNewOrders['last_date'] != $_SESSION['last_
     $response['orderMessage'] = 'New order placed!';
 } else {
     $response['newOrder'] = false;
-}
-
-// Check for completed orders
-$queryCompletedOrders = "
-    SELECT COUNT(*) as count 
-    FROM orders 
-    WHERE status = 'completed' AND updated_at > NOW() - INTERVAL 5 MINUTE
-";
-$resultCompletedOrders = $conne->query($queryCompletedOrders);
-$rowCompletedOrders = $resultCompletedOrders->fetch_assoc();
-
-if ($rowCompletedOrders['count'] > 0) {
-    $response['completedOrder'] = true;
-    $response['completedMessage'] = 'An order has been completed!';
-} else {
-    $response['completedOrder'] = false;
 }
 
 

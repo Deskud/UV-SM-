@@ -180,7 +180,17 @@ th {
     margin-right: auto;
     display: inline-block;
     margin-bottom: -10px;
-    
+
+}
+
+#PCUlogo-login-receipt {
+    width: 50px;
+    height: 50px;
+    /* margin-bottom: auto; */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: -10px;
 }
 
 .Login-title {
@@ -404,18 +414,18 @@ th {
     font-family: "Mulish", Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 20px;
-    border-radius: 2px;
+    border-radius: 3px;
     border: solid 1px;
     border-color: rgb(0, 0, 0, 0.25);
     background: rgb(255, 255, 255);
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0.07326680672268904) 100%);
     color: #000000;
     height: fit-content;
     width: 100%;
-    max-width: 1000px;
-    min-width: 950px;
+    max-width: 8500px;
+    min-width: 450px;
     padding: 5px;
     text-align: center;
+    box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, .4);
 
 
 }
@@ -1040,19 +1050,11 @@ th {
     text-align: center;
 }
 
-
-/* hide button if mag p-print na ng receipt
-@media print {
-
-    #qrCodeModal,
-    #qrCodeModal * {
-        visibility: visible;
-    }
-
-    #print {
-        visibility: hidden;
-    }
-} */
+#qrCodeImage {
+    max-width: 100px;
+    /* margin-right: 61%; */
+    margin-left: 20px;
+}
 
 #qr-code-display {
     align-items: center;

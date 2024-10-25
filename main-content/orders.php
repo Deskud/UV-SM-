@@ -174,21 +174,17 @@ include '../session_check.php';
 
         function updateOrder(orderId) {
             var quantities = {};
-            var productNames = {}; // New object to hold product names
 
             $('#updateModal' + orderId + ' .quantity-input').each(function() {
                 var itemId = $(this).data('item-id');
                 var quantity = $(this).val();
-                var productName = $(this).closest('li').find('h6').text().split(' x ')[0];
 
                 if (quantity) {
                     quantities[itemId] = quantity;
-                    productNames[itemId] = productName;
                 }
             });
 
             console.log(quantities);
-            console.log(productNames);
 
             $.ajax({
                 url: './main-content/orders_function.php',
@@ -197,7 +193,6 @@ include '../session_check.php';
                     action: 'update',
                     order_id: orderId,
                     quantities: quantities,
-                    product_names: productNames
                 },
                 success: function(response) {
                     console.log(response);
@@ -223,10 +218,11 @@ include '../session_check.php';
             }
 
             $('#confirmation-modal').css('display', 'block');
-
-            $('#confirm-print').off('click');
-
-            $('#confirm-print').on('click', function() {
+            
+           
+            // Ngayon ko lang narinig .one function wow
+            
+            $('#confirm-print').off('click').one('click', function() {
                 $('#confirmation-modal').css('display', 'none');
 
                 $.ajax({
@@ -235,19 +231,17 @@ include '../session_check.php';
                     data: {
                         action: 'finish',
                         order_id: orderId,
-                        student_no: studentNo // Pass the student number to the server
+                        student_no: studentNo
                     },
                     dataType: 'json',
                     success: function(response) {
                         console.log("AJAX request successful. Response:", response);
-
+                        loadOrderDetails(orderId);
                         if (response.qrcode) {
                             console.log("QR Code generated successfully for orderId:", orderId);
 
-                            // Display student number in the receipt modal
                             $('#qr-student-id-' + orderId).text(studentNo);
 
-                            // Ensure element exists before trying to insert HTML
                             var qrDisplay = document.getElementById('qr-code-display' + orderId);
                             if (qrDisplay) {
                                 qrDisplay.innerHTML = "<img src='./main-content/" + response.qrcode + "' alt='QR Code' />";
@@ -259,6 +253,8 @@ include '../session_check.php';
                             console.error("Error in response: ", response.error);
                             alert(response.error || 'Failed to generate QR code');
                         }
+
+
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX request failed. Status:", textStatus, "Error:", errorThrown);
@@ -274,17 +270,18 @@ include '../session_check.php';
             // Get the content of the modal
             var modalContent = `
         <div>
-            <h4>Philippine Christian University - Dasmariñas</h6>
-            <h6>PCU College Building, Dasmariñas, 4114 Cavite</h6>
-            <h6>-------</h6>
-            <h6>Order ID: ${orderId}</h6>
-            <h6>Student Number: ${studentNo}</h6>
-            <div id="itemContainer">
+            <h4 style = "text-align:center;">Philippine Christian University - Dasmariñas</h6>
+            <h6 style = "text-align:center;" >PCU College Building, Dasmariñas, 4114 Cavite</h6>
+            <h6 style = "text-align:center;">********************</h6>
+            <title>Order Receipt</title>
+            <h6  style = "text-align:center;" >Order ID: ${orderId}</h6>
+            <h6  style = "text-align:center;">Student Number: ${studentNo}</h6>
+            <div style = "text-align:center;" id="itemContainer">
                 ${$('#itemContainer' + orderId).html()}
             </div>
-           <h6>-------</h6>
+            <h6 style = "text-align:center;">********************</h6>
             <div id="qr-code-display" style:"text-align:center;">
-                <img src='./main-content/${qrCodeUrl}' alt='QR Code' />
+                <img id='qrCodeImage'  src='./main-content/${qrCodeUrl}' alt='QR Code' />
             </div>
         </div>
     `;
@@ -294,14 +291,9 @@ include '../session_check.php';
                 `
                     <html>
                     <head>
-                        <title>Order Receipt</title>
-                        <style>
-                            h6 { font-family: Arial, sans-serif; margin: 0; text-align:center; padding: 2px;}
-                            h4 {font-family: Times New Roman, sans-serif; margin:0; text-align:center; padding: 2px;}
-                            
-                            img { max-width: 100px; margin-left:20px; margin-right:20px; }
-                        </style>
+                        <link rel="stylesheet" href="./asset/styles.css">
                     </head>
+                    <img src="Images/PCU Logo.png" alt="PCU Logo" id="PCUlogo-login-receipt">
                     <body>
                         ${modalContent}
                     </body>
@@ -309,7 +301,7 @@ include '../session_check.php';
                 `
             );
 
-            printWindow.document.close(); 
+            printWindow.document.close();
             printWindow.onload = function() {
                 printWindow.focus();
                 printWindow.print();
@@ -333,9 +325,9 @@ include '../session_check.php';
                             // Remove the item from the order list
                             itemElement.remove();
 
-                            $('#item-id-' + itemId).remove(); // Adjusted to match the correct ID format
-                            loadOrderDetails(orderId); // Refresh order details
-                            loadQrDetails(orderId); // Refresh QR details if applicable
+                            $('#item-id-' + itemId).remove();
+                            loadOrderDetails(orderId);
+                            loadQrDetails(orderId);
 
                         } else {
                             // Display error message
@@ -348,10 +340,8 @@ include '../session_check.php';
                 });
             }
 
-            // Unbind the previous click handler to prevent duplicate events
             $(document).off('click', '.remove-item');
 
-            // Attach the click event to dynamically handle the remove button
             $(document).on('click', '.remove-item', function(event) {
                 var itemId = $(this).data('item-id');
                 var orderId = $(this).data('order-id');
@@ -360,20 +350,6 @@ include '../session_check.php';
                 removeItem(itemId, orderId, itemElement);
             });
         });
-
-
-
-        // Print QR code function
-        // function printQRCode(orderId) {
-        //     var qrCodeImg = document.getElementById('qr-code-display' + orderId).innerHTML;
-        //     window.print();
-        //     // print(qrCodeImg);
-        //     loadOrders();
-
-        // }
-
-        // ------------------------------------------------
-        // Loading datas
 
         function loadOrderDetails(orderId) {
             $.ajax({
@@ -411,6 +387,8 @@ include '../session_check.php';
                 },
                 dataType: 'json',
                 success: function(response) {
+
+                    console.log(response.items);
                     if (response.success) {
                         var itemContainer = $('#itemContainer' + orderId);
                         itemContainer.empty(); // Clear existing items
@@ -432,9 +410,6 @@ include '../session_check.php';
                 }
             });
         }
-
-
-
 
         function loadOrders() {
             $.ajax({

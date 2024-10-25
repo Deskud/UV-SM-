@@ -8,14 +8,14 @@ $response = array("success" => false, "items" => array());
 if (isset($order_id)) {
     $query = "SELECT p.product_name, i.quantity 
               FROM items i
-              JOIN products p ON i.product_id = p.product_id
+              LEFT JOIN products p ON i.product_id = p.product_id
               WHERE i.order_id = '$order_id'";
     $result = mysqli_query($conne, $query);
 
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             $response['items'][] = array(
-                'product_name' => $row['product_name'], // Make sure product_name is available
+                'product_name' => $row['product_name'], 
                 'quantity' => $row['quantity']
             );
         }
@@ -24,7 +24,6 @@ if (isset($order_id)) {
             $response['success'] = true;
         }
     } else {
-        // Handle query failure
         $response['error'] = 'Failed to retrieve items.';
     }
 } else {
