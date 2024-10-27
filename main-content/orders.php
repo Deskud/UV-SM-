@@ -271,7 +271,7 @@ include '../session_check.php';
             var modalContent = `
         <div>
             <h4 style = "text-align:center;">Philippine Christian University - Dasmariñas</h6>
-            <h6 style = "text-align:center;" >PCU College Building, Dasmariñas, 4114 Cavite</h6>
+            <h6 style = "text-align:center;" >PCU New Building, Dasmariñas, 4114 Cavite</h6>
             <h6 style = "text-align:center;">********************</h6>
             <title>Order Receipt</title>
             <h6  style = "text-align:center;" >Order ID: ${orderId}</h6>
