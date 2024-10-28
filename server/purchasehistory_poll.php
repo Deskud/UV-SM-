@@ -1,6 +1,8 @@
 <?php
 require "../dbconnection.php";
 
+// Unused but will not remove...for now.
+
 $query = "SELECT * FROM transactions";
 $result = mysqli_query($conne, $query);
 

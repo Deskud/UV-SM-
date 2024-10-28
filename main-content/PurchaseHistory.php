@@ -135,7 +135,7 @@ include '../session_check.php';
     });
 
 
-    // Function for generating monthly sales report based on date range
+    // Function for generating monthly sales report based on date range.
     function printTransaction() {
 
         var startDate = document.getElementById('start-date').value;
@@ -173,7 +173,7 @@ include '../session_check.php';
                     </tr>
                 `;
 
-                //Calculates total amount, total quantity, and total dispensed based on the date range selected. 
+                    //Calculates total amount, total quantity, and total dispensed based on the date range selected. 
                     totalAmount += parseFloat(transactions.total_amount);
                     totalQuantity += parseFloat(transactions.total_quantity);
                     totalDispensed += parseInt(transactions.quantity_dispensed);
@@ -189,6 +189,11 @@ include '../session_check.php';
                     <img src="Images/PCU Logo.png" alt="PCU Logo" id="PCUlogo-login-print">
                     <h1 style="color:black;">Uniform Monthly Sales Report</h1>
                 </head>
+
+                 <!-- Added style here for table head font color. Too lazy to change main styling sheet.  -->
+                <style>
+                 table th {color:black;}
+                </style>
                 <body>
                     
                     <table>

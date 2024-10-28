@@ -137,11 +137,7 @@ require "dbconnection.php";
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                // Check for new transactions
-                if (data.newTransaction) {
-                    showNotification(data.transactionMessage);
-                }
-
+     
                 // Check for new items
                 if (data.newItem) {
                     showNotification(data.itemMessage);
@@ -150,11 +146,6 @@ require "dbconnection.php";
                 // Check for new orders
                 if (data.newOrder) {
                     showNotification(data.orderMessage);
-                }
-
-                // Check for new products
-                if (data.newProduct) {
-                    showNotification(data.productMessage);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -173,7 +164,7 @@ require "dbconnection.php";
             notification.fadeOut(300, function() {
                 $(this).remove();
             });
-        }, 3000);
+        }, 10000);
     }
 
     setInterval(notifTrigger, 5000);

@@ -4,8 +4,8 @@
 #include <Keypad.h>
 #include <SoftwareSerial.h>
 
-#include <Adafruit_GFX.h>  // Core graphics library
-#include <MCUFRIEND_kbv.h> // Hardware-specific library
+#include <Adafruit_GFX.h>   // Core graphics library
+#include <MCUFRIEND_kbv.h>  // Hardware-specific library
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 480
 MCUFRIEND_kbv tft;
@@ -21,10 +21,10 @@ SoftwareSerial printer(17, 18);
 #define LIGHT_BLUE 0xADD8E6
 
 // Network settings
-byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-IPAddress ip(192, 168, 1, 105);   // Arduino IP
-IPAddress server(192, 168, 1, 2); // Server IP
-int port = 80;                    // HTTP port
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+IPAddress ip(192, 168, 1, 105);    // Arduino IP
+IPAddress server(192, 168, 1, 2);  // Server IP
+int port = 80;                     // HTTP port
 
 EthernetClient client;
 
@@ -32,38 +32,36 @@ const byte ROWS = 4;
 const byte COLS = 4;
 
 char keys[ROWS][COLS] = {
-    {'1', '4', '7', '*'},
-    {'2', '5', '8', '0'},
-    {'3', '6', '9', '#'},
-    {'A', 'B', 'C', 'D'}};
-byte rowPins[ROWS] = {22, 23, 24, 25};
-byte colPins[COLS] = {26, 27, 28, 29};
+  { '1', '4', '7', '*' },
+  { '2', '5', '8', '0' },
+  { '3', '6', '9', '#' },
+  { 'A', 'B', 'C', 'D' }
+};
+byte rowPins[ROWS] = { 36, 34, 32, 30 };
+byte colPins[COLS] = { 28, 26, 24, 22 };
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
-unsigned long lastActivityTime = 0;          // To track the last time of user interaction
-const unsigned long timeoutDuration = 60000; // 10 seconds timeout
+unsigned long lastActivityTime = 0;           // To track the last time of user interaction
+const unsigned long timeoutDuration = 60000;  // 10 seconds timeout
 
-typedef String (*GetNameFunc)(void *item);
+typedef String (*GetNameFunc)(void* item);
 // to hold category data
-struct Category
-{
-  int category_id;
-  String category_name;
-};
-Category categories[5];
-int categoryCount = 0;
+// struct Category {
+//   int category_id;
+//   String category_name;
+// };
+// Category categories[5];
+// int categoryCount = 0;
 
 // to hold product data
-struct Product
-{
+struct Product {
   String product_name;
 };
 Product products[10];
 int productCount = 0;
 
 // to hold product size data
-struct Size
-{
+struct Size {
   int product_id;
   int size_id;
   String size_name;
@@ -71,8 +69,7 @@ struct Size
 Size sizes[4];
 int sizeCount = 0;
 
-struct Order
-{
+struct Order {
   int product_id;
   String prod_name;
   int size;
@@ -84,8 +81,7 @@ int orderCount = 0;
 
 int product_quantity;
 
-void setup(void)
-{
+void setup(void) {
   Serial.begin(9600);
   printer.begin(9600);
   Ethernet.begin(mac, ip);
@@ -97,8 +93,7 @@ void setup(void)
   delay(1000);
 }
 
-void loop()
-{
+void loop() {
   // Wait for input to start fetching products
   tft.fillScreen(BLACK);
   displayCenteredText("ARDUINO-BASED", 80, 3, WHITE);
@@ -107,12 +102,11 @@ void loop()
   keyToStart('A');
   orderCount = 0;
 
-  while (orderCount < 6)
-  {
-    int selectedCategoryId = categorySelection();
-    Serial.print("Category ID: ");
-    Serial.println(selectedCategoryId);
-    int selectedProductIndex = productSelection(selectedCategoryId);
+  while (orderCount < 2) {
+    // int selectedCategoryId = categorySelection();
+    // Serial.print("Category ID: ");
+    // Serial.println(selectedCategoryId);
+    int selectedProductIndex = productSelection();
     Serial.print("selectedProductIndex: ");
     Serial.println(selectedProductIndex);
     int selectedSizeIndex = sizeSelection(selectedProductIndex);
@@ -147,23 +141,22 @@ void loop()
     orderCount++;
     delay(2000);
 
-    displayText(30, 390, "Add another item?\n'A' = Yes | 'B' = No", 2, WHITE);
-
-    char key = keypad.getKey();
-    while (key != 'A' && key != 'B')
-    {
-      systemTimeout();
-      key = keypad.getKey();
-      delay(100);
+    if (orderCount < 2) {
+      displayText(30, 390, "Add another item?\n'A' = Yes | 'B' = No", 2, WHITE);
+      char key = keypad.getKey();
+      while (key != 'A' && key != 'B') {
+        systemTimeout();
+        key = keypad.getKey();
+        delay(100);
+      }
+      if (key == 'B') break;  // Exit loop if user does not want to add more
+      lastActivityTime = millis();
     }
-    if (key == 'B')
-      break; // Exit loop if user does not want to add more
-    lastActivityTime = millis();
   }
 
   tft.fillScreen(BLACK);
   displayText(30, 30, "Saving order...", 2, YELLOW);
-  sendOrderDetails(orderCount); // Send order details to the server
+  sendOrderDetails(orderCount);  // Send order details to the server
 
   displayText(30, 60, "Done!", 3, GREEN);
   delay(1000);
@@ -176,10 +169,8 @@ void loop()
   delay(2000);
 }
 
-void systemTimeout()
-{
-  if (millis() - lastActivityTime >= timeoutDuration)
-  {
+void systemTimeout() {
+  if (millis() - lastActivityTime >= timeoutDuration) {
     tft.fillScreen(BLACK);
     displayText(30, 30, "Session timed out.\nReturning to start...", 2, RED);
     delay(2000);
@@ -187,71 +178,59 @@ void systemTimeout()
   }
 }
 
-void keyToStart(char expectedKey)
-{
+void keyToStart(char expectedKey) {
   char key = 0;
-  while (key != expectedKey)
-  {
+  while (key != expectedKey) {
     key = keypad.getKey();
     delay(100);
   }
 }
 
-void displayText(int x, int y, String text, int size, uint16_t color)
-{
+void displayText(int x, int y, String text, int size, uint16_t color) {
   tft.setTextColor(color);
   tft.setTextSize(size);
 
-  int lineHeight = size * 15; // Adjust line height based on the text size (8 is typical character height per size unit)
+  int lineHeight = size * 15;  // Adjust line height based on the text size (8 is typical character height per size unit)
   int currentY = y;
 
   String currentLine = "";
 
   // Iterate through the text and handle newlines
-  for (int i = 0; i < text.length(); i++)
-  {
+  for (int i = 0; i < text.length(); i++) {
     char c = text.charAt(i);
 
-    if (c == '\n')
-    {
+    if (c == '\n') {
       // Print the current line and move to the next line
       tft.setCursor(x, currentY);
       tft.print(currentLine);
       currentY += lineHeight;
-      currentLine = ""; // Clear the current line buffer
-    }
-    else
-    {
-      currentLine += c; // Add the character to the current line
+      currentLine = "";  // Clear the current line buffer
+    } else {
+      currentLine += c;  // Add the character to the current line
     }
   }
 
   // Print the last line if it exists
-  if (currentLine.length() > 0)
-  {
+  if (currentLine.length() > 0) {
     tft.setCursor(x, currentY);
     tft.print(currentLine);
   }
 }
 
-void displayCenteredText(String text, int y, int textSize, uint16_t color)
-{
+void displayCenteredText(String text, int y, int textSize, uint16_t color) {
   tft.setTextSize(textSize);
   tft.setTextColor(color);
 
   int16_t x1, y1;
   uint16_t width, height;
 
-  int lineHeight = textSize * 10; // Approximate height of one line
+  int lineHeight = textSize * 10;  // Approximate height of one line
 
   // Split and print each line based on the starting y position
   String currentLine = "";
-  for (unsigned int i = 0; i < text.length(); i++)
-  {
-    if (text[i] == '\n' || i == text.length() - 1)
-    {
-      if (i == text.length() - 1)
-        currentLine += text[i]; // Add last char
+  for (unsigned int i = 0; i < text.length(); i++) {
+    if (text[i] == '\n' || i == text.length() - 1) {
+      if (i == text.length() - 1) currentLine += text[i];  // Add last char
 
       // Get text bounds for the current line
       tft.getTextBounds(currentLine, 0, y, &x1, &y1, &width, &height);
@@ -266,38 +245,26 @@ void displayCenteredText(String text, int y, int textSize, uint16_t color)
       // Move the cursor down for the next line
       y += lineHeight;
 
-      currentLine = ""; // Reset for the next line
-    }
-    else
-    {
+      currentLine = "";  // Reset for the next line
+    } else {
       currentLine += text[i];
     }
   }
 }
 
-void fetchData(String endpoint, int selectedId)
-{
-  int retries = 3; // Number of retries for connection
+void fetchData(String endpoint, int selectedId) {
+  int retries = 3;  // Number of retries for connection
   bool connected = false;
 
-  while (retries > 0 && !connected)
-  {
-    if (client.connect(server, port))
-    {
-      connected = true; // Set the flag if connected
+  while (retries > 0 && !connected) {
+    if (client.connect(server, port)) {
+      connected = true;  // Set the flag if connected
       Serial.println("Connected to server");
 
-      if (endpoint == "/uvm/arduino/arduino-scripts/get_products.php")
-      {
-        endpoint += "?category_id=" + String(selectedId);
-      }
-      else if (endpoint == "/uvm/arduino/arduino-scripts/get_sizes.php")
-      {
+      if (endpoint == "/uvm/arduino/arduino-scripts/get_sizes.php") {
         String encodedProductName = urlencode(products[selectedId].product_name);
         endpoint += "?product_name=" + encodedProductName;
-      }
-      else if (endpoint == "/uvm/arduino/arduino-scripts/get_quantities.php")
-      {
+      } else if (endpoint == "/uvm/arduino/arduino-scripts/get_quantities.php") {
         endpoint += "?product_id=" + String(selectedId);
       }
 
@@ -305,13 +272,12 @@ void fetchData(String endpoint, int selectedId)
       client.print("GET ");
       client.print(endpoint);
       client.println(" HTTP/1.1");
-      client.println("Host: 192.168.0.104");
+      client.print("Host: ");
+      client.println(server);
       client.println("User-Agent: Arduino/1.0");
       client.println("Connection: close");
       client.println();
-    }
-    else
-    {
+    } else {
       retries--;
       Serial.println("Connection failed, retrying...");
       // tft.fillScreen(BLACK);
@@ -321,12 +287,11 @@ void fetchData(String endpoint, int selectedId)
       // tft.print("Retrying...");
       tft.fillScreen(BLACK);
       displayText(30, 30, "Connection failed.\nRetrying...", 2, RED);
-      delay(1000); // Wait before retrying
+      delay(1000);  // Wait before retrying
     }
   }
 
-  if (!connected)
-  {
+  if (!connected) {
     Serial.println("Failed to connect after retries");
     tft.fillScreen(BLACK);
     displayText(30, 30, "Failed to connect.\nPlease go to the\nTreasury or \nPurchasing office.", 2, RED);
@@ -338,8 +303,7 @@ void fetchData(String endpoint, int selectedId)
   }
 
   // Wait for server response
-  while (client.connected() && !client.available())
-  {
+  while (client.connected() && !client.available()) {
     delay(10);
   }
 
@@ -347,18 +311,15 @@ void fetchData(String endpoint, int selectedId)
   String jsonResponse = "";
   bool isBody = false;
 
-  while (client.available())
-  {
+  while (client.available()) {
     String line = client.readStringUntil('\n');
 
-    if (line == "\r")
-    {
+    if (line == "\r") {
       isBody = true;
       continue;
     }
 
-    if (isBody)
-    {
+    if (isBody) {
       jsonResponse += line;
     }
   }
@@ -371,10 +332,8 @@ void fetchData(String endpoint, int selectedId)
   parseJsonData(jsonResponse, endpoint);
 }
 
-void parseJsonData(String jsonResponse, String endpoint)
-{
-  if (jsonResponse.length() == 0)
-  {
+void parseJsonData(String jsonResponse, String endpoint) {
+  if (jsonResponse.length() == 0) {
     Serial.println("JSON response is empty.");
     return;
   }
@@ -383,163 +342,134 @@ void parseJsonData(String jsonResponse, String endpoint)
   DynamicJsonDocument doc(capacity);
   DeserializationError error = deserializeJson(doc, jsonResponse);
 
-  if (error)
-  {
+  if (error) {
     Serial.print("Failed to parse JSON: ");
     Serial.println(error.c_str());
     return;
   }
 
-  if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_categories.php"))
-  {
-    categoryCount = 0;
-    JsonArray categoriesArray = doc.as<JsonArray>();
+  // if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_categories.php")) {
+  //   categoryCount = 0;
+  //   JsonArray categoriesArray = doc.as<JsonArray>();
 
-    for (JsonObject category : categoriesArray)
-    {
-      categories[categoryCount].category_id = category["category_id"];
-      categories[categoryCount].category_name = String(category["category_name"].as<const char *>());
-      categoryCount++;
-    }
-  }
-  else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_products.php"))
-  {
+  //   for (JsonObject category : categoriesArray) {
+  //     categories[categoryCount].category_id = category["category_id"];
+  //     categories[categoryCount].category_name = String(category["category_name"].as<const char*>());
+  //     categoryCount++;
+  //   }
+  // } else
+  if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_products.php")) {
     productCount = 0;
     JsonArray productsArray = doc.as<JsonArray>();
 
-    for (JsonObject product : productsArray)
-    {
-      products[productCount].product_name = String(product["product_name"].as<const char *>());
+    for (JsonObject product : productsArray) {
+      products[productCount].product_name = String(product["product_name"].as<const char*>());
       productCount++;
     }
-  }
-  else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_sizes.php"))
-  {
+  } else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_sizes.php")) {
     sizeCount = 0;
     JsonArray sizesArray = doc.as<JsonArray>();
 
-    for (JsonObject size : sizesArray)
-    {
+    for (JsonObject size : sizesArray) {
       sizes[sizeCount].product_id = size["product_id"];
       sizes[sizeCount].size_id = size["size_id"];
-      sizes[sizeCount].size_name = String(size["size_name"].as<const char *>());
+      sizes[sizeCount].size_name = String(size["size_name"].as<const char*>());
       sizeCount++;
     }
-  }
-  else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_quantities.php"))
-  {
+  } else if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_quantities.php")) {
     product_quantity = doc[0]["product_quantity"];
   }
 }
 
-int categorySelection()
-{
-  fetchData("/uvm/arduino/arduino-scripts/get_categories.php", 0);
-  return handleSelection("Categories", categories, categoryCount, sizeof(Category), getCategoryName, 1);
-}
+// int categorySelection() {
+//   fetchData("/uvm/arduino/arduino-scripts/get_categories.php", 0);
+//   return handleSelection("Categories", categories, categoryCount, sizeof(Category), getCategoryName, 1);
+// }
 
-int productSelection(int categoryId)
-{
-  fetchData("/uvm/arduino/arduino-scripts/get_products.php", categoryId);
+int productSelection() {
+  fetchData("/uvm/arduino/arduino-scripts/get_products.php", 0);
   return handleSelection("Products", products, productCount, sizeof(Product), getProductName, 0);
 }
 
-int sizeSelection(int productIndex)
-{
+int sizeSelection(int productIndex) {
   fetchData("/uvm/arduino/arduino-scripts/get_sizes.php", productIndex);
   return handleSelection("Sizes", sizes, sizeCount, sizeof(Size), getSizeName, 0);
 }
 
-int quantitySelection(int productId)
-{
-  fetchData("/uvm/arduino/arduino-scripts/get_quantities.php", productId); // Fetch available quantity
-  int availableQuantity = product_quantity;                                // Get available quantity
-  return handleQuantitySelection(availableQuantity);                       // Pass available quantity to handle function
+int quantitySelection(int productId) {
+  fetchData("/uvm/arduino/arduino-scripts/get_quantities.php", productId);  // Fetch available quantity
+  int availableQuantity = product_quantity;                                 // Get available quantity
+  return handleQuantitySelection(availableQuantity);                        // Pass available quantity to handle function
 }
 
 // Function to display a list of items
-void displayList(const char *title, void *items, int itemCount, int itemSize, GetNameFunc getName)
-{
-  displayText(30, 30, title, 3, WHITE); // Display the title
+void displayList(const char* title, void* items, int itemCount, int itemSize, GetNameFunc getName) {
+  displayText(30, 30, title, 3, WHITE);  // Display the title
 
-  for (int i = 0; i < itemCount; i++)
-  {
+  for (int i = 0; i < itemCount; i++) {
     // Use itemSize to calculate the address of the current item
-    void *currentItem = static_cast<void *>(static_cast<char *>(items) + (i * itemSize));
-    String itemName = getName(currentItem);    // Retrieve the name
-    displayListItem(i, itemName, 80 + i * 30); // Display the item
+    void* currentItem = static_cast<void*>(static_cast<char*>(items) + (i * itemSize));
+    String itemName = getName(currentItem);     // Retrieve the name
+    displayListItem(i, itemName, 80 + i * 30);  // Display the item
   }
 }
 
 // Function to display a single list item
-void displayListItem(int index, String itemName, int yPosition)
-{
+void displayListItem(int index, String itemName, int yPosition) {
   tft.setTextSize(2);
   tft.setCursor(30, yPosition);
-  tft.print(index + 1); // Print the index number
+  tft.print(index + 1);  // Print the index number
   tft.print(": ");
-  tft.print(itemName); // Print the item name
+  tft.print(itemName);  // Print the item name
 }
 
-String getCategoryName(void *item)
-{
-  return static_cast<Category *>(item)->category_name;
+// String getCategoryName(void* item) {
+//   return static_cast<Category*>(item)->category_name;
+// }
+
+String getProductName(void* item) {
+  return static_cast<Product*>(item)->product_name;
 }
 
-String getProductName(void *item)
-{
-  return static_cast<Product *>(item)->product_name;
-}
-
-String getSizeName(void *item)
-{
-  return static_cast<Size *>(item)->size_name;
+String getSizeName(void* item) {
+  return static_cast<Size*>(item)->size_name;
 }
 
 // Generalized selection handler function
-int handleSelection(const char *title, void *items, int itemCount, int itemSize, String (*getName)(void *), int displayOffset)
-{
+int handleSelection(const char* title, void* items, int itemCount, int itemSize, String (*getName)(void*), int displayOffset) {
+  if (!items) {
+  }
   char key = 0;
   int selectedIndex = -1;
   tft.fillScreen(BLACK);
   displayList(title, items, itemCount, itemSize, getName);
+  displayText(30, 390, "Selected " + String(title) + ": " + String(selectedIndex + 1), 2, WHITE);
   lastActivityTime = millis();
-  while (true)
-  {
+  while (true) {
     systemTimeout();
     key = keypad.getKey();
 
     // Check if the input is valid (between '1' and the number of items)
-    if (key >= '1' && (key - '0') <= itemCount)
-    {
-      selectedIndex = key - '1'; // Convert to index
+    if (key >= '1' && (key - '0') <= itemCount) {
+      selectedIndex = key - '1';  // Convert to index
       tft.fillRect(30, 390, 300, 30, BLACK);
       displayText(30, 390, "Selected " + String(title) + ": " + String(selectedIndex + 1), 2, WHITE);
-    }
-    else if (key == '#')
-    {
-      if (selectedIndex != -1)
-      { // Only allow exiting if a valid selection is made
+    } else if (key == '#') {
+      if (selectedIndex != -1) {  // Only allow exiting if a valid selection is made
         tft.fillScreen(BLACK);
-        displayText(30, 30, "You selected:\n" + String(selectedIndex + 1) + ": " + getName((char *)items + selectedIndex * itemSize), 2, WHITE);
+        displayText(30, 30, "You selected:\n" + String(selectedIndex + 1) + ": " + getName((char*)items + selectedIndex * itemSize), 2, WHITE);
         delay(1500);
-        return selectedIndex + displayOffset; // Return the selected index with offset (e.g., category_id)
+        return selectedIndex + displayOffset;  // Return the selected index with offset (e.g., category_id)
       }
-    }
-    else if (key == 'D')
-    {
+    } else if (key == 'D') {
       tft.fillScreen(BLACK);
       displayText(30, 30, "Cancel order?", 2, WHITE);
       displayText(30, 390, "'C' = Yes | 'D' = No", 2, WHITE);
-      while (true)
-      {
+      while (true) {
         key = keypad.getKey();
-        if (key == 'C')
-        {
+        if (key == 'C') {
           asm volatile("  jmp 0");
-        }
-        else if (key == 'D')
-        {
+        } else if (key == 'D') {
           tft.fillScreen(BLACK);
           displayList(title, items, itemCount, itemSize, getName);
           break;
@@ -549,13 +479,12 @@ int handleSelection(const char *title, void *items, int itemCount, int itemSize,
     }
 
     // Prompt the user to select and confirm with '#'
-    displayText(30, 420, "# - enter | D - Cancel", 2, WHITE);
+    displayText(30, 420, "# - enter | D - cancel", 2, WHITE);
     delay(100);
   }
 }
 
-int handleQuantitySelection(int availableQuantity)
-{
+int handleQuantitySelection(int availableQuantity) {
   int selectedQuantity = 0;
   char key = 0;
 
@@ -567,56 +496,64 @@ int handleQuantitySelection(int availableQuantity)
   displayText(30, 30, "Quantity: " + String(product_quantity), 2, WHITE);
   displayText(30, 60, "Max: " + String(maxQuantity), 2, WHITE);
   displayText(30, 390, "Selected quantity: " + String(selectedQuantity), 2, WHITE);
-  displayText(30, 420, "Press '#' to enter", 2, WHITE);
+  displayText(30, 420, "# - enter | D - cancel", 2, WHITE);
 
-  while (true)
-  {
+  while (true) {
     key = keypad.getKey();
 
     // If '1' is pressed, set selectedQuantity to 1
-    if (key == '1')
-    {
+    if (key == '1' && maxQuantity >= 1) {
       selectedQuantity = 1;
       tft.fillRect(30, 390, 300, 30, BLACK);
       displayText(30, 390, "Selected quantity: " + String(selectedQuantity), 2, WHITE);
 
       // If '2' is pressed, set selectedQuantity to 2 (if available quantity allows it)
-    }
-    else if (key == '2' && maxQuantity >= 2)
-    {
+    } else if (key == '2' && maxQuantity >= 2) {
       selectedQuantity = 2;
       tft.fillRect(30, 390, 300, 30, BLACK);
       displayText(30, 390, "Selected quantity: " + String(selectedQuantity), 2, WHITE);
 
       // If '#' is pressed and a valid quantity is selected, confirm the selection
-    }
-    else if (key == '#')
-    {
-      if (selectedQuantity > 0)
-      { // Ensure a valid quantity has been selected
+    } else if (key == '#') {
+      if (selectedQuantity > 0) {  // Ensure a valid quantity has been selected
         tft.fillScreen(BLACK);
         displayText(30, 30, "Confirmed quantity: " + String(selectedQuantity), 2, WHITE);
         delay(1500);
-        return selectedQuantity; // Return the selected quantity
+        return selectedQuantity;  // Return the selected quantity
+      }
+    } else if (key == 'D') {
+      tft.fillScreen(BLACK);
+      displayText(30, 30, "Cancel order?", 2, WHITE);
+      displayText(30, 390, "'C' = Yes | 'D' = No", 2, WHITE);
+      while (true) {
+        key = keypad.getKey();
+        if (key == 'C') {
+          asm volatile("  jmp 0");
+        } else if (key == 'D') {
+          // Initial display
+          tft.fillScreen(BLACK);
+          displayText(30, 30, "Quantity: " + String(product_quantity), 2, WHITE);
+          displayText(30, 60, "Max: " + String(maxQuantity), 2, WHITE);
+          displayText(30, 390, "Selected quantity: " + String(selectedQuantity), 2, WHITE);
+          displayText(30, 420, "# - enter | D - cancel", 2, WHITE);
+          break;
+        }
+        delay(100);
       }
     }
 
-    delay(100); // Debounce delay
+    delay(100);  // Debounce delay
   }
 }
 
-void sendOrderDetails(int orderCount)
-{
-  if (client.connect(server, port))
-  {
+void sendOrderDetails(int orderCount) {
+  if (client.connect(server, port)) {
     Serial.println("Connected to server");
 
     // Create JSON string for order details
     String jsonOrderDetails = "{\"order_details\":[";
-    for (int i = 0; i < orderCount; i++)
-    {
-      if (i > 0)
-        jsonOrderDetails += ",";
+    for (int i = 0; i < orderCount; i++) {
+      if (i > 0) jsonOrderDetails += ",";
       jsonOrderDetails += "{\"product_id\":" + String(orders[i].product_id) + ",\"quantity\":" + String(orders[i].quantity) + "}";
     }
     jsonOrderDetails += "]}";
@@ -626,7 +563,8 @@ void sendOrderDetails(int orderCount)
 
     // Send the HTTP POST request
     client.println("POST /uvm/arduino/arduino-scripts/insert_order.php HTTP/1.1");
-    client.println("Host: 192.168.1.22");
+    client.print("Host: ");
+    client.println(server);
     client.println("Connection: close");
     client.println("Content-Type: application/json");
     client.print("Content-Length: ");
@@ -635,15 +573,13 @@ void sendOrderDetails(int orderCount)
     client.println(jsonOrderDetails);
 
     // Wait for server response
-    while (client.connected() && !client.available())
-    {
+    while (client.connected() && !client.available()) {
       delay(10);
     }
 
     // Read and print the response
     String response = "";
-    while (client.available())
-    {
+    while (client.available()) {
       response += client.readStringUntil('\n');
     }
     Serial.println("Received headers:");
@@ -651,9 +587,8 @@ void sendOrderDetails(int orderCount)
 
     // Find the start of the JSON part
     int jsonIndex = response.indexOf("{");
-    if (jsonIndex != -1)
-    {
-      String jsonResponse = response.substring(jsonIndex); // Extract JSON part
+    if (jsonIndex != -1) {
+      String jsonResponse = response.substring(jsonIndex);  // Extract JSON part
       Serial.println("JSON Response:");
       Serial.println(jsonResponse);
 
@@ -661,90 +596,81 @@ void sendOrderDetails(int orderCount)
       DynamicJsonDocument doc(2048);
       DeserializationError error = deserializeJson(doc, jsonResponse);
 
-      if (error)
-      {
+      if (error) {
         Serial.print("Failed to parse JSON: ");
         Serial.println(error.c_str());
-        Serial.println("Received JSON: " + jsonResponse); // Print received JSON for troubleshooting
+        Serial.println("Received JSON: " + jsonResponse);  // Print received JSON for troubleshooting
         return;
       }
 
-      if (doc["status"] == "success")
-      {
+      if (doc["status"] == "success") {
         Serial.println("Order successfully placed!");
         int orderId = doc["order_id"];
         printReceipt(orderId);
-      }
-      else
-      {
+      } else {
         Serial.print("Error placing order: ");
         Serial.println(doc["message"].as<String>());
       }
-    }
-    else
-    {
+    } else {
       Serial.println("JSON part not found in the response.");
     }
-  }
-  else
-  {
+  } else {
     Serial.println("Connection failed");
   }
 }
 
-void printReceipt(int orderId)
-{
+void printReceipt(int orderId) {
   // Initialize thermal printer and print the receipt
   Serial.println("Printing receipt...");
 
-  // Print order details
 
+  // Print order details
   Serial.print("Order ID: ");
   Serial.println(orderId);
-  for (int i = 0; i < orderCount; i++)
-  {
+  for (int i = 0; i < orderCount; i++) {
     Serial.print(orders[i].prod_name);
     Serial.print(" (");
     Serial.print(orders[i].prod_size);
-    Serial.print(") ");
+    Serial.print(") x ");
     Serial.println(orders[i].quantity);
   }
-  // Order Print Template
-
-  // Example of how to print using your thermal printer (adjust commands as needed):
-  printer.println("PCU Dasmariñas Campus");
-  printer.println("  PCU New Building   ");
-  printer.println("---------------------");
-  printer.print("Order ID: ");
+  printer.println("------------------------------");
+  printer.println("    PCU - Dasmariñas Campus   ");
+  printer.println("     New Academic Building    ");
+  printer.println("------------------------------");
+  printer.println();
+  printer.print("    Order ID: ");
   printer.println(orderId);
-  for (int i = 0; i < orderCount; i++)
-  {
+  printer.println();
+  for (int i = 0; i < orderCount; i++) {
+    printer.print("     ");
     printer.print(orders[i].prod_name);
-    printer.println("------");
     printer.print(" (");
     printer.print(orders[i].prod_size);
-    printer.print(") x--- ");
-    printer.println(orders[i].quantity);
+    printer.print(") - ");
+    printer.print(orders[i].quantity);
+    printer.println("pc(s)");
   }
-  printer.println("-----Thank you!------");
+  printer.println();
+  printer.println();
+  printer.println("           Thank you!         ");
+  printer.println("------------------------------");
+  printer.println();
+  printer.println();
+  printer.println();
   printer.println();
   printer.println();
   printer.println();
 }
 
-String urlencode(const String &str)
-{
+String urlencode(const String& str) {
   String encoded = "";
-  for (unsigned int i = 0; i < str.length(); i++)
-  {
+  for (unsigned int i = 0; i < str.length(); i++) {
     char c = str.charAt(i);
-    if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~')
-    {
-      encoded += c; // Add unencoded characters
-    }
-    else
-    {
-      encoded += String("%") + String(c, HEX); // Encode others
+    if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+      encoded += c;  // Add unencoded characters
+    } else {
+      encoded += String("%") + String(c, HEX);  // Encode others
     }
   }
   return encoded;

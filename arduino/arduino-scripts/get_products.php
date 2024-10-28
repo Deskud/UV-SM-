@@ -1,14 +1,14 @@
 <?php
 require "../../dbconnection.php";
 
-if (isset($_GET['category_id'])) {
-    $category_id = $_GET['category_id'];
+// if (isset($_GET['category_id'])) {
+//     $category_id = $_GET['category_id'];
 
     // Prepare the SQL query with a placeholder
     $query = "SELECT DISTINCT product_name
               FROM products
-              WHERE category_id = ?
-              AND is_archived = 0
+            --   WHERE category_id = ?
+              WHERE is_archived = 0
               AND unit_num IS NOT NULL
               AND product_quantity != 0";
 
@@ -21,7 +21,7 @@ if (isset($_GET['category_id'])) {
     }
 
     // Bind the category_id parameter (assuming it's an integer)
-    $stmt->bind_param("i", $category_id);
+    // $stmt->bind_param("i", $category_id);
 
     // Execute the statement
     $stmt->execute();
@@ -42,9 +42,9 @@ if (isset($_GET['category_id'])) {
 
     // Close the statement and connection
     $stmt->close();
-} else {
-    echo json_encode(['error' => 'No category_id provided.']);
-}
+// } else {
+//     echo json_encode(['error' => 'No category_id provided.']);
+// }
 
 // Close the database connection
 $conne->close();
