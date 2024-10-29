@@ -24,27 +24,31 @@ $display_purchase_history = mysqli_query($conne, $query);
             <th>Action</th>
         </tr>
     </thead>
-    <tbody>
-        <?php while ($row = mysqli_fetch_assoc($display_purchase_history)) { ?>
-            <tr>
-                <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
-                <td><?php echo htmlspecialchars($row['order_id']); ?></td>
-                <td><?php echo htmlspecialchars($row['user_id']); ?></td>
-                <td><?php echo htmlspecialchars($row['total_quantity']); ?></td>
-                <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
-                <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
-                <td><?php echo htmlspecialchars($row['student_no']); ?></td>
-                <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
-                <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
-                <td><?php echo htmlspecialchars($row['status']); ?></td>
-                <div class="transaction-actions">
+    <?php if (mysqli_num_rows($display_purchase_history)===0): ?>
+        <tr>
+            <td colspan="11" style="text-align: center;">
+                <h1 style="color:black;">No transactions available</h1>
+            </td>
+        </tr>
+    <?php else: ?>
+        <tbody>
+            <?php while ($row = mysqli_fetch_assoc($display_purchase_history)) { ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['order_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['user_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['total_quantity']); ?></td>
+                    <td><?php echo htmlspecialchars($row['total_amount']); ?></td>
+                    <td><?php echo htmlspecialchars($row['transaction_date']); ?></td>
+                    <td><?php echo htmlspecialchars($row['student_no']); ?></td>
+                    <td><?php echo htmlspecialchars($row['qr_code']); ?></td>
+                    <td><?php echo htmlspecialchars($row['quantity_dispensed']); ?></td>
+                    <td><?php echo htmlspecialchars($row['status']); ?></td>
                     <td>
-
                         <a class="edit-transaction" data-id="<?php echo htmlspecialchars($row['transaction_id']); ?>"><i style="color: black;" class="fa-regular fa-pen-to-square fa-lg"></i></a>
-
                     </td>
-                </div>
-            </tr>
-        <?php } ?>
-    </tbody>
+                </tr>
+            <?php } ?>
+        </tbody>
+    <?php endif; ?>
 </table>

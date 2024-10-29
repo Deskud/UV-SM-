@@ -218,10 +218,10 @@ include '../session_check.php';
             }
 
             $('#confirmation-modal').css('display', 'block');
-            
-           
+
+
             // Ngayon ko lang narinig .one function wow
-            
+
             $('#confirm-print').off('click').one('click', function() {
                 $('#confirmation-modal').css('display', 'none');
 
@@ -377,7 +377,7 @@ include '../session_check.php';
             });
         }
 
-        // Load yung laman sa qr para dynamically mag update kapag nag re-remove o nag dag-gad
+        // Load yung laman sa qr para dynamically mag update kapag nag re-remove o nag dagdag
         function loadQrDetails(orderId) {
             $.ajax({
                 url: './main-content/update_qrmodal.php',
@@ -388,7 +388,7 @@ include '../session_check.php';
                 dataType: 'json',
                 success: function(response) {
 
-                    console.log(response.items);
+                    console.log("Response:", response);
                     if (response.success) {
                         var itemContainer = $('#itemContainer' + orderId);
                         itemContainer.empty(); // Clear existing items

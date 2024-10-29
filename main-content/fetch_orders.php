@@ -70,7 +70,7 @@ if (!empty($orderIds)) {
     </div>
     <!-- QR Code Modal -->
 
-    <!-- WILL REMOVE SOON -->
+    <!-- WILL REMOVE SOON IF FORGOR TO REMOVE OOF -->
     <div id="qrCodeModal<?php echo $order['order_id']; ?>" class="modal">
         <div class="modal-receipt-content">
             <?php
