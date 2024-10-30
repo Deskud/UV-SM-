@@ -77,7 +77,7 @@
 
                     response.forEach(function(product) {
                         dataPoints.push({
-                            label: "Unit " + product.unit_num,
+                            label: "UNIT " + product.unit_num,
 
                             // Coverts the data to number. 
                             //JSON kasi yung data and na interprate na string yung data kahit int ang data type niya sa db
@@ -85,19 +85,16 @@
                         });
                     });
                     var chart = new CanvasJS.Chart("products-chart", {
-                        animationEnabled: false,
+                        animationEnabled: true,
                         title: {
                             text: "Product Stocks",
                             fontFamily: "Arial",
                         },
                         axisY: {
                             title: "Stock Quantity",
-
-
                         },
                         axisX: {
                             title: "Unit Numbers",
-
 
                         },
                         data: [{
@@ -116,7 +113,6 @@
             });
         }
     }
-
-    setInterval(dashPoll, 10000);
-    setInterval(productChart, 10000);
+    setInterval(dashPoll, 10000); //10 seconds
+    setInterval(productChart, 600000); //10 minutes
 </script>

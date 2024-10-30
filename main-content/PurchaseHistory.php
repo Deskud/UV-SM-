@@ -75,6 +75,7 @@ include '../session_check.php';
 <script type="text/javascript" src="modal.js"></script>
 <script>
     $(document).ready(function() {
+        // On load of the document products data should load.
         loadPurchases();
 
         // Edit Transaction

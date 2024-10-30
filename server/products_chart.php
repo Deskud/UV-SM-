@@ -4,7 +4,9 @@ require "../dbconnection.php";
 $products = [];
 
 // Fetch product names and quantities/stock where unit_num is between 1 and 12
-$result = $conne->query("SELECT unit_num, product_quantity FROM products WHERE unit_num BETWEEN 1 AND 12 AND product_quantity > 0");
+$result = $conne->query("SELECT unit_num, product_quantity, product_id, product_name 
+FROM products 
+WHERE unit_num BETWEEN 1 AND 12 AND product_quantity > 0");
 
 if ($result) {
     while ($row = $result->fetch_assoc()) {
