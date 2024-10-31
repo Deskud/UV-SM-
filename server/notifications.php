@@ -28,4 +28,26 @@ if ($rowNewOrders['count'] > 0 && $rowNewOrders['last_date'] != $_SESSION['last_
     $response['newOrder'] = false;
 }
 
+
+//Check if unit is low stock. If unit has low stocks will show alert notification.
+$lowStockQuery = "SELECT product_name, unit_num, product_quantity 
+                  FROM products 
+                  WHERE product_quantity <= 5";
+$lowStockResult = $conne->query($lowStockQuery);
+
+if ($lowStockResult && $lowStockResult->num_rows > 0) {
+    $response['lowStock'] = true;
+    $response['lowStockMessage'] = "Low stocks!";
+    
+    //Store items for displaying details.
+    $lowStockItems = [];
+    while ($row = $lowStockResult->fetch_assoc()) {
+        $lowStockItems[] = $row;
+    }
+    $response['lowStockItems'] = $lowStockItems;
+} else {
+    $response['lowStock'] = false;
+}
+
+
 echo json_encode($response);

@@ -402,8 +402,8 @@ th {
 .notifications-container {
 
     position: absolute;
-    margin-left: 32vw;
-    margin-right: 32vw;
+    margin-left: 40vw;
+    margin-right: 40vw;
     margin-top: 7vh;
     z-index: 3;
 }
@@ -421,7 +421,7 @@ th {
     color: #000000;
     height: fit-content;
     width: 100%;
-    max-width: 8500px;
+    max-width: 850px;
     min-width: 450px;
     padding: 5px;
     text-align: center;
@@ -429,7 +429,27 @@ th {
 
 
 }
+.notification-alert {
 
+    font-family: "Mulish", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 3px;
+    border: solid 1px;
+    border-color: rgb(0, 0, 0, 0.25);
+    background: rgb(242, 22, 22, 0.9);
+    color: #ffffff;
+    height: fit-content;
+    width: 100%;
+    max-width: 850px;
+    min-width: 450px;
+    padding: 5px;
+    text-align: center;
+    box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, .4);
+}
+.close-notification{
+ float: right;
+}
 
 #Topnavigator-container {
     position: fixed;

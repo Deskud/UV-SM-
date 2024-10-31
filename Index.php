@@ -137,15 +137,12 @@ require "dbconnection.php";
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-     
-                // Check for new items
-                if (data.newItem) {
-                    showNotification(data.itemMessage);
-                }
-
                 // Check for new orders
                 if (data.newOrder) {
                     showNotification(data.orderMessage);
+                }
+                if (data.lowStock) {
+                    showAlertStock(data.lowStockMessage, data.lowStockItems);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -167,5 +164,49 @@ require "dbconnection.php";
         }, 10000);
     }
 
-    setInterval(notifTrigger, 5000);
+    //This is a place holder for alert notification if the stock level of a unit is low.
+    //If I didn't change it, the only reason is because it is working. Eksdee
+    //Local Storage manipulation is cool. Need to learn more about java script shits.
+    function showAlertStock(message, items) {
+        if ($('.notification-alert').length) return;
+
+        //Checks if notification is closed 5 minutes ago
+        const closedTime = localStorage.getItem('lowStockAlertClosed');
+        if (closedTime && (Date.now() - closedTime < 300000)) {
+
+            // If the notification was closed less than a minute ago, do not show it
+            // If 5 minutes has passed the notification will show again, reminding that the stock is low.
+            return;
+        }
+
+        // Create the notification with a close button
+        var lowstockNotif = $(`
+        <div class="notification-alert">
+            <strong>${message}</strong>
+            <button class="close-notification"><i style="color:black;" class="fa-solid fa-xmark"></i></button>
+            <ul></ul>
+        </div>
+    `);
+
+        //Show unit numbers and products that has stock level that are lower or equal to 5.
+        if (items && items.length) {
+            items.forEach(function(item) {
+                lowstockNotif.find('ul').append(
+                    `<li>${item.product_name} (Unit ${item.unit_num}) - Quantity: ${item.product_quantity}</li>`
+                );
+            });
+        }
+        $('.notifications-container').append(lowstockNotif);
+        lowstockNotif.fadeIn(500);
+
+        // Button to close the notification
+        lowstockNotif.find('.close-notification').on('click', function() {
+            lowstockNotif.fadeOut(300, function() {
+                $(this).remove();
+            });
+            // Store the current timestamp in localStorage
+            localStorage.setItem('lowStockAlertClosed', Date.now());
+        });
+    }
+    setInterval(notifTrigger, 5000);//5 seconds 
 </script>
