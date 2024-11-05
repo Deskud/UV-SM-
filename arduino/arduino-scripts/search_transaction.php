@@ -31,7 +31,7 @@ if ($qrcode > 0) {
             // Fetch items for the found order and calculate remaining quantities
             $stmtItems = $pdo->prepare("SELECT i.product_id, p.product_name, p.unit_num, 
                                                i.quantity, COALESCE(i.quantity_dispensed, 0) AS quantity_dispensed,
-                                               s.size_name
+                                               s.size_name, p.product_quantity
                                         FROM items i 
                                         JOIN products p ON i.product_id = p.product_id 
                                         LEFT JOIN sizes s ON p.size_id = s.size_id
