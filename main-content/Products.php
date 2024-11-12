@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $(document).off('click', '.edit-btn').on('click', '.edit-btn', function() {
             var productId = $(this).data('id');
-            console.log('SANDDSADSADSASDADAS');
+        
 
 
             // Fetch product details

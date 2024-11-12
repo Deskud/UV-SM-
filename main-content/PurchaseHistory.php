@@ -247,7 +247,7 @@ include '../session_check.php';
                 $('.transactions-table-container').html(data);
             },
             error: function() {
-                alert('Error cannot load datas. OOF');
+                alert('Error: Cannot load datas.');
             }
         })
     }

@@ -335,7 +335,7 @@ include '../session_check.php';
                         }
                     },
                     error: function() {
-                        alert('An error occurred. Please try again.'); // Handle AJAX error
+                        alert('An error occurred. Please try again.'); 
                     }
                 });
             }

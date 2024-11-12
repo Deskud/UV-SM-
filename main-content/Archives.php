@@ -29,8 +29,8 @@ $result = mysqli_query($conne, $query);
         </tr>
         <?php if (mysqli_num_rows($result) == 0): ?>
             <td>
-            <td colspan="5" style="text-align: center;">
-                <h1 style="color:black;">No orders available</h1>
+            <td colspan="3" style="text-align: center;">
+                <h1 style="color:black;">No archived products available</h1>
             </td>
             </td>
         <?php else: ?>
