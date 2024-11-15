@@ -32,7 +32,7 @@ if ($rowNewOrders['count'] > 0 && $rowNewOrders['last_date'] != $_SESSION['last_
 //Check if unit is low stock. If unit has low stocks will show alert notification.
 $lowStockQuery = "SELECT product_name, unit_num, product_quantity 
                   FROM products 
-                  WHERE product_quantity <= 5";
+                  WHERE product_quantity <= 2";
 $lowStockResult = $conne->query($lowStockQuery);
 
 if ($lowStockResult && $lowStockResult->num_rows > 0) {

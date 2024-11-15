@@ -172,10 +172,12 @@ require "dbconnection.php";
 
         //Checks if notification is closed 5 minutes ago
         const closedTime = localStorage.getItem('lowStockAlertClosed');
-        if (closedTime && (Date.now() - closedTime < 300000)) {
+        if (closedTime && (Date.now() - closedTime < 50000)) {
 
             // If the notification was closed less than a minute ago, do not show it
-            // If 5 minutes has passed the notification will show again, reminding that the stock is low.
+            // If 50 seconds has passed the notification will show again, reminding that the stock is low.
+
+            
             return;
         }
 
