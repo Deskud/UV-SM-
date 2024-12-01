@@ -37,7 +37,7 @@ if (isset($_POST['orderinput'])) {
 
 <?php
     } else {
-        echo "Product does not exist.";
+        echo "Order does not exist.";
     }
 }
 ?>
