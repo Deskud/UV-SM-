@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $totalItems += $quantity;
                 $totalAmount += $quantity * $price;
 
-                $itemDetails[] = $item; // Optional: store item details if needed
+                $itemDetails[] = $item;
             }
 
             $qrData = generateRandCode();
