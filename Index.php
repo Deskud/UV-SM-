@@ -190,7 +190,7 @@ require "dbconnection.php";
         </div>
     `);
 
-        //Show unit numbers and products that has stock level that are lower or equal to 5.
+        //Show unit numbers and products that has stock level that are lower or equal to 2.
         if (items && items.length) {
             items.forEach(function(item) {
                 lowstockNotif.find('ul').append(
