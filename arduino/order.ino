@@ -3,15 +3,11 @@
 #include <ArduinoJson.h>
 #include <Keypad.h>
 #include <SoftwareSerial.h>
-
-#include <Adafruit_GFX.h>   // Core graphics library
-#include <MCUFRIEND_kbv.h>  // Hardware-specific library
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 480
+#include <Adafruit_GFX.h>
+#include <MCUFRIEND_kbv.h>
 MCUFRIEND_kbv tft;
 SoftwareSerial printer(17, 18);
 
-// Color definitions
 #define BLACK 0x0000
 #define WHITE 0xFFFF
 #define RED 0xF800
@@ -22,9 +18,8 @@ SoftwareSerial printer(17, 18);
 
 // Network settings
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192, 168, 1, 105);    // Arduino IP
-IPAddress server(192, 168, 1, 2);  // Server IP
-int port = 80;                     // HTTP port
+int port = 80;
+IPAddress server(192, 168, 1, 4);
 
 EthernetClient client;
 
@@ -42,22 +37,16 @@ byte colPins[COLS] = { 28, 26, 24, 22 };
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 unsigned long lastActivityTime = 0;           // To track the last time of user interaction
-const unsigned long timeoutDuration = 60000;  // 10 seconds timeout
+const unsigned long timeoutDuration = 60000;  // 60 seconds timeout
 
 typedef String (*GetNameFunc)(void* item);
-// to hold category data
-// struct Category {
-//   int category_id;
-//   String category_name;
-// };
-// Category categories[5];
-// int categoryCount = 0;
 
 // to hold product data
 struct Product {
   String product_name;
 };
-Product products[10];
+const int productNum = 12;
+Product products[productNum];
 int productCount = 0;
 
 // to hold product size data
@@ -66,9 +55,11 @@ struct Size {
   int size_id;
   String size_name;
 };
-Size sizes[4];
+const int sizeNum = 3;
+Size sizes[sizeNum];
 int sizeCount = 0;
 
+// to hold order details data
 struct Order {
   int product_id;
   String prod_name;
@@ -76,7 +67,8 @@ struct Order {
   String prod_size;
   int quantity;
 };
-Order orders[6];
+const int orderNum = 2;
+Order orders[orderNum];
 int orderCount = 0;
 
 int product_quantity;
@@ -84,13 +76,12 @@ int product_quantity;
 void setup(void) {
   Serial.begin(9600);
   printer.begin(9600);
-  Ethernet.begin(mac, ip);
+  Ethernet.begin(mac);
   tft.begin(tft.readID());
   tft.setRotation(0);
   tft.fillScreen(BLACK);
   tft.setTextColor(WHITE);
   tft.setTextSize(2);
-  delay(1000);
 }
 
 void loop() {
@@ -98,23 +89,24 @@ void loop() {
   tft.fillScreen(BLACK);
   displayCenteredText("ARDUINO-BASED", 80, 3, WHITE);
   displayCenteredText("UNIFORM\nVENDING\nMACHINE\n", 110, 6, YELLOW);
+  Serial.println("Press 'A' to start...");
   displayText(30, 420, "Press 'A' to start...", 2, WHITE);
   keyToStart('A');
   orderCount = 0;
+  tft.fillScreen(BLACK);
+  displayText(30, 30, "Reminder: ", 3, YELLOW);
+  displayText(30, 80, "Each order can\nonly contain up\nto 2 items and\nlimited to\n2pcs each.", 2, WHITE);
+  delay(3000);
 
-  while (orderCount < 2) {
-    // int selectedCategoryId = categorySelection();
-    // Serial.print("Category ID: ");
-    // Serial.println(selectedCategoryId);
+  while (orderCount < orderNum) {
     int selectedProductIndex = productSelection();
-    Serial.print("selectedProductIndex: ");
-    Serial.println(selectedProductIndex);
+    Serial.println("selectedProductIndex: " + String(selectedProductIndex));
+
     int selectedSizeIndex = sizeSelection(selectedProductIndex);
-    Serial.print("selectedSizeIndex: ");
-    Serial.println(selectedSizeIndex);
+    Serial.println("selectedSizeIndex: " + String(selectedSizeIndex));
+
     int selectedQuantity = quantitySelection(sizes[selectedSizeIndex].product_id);
-    Serial.print("selectedQuantity: ");
-    Serial.println(selectedQuantity);
+    Serial.println("selectedQuantity: " + String(selectedQuantity));
 
     orders[orderCount].product_id = sizes[selectedSizeIndex].product_id;
     orders[orderCount].prod_name = products[selectedProductIndex].product_name;
@@ -139,9 +131,8 @@ void loop() {
     displayText(30, 110, "Size: " + orders[orderCount].prod_size, 2, WHITE);
     displayText(30, 140, "Qty: " + String(orders[orderCount].quantity) + "pc(s).", 2, WHITE);
     orderCount++;
-    delay(2000);
 
-    if (orderCount < 2) {
+    if (orderCount < orderNum) {
       displayText(30, 390, "Add another item?\n'A' = Yes | 'B' = No", 2, WHITE);
       char key = keypad.getKey();
       while (key != 'A' && key != 'B') {
@@ -158,7 +149,7 @@ void loop() {
   displayText(30, 30, "Saving order...", 2, YELLOW);
   sendOrderDetails(orderCount);  // Send order details to the server
 
-  displayText(30, 60, "Done!", 3, GREEN);
+  displayText(30, 90, "Done!", 2, GREEN);
   delay(1000);
 
   tft.fillScreen(BLACK);
@@ -172,8 +163,7 @@ void loop() {
 void systemTimeout() {
   if (millis() - lastActivityTime >= timeoutDuration) {
     tft.fillScreen(BLACK);
-    displayText(30, 30, "Session timed out.\nReturning to start...", 2, RED);
-    delay(2000);
+    displayText(30, 30, "Session timed out.\nReturning to start...", 2, WHITE);
     asm volatile("  jmp 0");
   }
 }
@@ -190,7 +180,7 @@ void displayText(int x, int y, String text, int size, uint16_t color) {
   tft.setTextColor(color);
   tft.setTextSize(size);
 
-  int lineHeight = size * 15;  // Adjust line height based on the text size (8 is typical character height per size unit)
+  int lineHeight = size * 15;
   int currentY = y;
 
   String currentLine = "";
@@ -253,64 +243,68 @@ void displayCenteredText(String text, int y, int textSize, uint16_t color) {
 }
 
 void fetchData(String endpoint, int selectedId) {
-  int retries = 3;  // Number of retries for connection
+  int retries = 3;
   bool connected = false;
 
   while (retries > 0 && !connected) {
-    if (client.connect(server, port)) {
+    // If not connected, try to reconnect
+    if (client.connected()) {
+      connected = true;
+    } else if (client.connect(server, port)) {
       connected = true;  // Set the flag if connected
       Serial.println("Connected to server");
-
-      if (endpoint == "/uvm/arduino/arduino-scripts/get_sizes.php") {
-        String encodedProductName = urlencode(products[selectedId].product_name);
-        endpoint += "?product_name=" + encodedProductName;
-      } else if (endpoint == "/uvm/arduino/arduino-scripts/get_quantities.php") {
-        endpoint += "?product_id=" + String(selectedId);
-      }
-
-      // Correct the GET request format
-      client.print("GET ");
-      client.print(endpoint);
-      client.println(" HTTP/1.1");
-      client.print("Host: ");
-      client.println(server);
-      client.println("User-Agent: Arduino/1.0");
-      client.println("Connection: close");
-      client.println();
     } else {
       retries--;
       Serial.println("Connection failed, retrying...");
-      // tft.fillScreen(BLACK);
-      // tft.setCursor(20, 20);
-      // tft.print("Connection failed");
-      // tft.setCursor(20, 50);
-      // tft.print("Retrying...");
       tft.fillScreen(BLACK);
-      displayText(30, 30, "Connection failed.\nRetrying...", 2, RED);
-      delay(1000);  // Wait before retrying
+      displayText(30, 30, "Connection failed.\nRetrying...", 2, WHITE);
+      delay(1000);
     }
   }
 
   if (!connected) {
     Serial.println("Failed to connect after retries");
     tft.fillScreen(BLACK);
-    displayText(30, 30, "Failed to connect.\nPlease go to the\nTreasury or \nPurchasing office.", 2, RED);
+    displayText(30, 30, "Failed to connect.\nPlease go to the\nTreasury or \nPurchasing office.", 2, WHITE);
     delay(2000);
     tft.fillScreen(BLACK);
-    displayText(30, 30, "Sorry for\nthe inconvience.", 2, RED);
+    displayText(30, 30, "Sorry for\nthe inconvenience.", 2, WHITE);
     delay(2000);
-    asm volatile("  jmp 0");
+    asm volatile("  jmp 0");  // Reset or halt program
   }
 
-  // Wait for server response
-  while (client.connected() && !client.available()) {
-    delay(10);
+  // Prepare and send the GET request
+  if (endpoint == "/uvm/arduino/arduino-scripts/get_sizes.php") {
+    String encodedProductName = urlencode(products[selectedId].product_name);
+    endpoint += "?product_name=" + encodedProductName;
+  } else if (endpoint == "/uvm/arduino/arduino-scripts/get_quantities.php") {
+    endpoint += "?product_id=" + String(selectedId);
   }
 
-  // Read the server response
+  // Send the GET request
+  client.print("GET ");
+  client.print(endpoint);
+  client.println(" HTTP/1.1");
+  client.print("Host: ");
+  client.println(server);
+  client.println("User-Agent: Arduino/1.0");
+  client.println("Connection: close");
+  client.println();
+
+  // Wait for the server's response
   String jsonResponse = "";
   bool isBody = false;
 
+  unsigned long startMillis = millis();  // Timeout timer
+  while (client.connected() && !client.available()) {
+    if (millis() - startMillis > 5000) {  // Timeout after 5 seconds if no data
+      Serial.println("Timeout waiting for server response.");
+      break;
+    }
+    delay(10);  // Small delay to prevent locking up the processor
+  }
+
+  // Read the server's response if available
   while (client.available()) {
     String line = client.readStringUntil('\n');
 
@@ -324,11 +318,12 @@ void fetchData(String endpoint, int selectedId) {
     }
   }
 
-  client.stop();
+  client.stop();  // Close the connection
   Serial.println("Disconnected from server");
   Serial.println("Raw JSON Response:");
   Serial.println(jsonResponse);
 
+  // Parse and process the response
   parseJsonData(jsonResponse, endpoint);
 }
 
@@ -338,7 +333,7 @@ void parseJsonData(String jsonResponse, String endpoint) {
     return;
   }
 
-  const size_t capacity = JSON_ARRAY_SIZE(24) + 24 * JSON_OBJECT_SIZE(3) + 24 * 50;
+  const size_t capacity = JSON_ARRAY_SIZE(12) + 12 * JSON_OBJECT_SIZE(3) + 12 * 50;
   DynamicJsonDocument doc(capacity);
   DeserializationError error = deserializeJson(doc, jsonResponse);
 
@@ -348,16 +343,6 @@ void parseJsonData(String jsonResponse, String endpoint) {
     return;
   }
 
-  // if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_categories.php")) {
-  //   categoryCount = 0;
-  //   JsonArray categoriesArray = doc.as<JsonArray>();
-
-  //   for (JsonObject category : categoriesArray) {
-  //     categories[categoryCount].category_id = category["category_id"];
-  //     categories[categoryCount].category_name = String(category["category_name"].as<const char*>());
-  //     categoryCount++;
-  //   }
-  // } else
   if (endpoint.startsWith("/uvm/arduino/arduino-scripts/get_products.php")) {
     productCount = 0;
     JsonArray productsArray = doc.as<JsonArray>();
@@ -381,11 +366,6 @@ void parseJsonData(String jsonResponse, String endpoint) {
   }
 }
 
-// int categorySelection() {
-//   fetchData("/uvm/arduino/arduino-scripts/get_categories.php", 0);
-//   return handleSelection("Categories", categories, categoryCount, sizeof(Category), getCategoryName, 1);
-// }
-
 int productSelection() {
   fetchData("/uvm/arduino/arduino-scripts/get_products.php", 0);
   return handleSelection("Products", products, productCount, sizeof(Product), getProductName, 0);
@@ -397,9 +377,9 @@ int sizeSelection(int productIndex) {
 }
 
 int quantitySelection(int productId) {
-  fetchData("/uvm/arduino/arduino-scripts/get_quantities.php", productId);  // Fetch available quantity
-  int availableQuantity = product_quantity;                                 // Get available quantity
-  return handleQuantitySelection(availableQuantity);                        // Pass available quantity to handle function
+  fetchData("/uvm/arduino/arduino-scripts/get_quantities.php", productId);
+  int availableQuantity = product_quantity;
+  return handleQuantitySelection(availableQuantity);
 }
 
 // Function to display a list of items
@@ -418,14 +398,10 @@ void displayList(const char* title, void* items, int itemCount, int itemSize, Ge
 void displayListItem(int index, String itemName, int yPosition) {
   tft.setTextSize(2);
   tft.setCursor(30, yPosition);
-  tft.print(index + 1);  // Print the index number
+  tft.print(index + 1);
   tft.print(": ");
-  tft.print(itemName);  // Print the item name
+  tft.print(itemName);
 }
-
-// String getCategoryName(void* item) {
-//   return static_cast<Category*>(item)->category_name;
-// }
 
 String getProductName(void* item) {
   return static_cast<Product*>(item)->product_name;
@@ -437,8 +413,23 @@ String getSizeName(void* item) {
 
 // Generalized selection handler function
 int handleSelection(const char* title, void* items, int itemCount, int itemSize, String (*getName)(void*), int displayOffset) {
-  if (!items) {
+  if (!items || itemCount == 0) {
+    // If there are no items to display, show an appropriate message
+    tft.fillScreen(BLACK);
+    displayText(30, 30, "No items available", 2, WHITE);
+    displayText(30, 390, "Press any key to return", 2, WHITE);
+
+    // Wait for a key press to return to the previous menu
+    while (true) {
+      char key = keypad.getKey();
+      if (key) {
+        tft.fillScreen(BLACK);  // Clear the screen before returning
+        asm volatile("  jmp 0");
+      }
+      delay(100);
+    }
   }
+
   char key = 0;
   int selectedIndex = -1;
   tft.fillScreen(BLACK);
@@ -455,10 +446,7 @@ int handleSelection(const char* title, void* items, int itemCount, int itemSize,
       tft.fillRect(30, 390, 300, 30, BLACK);
       displayText(30, 390, "Selected " + String(title) + ": " + String(selectedIndex + 1), 2, WHITE);
     } else if (key == '#') {
-      if (selectedIndex != -1) {  // Only allow exiting if a valid selection is made
-        tft.fillScreen(BLACK);
-        displayText(30, 30, "You selected:\n" + String(selectedIndex + 1) + ": " + getName((char*)items + selectedIndex * itemSize), 2, WHITE);
-        delay(1500);
+      if (selectedIndex != -1) {               // Only allow exiting if a valid selection is made
         return selectedIndex + displayOffset;  // Return the selected index with offset (e.g., category_id)
       }
     } else if (key == 'D') {
@@ -516,10 +504,7 @@ int handleQuantitySelection(int availableQuantity) {
       // If '#' is pressed and a valid quantity is selected, confirm the selection
     } else if (key == '#') {
       if (selectedQuantity > 0) {  // Ensure a valid quantity has been selected
-        tft.fillScreen(BLACK);
-        displayText(30, 30, "Confirmed quantity: " + String(selectedQuantity), 2, WHITE);
-        delay(1500);
-        return selectedQuantity;  // Return the selected quantity
+        return selectedQuantity;   // Return the selected quantity
       }
     } else if (key == 'D') {
       tft.fillScreen(BLACK);
@@ -541,8 +526,7 @@ int handleQuantitySelection(int availableQuantity) {
         delay(100);
       }
     }
-
-    delay(100);  // Debounce delay
+    delay(100);
   }
 }
 
@@ -623,10 +607,11 @@ void printReceipt(int orderId) {
   // Initialize thermal printer and print the receipt
   Serial.println("Printing receipt...");
 
-
   // Print order details
   Serial.print("Order ID: ");
   Serial.println(orderId);
+
+  displayText(30, 60, "Order ID: " + String(orderId), 2, WHITE);
   for (int i = 0; i < orderCount; i++) {
     Serial.print(orders[i].prod_name);
     Serial.print(" (");

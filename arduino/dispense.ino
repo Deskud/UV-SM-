@@ -8,10 +8,9 @@ SoftwareSerial qrscanner(11, 12);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 // Network settings
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192, 168, 1, 105);    // Arduino IP
-IPAddress server(192, 168, 1, 2);  // Server IP
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEE };
 int port = 80;                     // HTTP port
+IPAddress server(192, 168, 1, 4);
 
 EthernetClient client;
 
@@ -20,36 +19,45 @@ struct Item {
   int product_id;
   String productName;
   String sizeName;
+  int stock;
   int unit_num;
   int quantity;
   int index;
 };
-const int maxItems = 5;
+const int maxItems = 2;
 Item items[maxItems];
 int itemCount = 0;
 int transaction_id;
 int order_id;
-// const int irSensorPin = 3;
+
 const int trigPin = 3;
 const int echoPin = 4;
 const int numServos = 12;
 Servo servos[numServos];
-int servoPins[numServos] = { 22, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45 };
+int servoPins[numServos] = { 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45 };
+
+#define BUTTON_R_PIN 5  // Pin for the 'R' button (partially claim)
+#define BUTTON_B_PIN 6  // Pin for the 'B' button (next item)
+#define BUTTON_W_PIN 7  // Pin for the 'W' button (cancel)
+
+char userInput = '\0';  // This will store the button press ('R', 'B', 'W')
 
 void setup() {
   Serial.begin(9600);
+  qrscanner.begin(9600);
+  Ethernet.begin(mac);
   lcd.init();
   lcd.backlight();
-  qrscanner.begin(9600);
-  Ethernet.begin(mac, ip);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+  pinMode(BUTTON_R_PIN, INPUT_PULLUP);  // 'R' button: Partially claim
+  pinMode(BUTTON_B_PIN, INPUT_PULLUP);  // 'B' button: Next item
+  pinMode(BUTTON_W_PIN, INPUT_PULLUP);  // 'W' button: Cancel
 
   for (int i = 0; i < numServos; i++) {
     servos[i].attach(servoPins[i]);
+    delay(15);
   }
-
-  while (!Serial) { ; }  // Wait for serial connection
 }
 
 void loop() {
@@ -89,18 +97,18 @@ void loop() {
     lcd.clear();
     displayText(0, 0, "Connection to");
     displayText(0, 1, "server failed.");
-    delay(2000);
+    delay(1500);
     lcd.clear();
     displayText(0, 0, "Please go to the");
     displayText(0, 1, "Treasury or");
-    displayText(0, 2, "Purchasing office.");
-    delay(2000);
+    displayText(0, 2, "Purchasing office to");
+    displayText(0, 3, "address this matter.");
+    delay(1500);
     lcd.clear();
     displayText(0, 0, "Sorry for the");
     displayText(0, 1, "inconvenience...");
-    delay(2000);
+    delay(1500);
   }
-  delay(100);
 }
 
 void displayText(int x, int y, String text) {
@@ -109,14 +117,40 @@ void displayText(int x, int y, String text) {
 }
 
 bool connectToServer() {
-  Serial.println("Connecting to server...");
-  if (client.connect(server, port)) {
-    Serial.println("Connected to server.");
-    return true;
-  }
-  return false;
-}
+  int retries = 3;
+  bool connected = false;
 
+  while (retries > 0 && !connected) {
+
+    if (client.connected()) {
+      connected = true;
+    } else if (client.connect(server, port)) {
+      connected = true;
+      Serial.println("Connected to server.");
+    } else {
+      retries++;
+      Serial.println("Connection failed, retrying...");
+      delay(1000);
+    }
+
+    if (!connected) {
+      lcd.clear();
+      displayText(0, 0, "Connection to");
+      displayText(0, 1, "server failed.");
+      delay(1500);
+      lcd.clear();
+      displayText(0, 0, "Please go to the");
+      displayText(0, 1, "Treasury or");
+      displayText(0, 2, "Purchasing office to");
+      displayText(0, 3, "address this matter.");
+      delay(1500);
+      lcd.clear();
+      displayText(0, 0, "Sorry for the");
+      displayText(0, 1, "inconvenience...");
+      asm volatile("  jmp 0");
+    }
+  }
+}
 void processServerResponse(String qrCode) {
   String encodedQrCode = urlEncode(qrCode);
   client.print("GET /uvm/arduino/arduino-scripts/search_transaction.php?qrcode=");
@@ -187,10 +221,12 @@ void parseJsonResponse(String jsonData) {
             const int productId = item["product_id"];
             const char* productName = item["product_name"];
             const char* sizeName = item["size_name"];
+            int stock = item["product_quantity"];
             int unit_num = item["unit_num"];
-            int quantity_remaining = item["quantity_remaining"];  // Updated field
+            int quantity_remaining = item["quantity_remaining"];
 
-            items[itemCount] = { productId, productName, sizeName, unit_num, quantity_remaining, itemCount };
+
+            items[itemCount] = { productId, productName, sizeName, stock, unit_num, quantity_remaining, itemCount };
             itemCount++;
 
             Serial.print(" | Item: ");
@@ -202,16 +238,12 @@ void parseJsonResponse(String jsonData) {
             Serial.print(" | Quantity Remaining: ");
             Serial.print(quantity_remaining);
             Serial.println();
-            lcd.clear();
-            displayText(0, 1, "Name: " + String(productName));
-            displayText(0, 2, "Size: " + String(sizeName));
-            displayText(0, 3, "Qty Remaining: " + String(quantity_remaining));
+            displayText(0, 1, String(itemCount) + ". " + String(productName) + "(" + String(sizeName) + ")");
+            displayText(0, 2, "Quantity: " + String(quantity_remaining));
+            displayText(0, 3, "Stock: " + String(stock));
             delay(2000);
           }
         }
-        Serial.println("Ready to dispense...");
-        lcd.clear();
-        displayText(0, 0, "Ready to dispense...");
         dispenseItems();
       } else if (strcmp(status, "error") == 0 && doc["message"] == "Transaction was already processed.") {
         // Handle fully claimed transaction
@@ -230,7 +262,8 @@ void parseJsonResponse(String jsonData) {
         lcd.clear();
         displayText(0, 0, "Please go to the");
         displayText(0, 1, "Treasury or");
-        displayText(0, 2, "Purchasing office.");
+        displayText(0, 2, "Purchasing office to");
+        displayText(0, 3, "address this matter.");
         delay(2000);
         lcd.clear();
         displayText(0, 0, "Sorry for the");
@@ -270,10 +303,10 @@ int itemDrop() {
   Serial.println(" cm");
 
   // Condition to control LED
-  if (distance > 72) {
-    return 1;
+  if (distance < 70) {
+    return 0;
   } else {
-    return 0;  // Turn off LED
+    return 1;  // Turn off LED
   }
 }
 
@@ -281,8 +314,51 @@ void dispenseItems() {
   int sensorValue;
 
   for (int i = 0; i < itemCount; i++) {
-    if (items[i].quantity <= 0) {
-      Serial.println("No quantity to dispense for this item.");
+
+    if (items[i].quantity > items[i].stock) {
+      lcd.clear();
+      displayText(0, 0, "Not enough stock for" + String(items[i].stock));
+      displayText(0, 1, items[i].productName + " (" + items[i].sizeName + ")");
+      displayText(0, 2, "Quantity: " + String(items[i].quantity));
+      displayText(0, 3, "Stock: " + String(items[i].stock));
+      delay(2000);
+      lcd.clear();
+      displayText(0, 0, "Proceed?");
+      displayText(0, 1, "R: partially claim");
+      displayText(0, 2, "B: go to next item");
+      displayText(0, 3, "W: cancel");
+      waitForUserInput();
+
+      // Handle button input
+      switch (userInput) {
+        case 'R':                              // Partially claim available stock
+          items[i].quantity = items[i].stock;  // Set quantity to available stock
+          break;
+
+        case 'B':    // Skip to next item
+          continue;  // Skip dispensing this item and move to the next
+
+        case 'W':  // Cancel the entire dispensing process
+          lcd.clear();
+          displayText(0, 0, "Dispense cancelled.");
+          delay(2000);  // Show cancellation message for a moment
+          return;       // Exit the function early
+      }
+    }
+
+    if (items[i].stock <= 0) {
+      lcd.clear();
+      displayText(0, 0, "No stock available.");
+      displayText(0, 1, items[i].productName + " (" + items[i].sizeName + ")");
+      displayText(0, 2, "Quantity: " + String(items[i].quantity));
+      displayText(0, 3, "Stock: " + String(items[i].stock));
+      delay(2000);
+      lcd.clear();
+      displayText(0, 0, "Please go to the");
+      displayText(0, 1, "Treasury or");
+      displayText(0, 2, "Purchasing office to");
+      displayText(0, 3, "address this matter.");
+      delay(2000);
       continue;  // Skip dispensing if quantity is zero
     }
 
@@ -293,37 +369,37 @@ void dispenseItems() {
     Serial.print(items[i].sizeName);
     Serial.print("Quantity: ");
     Serial.println(items[i].quantity);
+
+    int j = 0;
+    int servoIndex = items[i].unit_num - 1;
     lcd.clear();
     displayText(0, 0, "Dispensing item:");
     displayText(0, 1, items[i].productName + " (" + items[i].sizeName + ")");
     displayText(0, 2, "Qty: " + String(items[i].quantity));
-
-    int j = 0;
-    int servoIndex = items[i].unit_num - 1;
     displayText(0, 3, "dispensed: " + String(j));
 
     while (j < items[i].quantity) {
       sensorValue = itemDrop();
 
       if (sensorValue == 1) {
-        servos[servoIndex].write(0);  // Activate servo
+        servos[servoIndex].write(0);
         delay(50);
       } else if (sensorValue == 0) {
         while (sensorValue == 0) {
-          servos[servoIndex].write(90);  // Reset servo
-          delay(50);
+          servos[servoIndex].write(90);
           sensorValue = itemDrop();
+          delay(100);
         }
         j++;
         displayText(0, 3, "dispensed: " + String(j));
         updateStockOnServer(order_id, items[i].product_id, 1);
         delay(1000);
       }
-      delay(50);  // Wait before dispensing next item
+      delay(50);
     }
-    servos[servoIndex].write(90);  // Reset servo to neutral after each item
-    delay(1000);                   // Wait before dispensing next item
+    delay(1000);  // Wait before dispensing next item
   }
+
   lcd.clear();
   displayText(0, 0, "Dispense completed!");
   displayText(0, 1, "Thank you!");
@@ -370,5 +446,44 @@ void updateStockOnServer(const int order_id, const int product_id, int quantity)
     client.stop();  // Close the connection
   } else {
     Serial.println("Failed to connect to server for stock update.");
+  }
+}
+
+void waitForUserInput() {
+  unsigned long lastDebounceTime = 0;  // Last time a button was pressed
+  unsigned long debounceDelay = 50;    // debounce delay in milliseconds
+
+  char lastInput = '\0';  // Store last detected input to avoid multiple reads
+
+  while (true) {
+    // Read the button states (using INPUT_PULLUP, so HIGH means unpressed, LOW means pressed)
+    if (digitalRead(BUTTON_R_PIN) == LOW) {  // Button 'R' pressed
+      if (millis() - lastDebounceTime > debounceDelay) {
+        lastDebounceTime = millis();
+        if (lastInput != 'R') {
+          userInput = 'R';
+          lastInput = 'R';
+          return;  // Exit the function as the input is detected
+        }
+      }
+    } else if (digitalRead(BUTTON_B_PIN) == LOW) {  // Button 'B' pressed
+      if (millis() - lastDebounceTime > debounceDelay) {
+        lastDebounceTime = millis();
+        if (lastInput != 'B') {
+          userInput = 'B';
+          lastInput = 'B';
+          return;  // Exit the function as the input is detected
+        }
+      }
+    } else if (digitalRead(BUTTON_W_PIN) == LOW) {  // Button 'W' pressed
+      if (millis() - lastDebounceTime > debounceDelay) {
+        lastDebounceTime = millis();
+        if (lastInput != 'W') {
+          userInput = 'W';
+          lastInput = 'W';
+          return;  // Exit the function as the input is detected
+        }
+      }
+    }
   }
 }
